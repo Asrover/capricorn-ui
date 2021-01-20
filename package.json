@@ -13,7 +13,8 @@
     "format:js": "prettier --write src/**/*.{ts,tsx}",
     "copy-css:lib": "cp src/components/**/*.css lib/components/** & mkdir lib/theme & cp src/theme/*.css lib/theme",
     "copy-css:lib-esm": "cp src/components/**/*.css lib-esm/components/** & mkdir lib-esm/theme & cp src/theme/*.css lib-esm/theme",
-    "build:all": "yarn build & yarn build:lib-esm & yarn build:lib"
+    "build:all": "yarn build & yarn build:lib-esm & yarn build:lib",
+    "publish": "yarn publish"
   },
   "dependencies": {
     "classnames": "^2.2.6",
