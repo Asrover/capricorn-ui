@@ -7,7 +7,8 @@
     left: calc(100% + 15px);
     cursor: default;
     transition-property: transform, visibility, opacity;
-    transition-duration: 0.35s;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
     z-index: 50;
 }
 

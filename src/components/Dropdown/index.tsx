@@ -11,17 +11,18 @@ type AllProps = DropdownProps & React.HTMLAttributes<HTMLDivElement>
 
 // Todo: to Transition Group
 
-const Index: React.FC<AllProps> = ({ active, position, children, ...rest }) => {
+const Index: React.FC<AllProps> = ({ active, className, position, children, ...rest }) => {
     return (
         <div
+            {...rest}
             className={classNames({
+                [className]: Boolean(className),
                 [styles.area]: true,
                 [styles.active]: active,
                 [styles[`position-${position}`]]: position !== 'right',
             })}
         >
             <div
-                {...rest}
                 className={classNames({
                     [styles.dropdown]: true,
                 })}

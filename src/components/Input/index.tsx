@@ -14,35 +14,39 @@ import { Dropdown } from '../Dropdown'
 
 type InputType = 'text' | 'password' | 'money' | 'tel' | 'search' | 'code'
 
-type Option = { value: string; text: string }
+type Option = { value: any; text: string }
 
 interface InputProps {
     type?: InputType
     label?: ReactNode
     /** Value of text of input */
     value?: string
-    optionValue?: Option
     onChange?: (value?: string) => void
-    onChangeOption?: (value?: string) => void
+
+    selectedOption?: Option
+    options?: Option[]
+    onChangeOptionValue?: (option?: Option) => void
+    withSearch?: boolean
+    optionsLikeRightLabel?: boolean
+    /** options with optionsLikeRightLabel overwrite rightLabel */
+    rightLabel?: string
 
     onFocus?: () => void
     onBlur?: () => void
     onClick?: () => void
-    onChangeTypeLabel?: (option: Option) => void
 
+    /** it will overwrite rightContent */
     error?: ReactNode
+    /** it will overwrite rightContent */
     success?: ReactNode
     autoFocus?: boolean
-    typeLabel?: ReactNode
-    typeLabelOptions?: Option[]
-    options: Option[]
     disabled?: boolean
-    leftIcon?: ReactNode
+    leftContent?: ReactNode
     clearable?: boolean
     fieldTip?: ReactNode
     autofocus?: boolean
+    rightContent?: ReactNode
     loading?: boolean
-    rightIcon?: ReactNode
     readOnly?: boolean
     innerRef?: RefObject<HTMLInputElement>
     /** Required with type=code */
@@ -61,53 +65,53 @@ const Index: React.FC<AllProps> = ({
     type = 'text',
     error,
     success,
-    leftIcon,
+    leftContent,
     placeholder,
-    value,
-    optionValue,
+    value = '',
+    selectedOption = {},
     disabled,
     fullWidth,
     loading,
     smallHeight,
+    rightLabel,
     clearable,
     autoFocus,
     fieldTip,
     onChange,
-    onChangeTypeLabel,
-    onChangeOption,
-    rightIcon,
+    optionsLikeRightLabel,
+    onChangeOptionValue,
+    rightContent,
     innerRef,
-    typeLabelOptions,
-    typeLabel,
     onBlur,
     onFocus,
     codeLength,
     staticLabel,
     maxWidth = 360,
+    withSearch,
     options,
     ...rest
 }) => {
     const [inputText, setInputText] = useState(value)
     const inputRef: RefObject<HTMLInputElement | undefined> = innerRef || useRef()
-    const [openedLabel, setOpenedLabels] = useState(false)
     const [openedOptions, setOpenedOptions] = useState(false)
     const [typeState, setTypeState] = useState<InputType>(type)
     const [focused, setFocused] = useState(false)
-    const hasLeftIcon = Boolean(leftIcon) || typeState === 'search'
+    const hasLeftContent = Boolean(leftContent) || typeState === 'search'
     const hasError = Boolean(error)
     const hasSuccess = Boolean(success)
     const hasValue = Boolean(inputText)
+    const hasOptions = useMemo(() => Boolean(options) && Object.keys(options).length !== 0, [options])
 
     useEffect(() => {
         setInputText(value)
     }, [value])
 
-    useOutsideClick(inputRef, () => setOpenedLabels(false))
+    useOutsideClick(inputRef, () => setOpenedOptions(false))
 
     const handleFocus = (): void => {
         if (!disabled) {
             setFocused(true)
-            setOpenedOptions(true)
+            !optionsLikeRightLabel && setOpenedOptions(true)
             onFocus && onFocus()
         }
     }
@@ -115,7 +119,6 @@ const Index: React.FC<AllProps> = ({
     const handleBlur = (): void => {
         setFocused(false)
         setOpenedOptions(false)
-        setOpenedLabels(false)
         onBlur && onBlur()
 
         if (options) {
@@ -126,12 +129,19 @@ const Index: React.FC<AllProps> = ({
     }
 
     const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
-        if (!disabled) {
+        if (!disabled && !(hasOptions && !withSearch && !optionsLikeRightLabel)) {
             if (typeState === 'money' && isNaN(Number(target.value))) return
 
             setInputText(target.value)
-            onChange && onChange(value)
+            onChange && onChange(target.value)
+            onChangeOptionValue && !optionsLikeRightLabel && onChangeOptionValue()
         }
+    }
+
+    const handleChangeOption = (option: Option, index: number) => () => {
+        onChangeOptionValue && onChangeOptionValue(option)
+        setFocusedOptionIndex(index)
+        !optionsLikeRightLabel && setInputText(option.text)
     }
 
     const forceFocus = (): void => {
@@ -152,10 +162,41 @@ const Index: React.FC<AllProps> = ({
         forceFocus()
     }
 
-    const filteredOptions = useMemo(
-        () => options && options.filter((option) => option.text.toLowerCase().includes(value?.toLowerCase() || '')),
-        [[options, value]],
-    )
+    const filteredOptions = useMemo(() => {
+        if (hasOptions) {
+            const withoutFilter =
+                !withSearch ||
+                optionsLikeRightLabel ||
+                options.some((option) => option.text.toLowerCase() === inputText?.toLowerCase())
+
+            // Need also to show ALL OPTIONS in case when input text equals to option text
+            return withoutFilter
+                ? options
+                : options.filter((option) => option.text.toLowerCase().includes(inputText?.toLowerCase() || ''))
+        }
+    }, [options, inputText, withSearch])
+
+    const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (hasOptions) {
+            const optionsLength = options.length - 1
+
+            switch (event.key) {
+                case 'ArrowUp':
+                    setFocusedOptionIndex(focusedOptionIndex === 0 ? optionsLength : focusedOptionIndex - 1)
+                    break
+                case 'ArrowDown':
+                    setFocusedOptionIndex(focusedOptionIndex === optionsLength ? 0 : focusedOptionIndex + 1)
+                    break
+                case 'Enter':
+                    setInputText(options[focusedOptionIndex].text)
+                    setOpenedOptions(!openedOptions)
+                    onChangeOptionValue && onChangeOptionValue(options[focusedOptionIndex])
+                    break
+            }
+        }
+    }
 
     const getContent = () => (
         <div
@@ -172,7 +213,8 @@ const Index: React.FC<AllProps> = ({
                 [styles.error]: hasError,
                 [styles.disabled]: disabled,
                 [styles.success]: hasSuccess,
-                [styles.hasLeftIcon]: hasLeftIcon,
+                [styles.hasLeftContent]: hasLeftContent,
+                [styles.cursorPointer]: hasOptions && !withSearch && !optionsLikeRightLabel,
             })}
             style={{ maxWidth: codeLength ? codeLength * 60 : maxWidth }}
         >
@@ -188,15 +230,21 @@ const Index: React.FC<AllProps> = ({
                 </div>
             )}
             <div className={styles.inputBox}>
-                {hasLeftIcon && (
-                    <div onClick={forceFocus} className={styles.leftIcon}>
+                {hasLeftContent && (
+                    <div onClick={forceFocus} className={styles.leftContent}>
                         {typeState === 'search' && <SearchSvg />}
-                        {leftIcon}
+                        {leftContent}
                     </div>
                 )}
                 <div className={styles.inputWrap}>
                     {label && !(staticLabel || type === 'code') && (
-                        <label onClick={forceFocus} className={styles.label}>
+                        <label
+                            onClick={forceFocus}
+                            className={classNames({
+                                [styles.label]: true,
+                                [styles.notFocused]: hasOptions && !withSearch && !optionsLikeRightLabel,
+                            })}
+                        >
                             {label}
                         </label>
                     )}
@@ -206,7 +254,9 @@ const Index: React.FC<AllProps> = ({
                         value={inputText}
                         className={classNames({
                             [styles.input]: true,
-                            [styles.hideCaret]: type === 'code' && inputText?.length === codeLength,
+                            [styles.hideCaret]:
+                                (type === 'code' && inputText?.length === codeLength) ||
+                                (hasOptions && !withSearch && !optionsLikeRightLabel),
                             [styles.typeCode]: type === 'code',
                             [styles.vCenter]: type === 'code' || staticLabel,
                             [styles.withLabel]: Boolean(label),
@@ -215,6 +265,7 @@ const Index: React.FC<AllProps> = ({
                         placeholder={placeholder || (type === 'code' && 'X'.repeat(codeLength))}
                         spellCheck="false"
                         ref={inputRef}
+                        onKeyDown={handleKeyDown}
                     />
                     {type !== 'code' && (hasError || hasSuccess) && (
                         <div className={styles.statusIcon}>
@@ -223,20 +274,25 @@ const Index: React.FC<AllProps> = ({
                         </div>
                     )}
                 </div>
-                {Boolean(options) && (
-                    <Dropdown active={openedOptions} position="bottom">
+                {hasOptions && (
+                    <Dropdown
+                        className={classNames({ [styles.rightMode]: optionsLikeRightLabel })}
+                        active={openedOptions}
+                        position="bottom"
+                    >
                         {filteredOptions.length !== 0
-                            ? filteredOptions.map((label) => (
+                            ? filteredOptions.map((option, index) => (
                                   <div
-                                      key={label.value}
+                                      key={option.value}
                                       className={classNames({
-                                          [styles.labelItem]: true,
-                                          [styles.selected]: optionValue === label.value,
+                                          [styles.optionItem]: true,
+                                          [styles.selected]: selectedOption.value === option.value,
+                                          [styles.focused]: focusedOptionIndex === index,
                                       })}
-                                      onClick={() => onChangeOption && onChangeOption(label.value)}
+                                      onClick={handleChangeOption(option, index)}
                                   >
-                                      {optionValue === label.value && <CheckMarkSvg width={12} />}
-                                      {label.text}
+                                      {selectedOption.value === option.value && <CheckMarkSvg width={12} />}
+                                      {option.text}
                                   </div>
                               ))
                             : 'Items not found'}
@@ -244,7 +300,7 @@ const Index: React.FC<AllProps> = ({
                 )}
             </div>
             {(fieldTip || error || success) && <div className={styles.fieldTip}>{error || success || fieldTip}</div>}
-            {(rightIcon || loading || Boolean(options)) && (
+            {(rightContent || loading || hasOptions) && (
                 <div
                     className={classNames({
                         [styles.rightIconBlock]: true,
@@ -252,7 +308,13 @@ const Index: React.FC<AllProps> = ({
                     })}
                     onClick={forceFocus}
                 >
-                    {loading ? <LoaderSvg width={24} /> : Boolean(options) ? <ChevronDownSvg width={12} /> : rightIcon}
+                    {loading ? (
+                        <LoaderSvg width={24} />
+                    ) : hasOptions && !optionsLikeRightLabel ? (
+                        <ChevronDownSvg width={12} />
+                    ) : (
+                        rightContent
+                    )}
                 </div>
             )}
             {clearable && Boolean(value) && (
@@ -268,43 +330,26 @@ const Index: React.FC<AllProps> = ({
                     {typeState === 'text' ? <EyeSvg width={16} /> : <EyeHiddenSvg width={16} />}
                 </div>
             )}
-            {typeLabel && (
+            {(optionsLikeRightLabel || rightLabel) && (
                 <div
                     className={classNames({
                         [styles.typeLabel]: true,
-                        [styles.withDropdown]: Boolean(typeLabelOptions),
-                        [styles.hasLeftIcon]: hasLeftIcon,
+                        [styles.withDropdown]: hasOptions,
+                        [styles.hasLeftContent]: hasLeftContent,
                         [styles.withLabel]: Boolean(label),
                     })}
-                    onClick={() => setOpenedLabels((opened) => !opened)}
+                    onClick={() => optionsLikeRightLabel && setOpenedOptions(true)}
                 >
-                    {typeLabel}
-                    {typeLabelOptions && (
-                        <>
-                            <div
-                                className={classNames({
-                                    [styles.rightIconBlock]: true,
-                                    [styles.opened]: openedLabel,
-                                })}
-                            >
-                                <ChevronDownSvg width={12} />
-                            </div>
-                            <Dropdown active={openedLabel} position="bottom">
-                                {typeLabelOptions.map((label) => (
-                                    <div
-                                        key={label.value}
-                                        className={classNames({
-                                            [styles.labelItem]: true,
-                                            [styles.selected]: typeLabel === label.text,
-                                        })}
-                                        onClick={() => onChangeTypeLabel && onChangeTypeLabel(label)}
-                                    >
-                                        {typeLabel === label.text && <CheckMarkSvg width={12} />}
-                                        {label.text}
-                                    </div>
-                                ))}
-                            </Dropdown>
-                        </>
+                    {selectedOption.text || rightLabel}
+                    {hasOptions && (
+                        <div
+                            className={classNames({
+                                [styles.rightIconBlock]: true,
+                                [styles.opened]: openedOptions,
+                            })}
+                        >
+                            <ChevronDownSvg width={12} />
+                        </div>
                     )}
                 </div>
             )}

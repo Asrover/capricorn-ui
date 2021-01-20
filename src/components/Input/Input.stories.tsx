@@ -8,10 +8,17 @@ export default {
     component: Input,
 } as Meta
 
-const options = [
+const typeLabelOptions = [
     { value: 'usd', text: 'USD' },
     { value: 'eur', text: 'EUR' },
     { value: 'btc', text: 'BTC' },
+    { value: 'rub', text: 'RUB' },
+]
+
+const options = [
+    { value: 'usd', text: 'USD5849023 / 55 USD', leftContent: '$' },
+    { value: 'eur', text: 'EUR5849055 / 70 EUR', leftContent: '€' },
+    { value: 'gbp', text: 'GBP9865989 / 1.45 GBP', leftContent: '£' },
 ]
 
 export const All: React.FC = () => {
@@ -19,15 +26,14 @@ export const All: React.FC = () => {
     const [search, setSearch] = useState()
     const [code, setCode] = useState()
     const [code2, setCode2] = useState()
-    const [currency, setCurrency] = useState(options[0])
+    const [currency, setCurrency] = useState(typeLabelOptions[0])
     const [value1, setValue1] = useState()
     const [value2, setValue2] = useState()
     const [value3, setValue3] = useState()
     const [value4, setValue4] = useState()
-    const [value5, setValue5] = useState()
     const [value6, setValue6] = useState()
-    const [value7, setValue7] = useState('Some initial value')
     const [value8, setValue8] = useState()
+    const [value9, setValue9] = useState()
 
     return (
         <>
@@ -48,6 +54,7 @@ export const All: React.FC = () => {
                 error="Required field"
             />
             <Input value={value2} onChange={setValue2} label="With success" success="Success text" />
+            <Input disabled value={'Some text'} label="Disabled state" />
             <Input
                 value={value3}
                 onChange={setValue3}
@@ -59,19 +66,22 @@ export const All: React.FC = () => {
             <Input
                 value={value4}
                 onChange={setValue4}
-                leftIcon={<PrintSvg width={24} />}
+                leftContent={<PrintSvg width={24} />}
                 maxWidth={600}
-                label="With leftIcon and custom maxWidth"
+                rightContent="Right Content"
+                rightLabel="Right Label"
+                label="With leftContent and custom maxWidth"
             />
-            <Input value={value5} onChange={setValue5} type="money" typeLabel="USD" label="Amount with typeLabel" />
             <Input
+                type="money"
                 value={value6}
                 onChange={setValue6}
-                type="money"
-                typeLabel={currency.text}
-                onChangeTypeLabel={setCurrency}
-                typeLabelOptions={options}
-                label="Amount with typeLabel options"
+                selectedOption={currency}
+                onChangeOptionValue={setCurrency}
+                options={typeLabelOptions}
+                optionsLikeRightLabel
+                rightLabel="asd"
+                label="Amount with optionsLikeRightLabel"
             />
             <Input
                 type="code"
@@ -89,9 +99,17 @@ export const All: React.FC = () => {
                 label="SMS code - 4 symbols"
                 fieldTip="We send the code on +7900***2323"
             />
-            <Input disabled value={'Some text'} label="Disabled state" />
             {/*<Input value={value7} onChange={setValue7} loading label="Loading state" />*/}
-            <Input optionValue={value8} options={options} loading onChangeOption={setValue8} label="With options" />
+            <Input
+                selectedOption={value8}
+                options={typeLabelOptions}
+                loading
+                withSearch
+                leftContent="leftContent"
+                onChangeOptionValue={setValue8}
+                label="With options"
+            />
+            <Input selectedOption={value9} leftContent={value9?.leftContent} options={options} onChangeOptionValue={setValue9} label="Account" />
         </>
     )
 }

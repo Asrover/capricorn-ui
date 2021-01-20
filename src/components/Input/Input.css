@@ -14,7 +14,7 @@
     transition: 0.25s border-color;
 }
 
-.inputContainer.focused .leftIcon {
+.inputContainer.focused .leftContent {
     color: var(--color-primary);
 }
 
@@ -64,7 +64,7 @@
     border-color: var(--color-primary);
 }
 
-.inputContainer.focused .label {
+.inputContainer.focused .label:not(.notFocused) {
     transform: translateY(-10px);
     font-size: 12px;
 }
@@ -131,8 +131,8 @@
     padding-bottom: 6px;
 }
 
-.inputContainer.hasLeftIcon .label,
-.inputContainer.hasLeftIcon .input {
+.inputContainer.hasLeftContent .label,
+.inputContainer.hasLeftContent .input {
     padding-left: 15px;
 }
 
@@ -223,8 +223,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 62px;
-    min-width: 62px;
+    padding: 0 15px;
     border-left: 1px solid #d9dde4;
     border-radius: 0 5px 5px 0;
     background: #f9fafb;
@@ -234,8 +233,6 @@
 }
 
 .typeLabel.withDropdown {
-    width: 83px;
-    min-width: 83px;
     cursor: pointer;
 }
 
@@ -243,7 +240,7 @@
     padding: 0 0 0 8px;
 }
 
-.leftIcon {
+.leftContent {
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -254,28 +251,34 @@
     z-index: 1;
 }
 
-.labelItem {
+.optionItem {
     padding: 6px 18px;
     margin: 0 -10px;
+    white-space: nowrap;
     transition: 0.25s background-color;
     cursor: pointer;
 }
 
-.labelItem:first-child {
+.optionItem:first-child {
     margin-top: 6px;
 }
 
-.labelItem:last-child {
+.optionItem:last-child {
     margin-bottom: 6px;
 }
 
-.labelItem:hover,
-.labelItem.selected {
-    background-color: var(--color-gray-lighter);
+.optionItem:hover,
+.optionItem.selected,
+.optionItem.focused {
+    background-color: var(--color-gray);
 }
 
-.labelItem svg {
-    margin-right: 6px;
+.optionItem.selected {
+    font-weight: 600;
+}
+
+.optionItem svg {
+    margin-right: 8px;
     color: var(--color-primary);
 }
 
@@ -292,4 +295,18 @@
     width: 1px;
     height: 100%;
     background-color: #d9dde4;
+}
+
+.cursorPointer .label,
+.cursorPointer .input {
+    cursor: pointer;
+}
+
+.rightMode {
+    left: auto !important;
+}
+
+.rightMode .dropdown {
+    padding-left: 30px;
+    padding-right: 30px;
 }
