@@ -7,4 +7,4 @@ lib/
 lib-esm/
 .next
 .idea
-.storybook
+.storybook-static
