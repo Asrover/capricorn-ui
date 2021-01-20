@@ -2,7 +2,7 @@
 .vscode
 node_modules/
 yarn-error.log
-build
+dist
 lib/
 lib-esm/
 .next
