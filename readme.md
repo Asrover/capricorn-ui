@@ -1,4 +1,4 @@
-# Card, Marketplace and Marketplace Deposit
+# Components library for Capitalist and Practika
 
 ### Первая установка зависимостей
 
