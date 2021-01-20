@@ -1,0 +1,45 @@
+.container {
+    display: inline-block;
+    position: relative;
+    color: inherit;
+    cursor: pointer;
+}
+
+.container > div {
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    max-width: 100%;
+}
+
+.container svg {
+    margin: 0 6px;
+    min-width: 12px;
+    color: var(--color-primary);
+}
+
+.text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text.highlight {
+    padding: 4px 8px;
+    background: var(--color-gray);
+    border-radius: 4px;
+}
+
+.successText {
+    display: flex;
+    align-items: center;
+}
+
+.successText svg {
+    margin: 0 10px 0 0;
+}
+
+.bold {
+    font-weight: bold;
+}

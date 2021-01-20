@@ -1,0 +1,85 @@
+.checkbox {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    font-size: 15px;
+    line-height: 1.7;
+    cursor: pointer;
+}
+
+.markBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 1px solid #d9dde4;
+    transition: 0.25s border-color;
+    color: var(--color-primary);
+}
+
+.markBox:hover {
+    border-color: var(--color-primary);
+}
+
+.checkbox input {
+    width: 0;
+    visibility: hidden;
+}
+
+.markBox svg {
+    transform: scale(0);
+    width: 10px;
+    transition: 0.15s transform;
+}
+
+.markBox.checked {
+    border-color: var(--color-primary);
+}
+
+.markBox.checked svg {
+    transform: scale(1);
+}
+
+.checkbox.hasError .markBox {
+    border-color: #ff5c21;
+    color: #ff5c21;
+}
+
+.checkbox.disabled {
+    cursor: not-allowed;
+    color: var(--color-gray-darkest);
+}
+
+.checkbox.disabled .markBox {
+    color: var(--color-gray-darkest);
+}
+
+.checkbox.disabled .markBox {
+    border-color: var(--color-gray-darkest);
+}
+
+.label {
+    position: relative;
+    margin-left: 10px;
+    text-align: left;
+}
+
+.error {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: 0;
+    top: calc(100% + 5px);
+    font-size: 14px;
+    white-space: nowrap;
+    color: #ff5c21;
+}
+
+.error svg {
+    position: relative;
+    top: -1px;
+    margin-right: 6px;
+}

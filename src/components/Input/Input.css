@@ -1,0 +1,295 @@
+.inputContainer {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    position: relative;
+    width: 100%;
+    min-height: 54px;
+    margin-bottom: 38px;
+    background: #fff;
+    border: 1px solid #d9dde4;
+    box-sizing: border-box;
+    border-radius: 6px;
+    cursor: text;
+    transition: 0.25s border-color;
+}
+
+.inputContainer.focused .leftIcon {
+    color: var(--color-primary);
+}
+
+.inputContainer.smallHeight {
+    min-height: 40px;
+}
+
+.inputContainer.error {
+    border-color: #ff5c21;
+}
+
+.inputContainer.error .statusIcon,
+.inputContainer.error .statusText,
+.inputContainer.error .fieldTip {
+    color: #ff5c21;
+}
+
+.inputContainer.success {
+    border-color: #7dd130;
+}
+
+.inputContainer.success .statusIcon,
+.inputContainer.success .statusText,
+.inputContainer.success .fieldTip {
+    color: #7dd130;
+}
+
+.inputContainer.smallHeight input {
+    font-size: 14px;
+}
+
+.inputContainer.noMarginBottom {
+    margin-bottom: 0;
+}
+
+.inputContainer.loading .label,
+.inputContainer.loading .rightIconBlock,
+.inputContainer.loading .input {
+    cursor: progress;
+}
+
+.inputContainer:hover {
+    border-color: var(--color-primary);
+}
+
+.inputContainer.focused {
+    border-color: var(--color-primary);
+}
+
+.inputContainer.focused .label {
+    transform: translateY(-10px);
+    font-size: 12px;
+}
+
+.inputContainer.focused .customIcon {
+    color: var(--color-primary);
+}
+
+.inputContainer.fullWidth {
+    max-width: 100% !important;
+}
+
+.inputContainer.disabled {
+    background: #f9fafb;
+}
+
+.inputContainer.disabled .input {
+    caret-color: transparent;
+}
+
+.inputContainer.hasValue .label {
+    transform: translateY(-10px);
+    font-size: 12px;
+}
+
+.inputContainer.hasValue .customIcon {
+    color: var(--color-primary);
+}
+
+.inputBox {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.inputWrap {
+    position: relative;
+    width: 100%;
+    flex: 1;
+}
+
+.label {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding-left: 20px;
+    font-size: 15px;
+    line-height: 1.2;
+    color: #7e8289;
+    transition: 0.15s;
+    transition-property: color, font-size, transform;
+    z-index: 1;
+    cursor: text;
+    user-select: none;
+}
+
+.label.static {
+    position: static;
+    padding-left: 0;
+    padding-bottom: 6px;
+}
+
+.inputContainer.hasLeftIcon .label,
+.inputContainer.hasLeftIcon .input {
+    padding-left: 15px;
+}
+
+.input {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 100px;
+    height: 100%;
+    padding: 10px 10px 10px 20px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    transition: 0.25s border-color;
+    caret-color: var(--color-primary);
+    border-radius: 6px;
+}
+
+.input.hideCaret {
+    caret-color: transparent;
+}
+
+.input.vCenter {
+    padding: 18px 0 14px 24px !important;
+}
+
+.input.typeCode {
+    box-sizing: content-box;
+    letter-spacing: 50px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.input.withLabel {
+    padding-top: 25px;
+}
+
+.statusIcon {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 20px;
+    background: #fff;
+    z-index: 2;
+}
+
+.fieldTip,
+.statusText {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 5px;
+    font-size: 13px;
+    color: #b8bdc4;
+}
+
+.fieldTip {
+    color: #b8bdc4;
+}
+
+.rightIconBlock {
+    display: flex;
+    align-items: center;
+    padding: 0 20px 0 5px;
+    color: var(--color-primary);
+    transform-origin: center center;
+    transition: 0.25s color;
+    cursor: pointer;
+}
+
+.rightIconBlock svg {
+    transition: 0.25s transform;
+}
+
+.rightIconBlock.opened svg {
+    transform: rotate(180deg);
+}
+
+.rightIconBlock:hover {
+    color: var(--color-primary);
+}
+
+.typeLabel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 62px;
+    min-width: 62px;
+    border-left: 1px solid #d9dde4;
+    border-radius: 0 5px 5px 0;
+    background: #f9fafb;
+    font-size: 12px;
+    color: #35373b;
+    transition: 0.25s border-color;
+}
+
+.typeLabel.withDropdown {
+    width: 83px;
+    min-width: 83px;
+    cursor: pointer;
+}
+
+.typeLabel.withDropdown .rightIconBlock {
+    padding: 0 0 0 8px;
+}
+
+.leftIcon {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-left: 16px;
+    color: #b8bdc4;
+    transition: 0.25s color;
+    z-index: 1;
+}
+
+.labelItem {
+    padding: 6px 18px;
+    margin: 0 -10px;
+    transition: 0.25s background-color;
+    cursor: pointer;
+}
+
+.labelItem:first-child {
+    margin-top: 6px;
+}
+
+.labelItem:last-child {
+    margin-bottom: 6px;
+}
+
+.labelItem:hover,
+.labelItem.selected {
+    background-color: var(--color-gray-lighter);
+}
+
+.labelItem svg {
+    margin-right: 6px;
+    color: var(--color-primary);
+}
+
+.numberDelimiter {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.codeDelimiter {
+    width: 1px;
+    height: 100%;
+    background-color: #d9dde4;
+}

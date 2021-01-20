@@ -1,0 +1,200 @@
+/*
+ * 1. Значения padding и margin каждый браузер выставляет по-своему – сбрасываем в ноль.
+ * 2. Не должно быть возможности выделить контент кнопки, в т.ч. кнопки-ссылки.
+ * 3. У содержимого кнопок-ссылок не должно быть подчеркивания.
+ * 4. Кнопка не предполагает многострочного содержимого.
+ * 5. Чтобы FF под MacOS не делал blur после программного выставления фокуса по mousedown.
+ *    Подробности: http://jsfiddle.net/mishaberezin/892yppts/10/.
+ * 6. Для кнопок-ссылок.
+ * 7. Убираем нативную подсветку на iOS и Android.
+ * 8. В IE по дефолту hidden, в остальных браузерах visible, требуется нормализация.
+ *    В пользу visible, т.к. мы используем тень для отображения фокуса.
+ * 9. Такой сброс стилей нужен для всех тем.
+ * 10. Сбрасываем браузерные стили для кнопок, в особенности для link.
+ */
+
+.button {
+    position: relative;
+
+    display: inline-flex; /* 6 */
+    vertical-align: middle;
+    align-items: center;
+    overflow: visible; /* 8 */
+
+    box-sizing: border-box;
+    margin: 0; /* 1 */
+
+    -moz-user-focus: ignore; /* 5 */
+    user-select: none; /* 2 */
+    text-align: center; /* 10 */
+    white-space: nowrap; /* 4 */
+    text-decoration: none; /* 3 */
+
+    border-width: 0;
+    outline: 0;
+    background-color: transparent; /* 9 */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* 7 */
+
+    border-radius: 6px;
+    touch-action: manipulation;
+    transition-duration: 0.3s;
+    transition-property: color, border-color, background-color, box-shadow, transform;
+    cursor: pointer;
+
+    height: 54px;
+    padding: 0 28px;
+    font-size: 18px;
+}
+
+.button svg {
+    height: 48%;
+    min-height: 16px;
+    margin: 0 15% 0 -5%;
+}
+
+.button.size-s {
+    height: 30px;
+    padding: 0 15px;
+    font-size: 13px;
+}
+
+.button.size-sm {
+    height: 30px;
+    padding: 0 15px;
+    font-size: 14px;
+}
+
+.button.size-m {
+    height: 40px;
+    padding: 0 20px;
+    font-size: 16px;
+}
+
+.button.size-xl {
+    height: 60px;
+    padding: 0 30px;
+    font-size: 22px;
+}
+
+.button.skin-action {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+.button.skin-action:hover {
+    background-color: var(--color-primary-darker);
+}
+
+.button.skin-action:active {
+    background-color: var(--color-primary-darkest);
+}
+
+.button.skin-action:focus {
+    box-shadow: inset 0 0 0 2px var(--color-primary-darkest);
+}
+
+.button.skin-link {
+    color: var(--color-primary);
+}
+
+.button.skin-link:hover {
+    background-color: var(--color-gray);
+}
+
+.button.skin-border {
+    background-color: #fff;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+}
+
+.button.skin-border:hover {
+    border-color: var(--color-primary-lighter);
+    color: var(--color-primary-lighter);
+}
+
+.button.skin-border:active {
+    border-color: var(--color-primary-darkest);
+    color: var(--color-primary-darkest);
+}
+
+.button.skin-border:focus {
+    box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+
+.button.skin-default {
+    background-color: var(--color-gray);
+    color: var(--text-color);
+}
+
+.button.skin-default:hover {
+    background-color: var(--color-gray-lighter);
+}
+
+.button.skin-default:active {
+    background-color: var(--color-gray-darker);
+}
+
+.button.skin-default:focus {
+    box-shadow: inset 0 0 0 2px var(--color-gray-darker);
+}
+
+.button.skin-pseudo,
+.button.skin-back {
+    border: 2px solid var(--color-gray-darker);
+    color: var(--text-color);
+}
+
+.button.skin-pseudo:hover,
+.button.skin-back:hover {
+    color: var(--color-primary);
+}
+
+.button.skin-pseudo:active,
+.button.skin-back:active {
+    border-color: var(--color-gray-darkest);
+}
+
+.button.skin-pseudo:focus,
+.button.skin-back:focus {
+    box-shadow: inset 0 0 0 1px var(--color-gray-darker);
+}
+
+.button.skin-back svg {
+    height: 35%;
+    min-height: 10px;
+    transition: 0.25s transform;
+}
+
+.button.skin-back:hover svg {
+    transform: translateX(-15%);
+}
+
+.button.loading {
+    background-image: linear-gradient(-45deg, rgba(0, 0, 0, .07) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, .07) 50%, rgba(0, 0, 0, .07) 75%, transparent 75%, transparent);
+    background-size: 40px 40px;
+    animation: progress-bar-stripes .5s linear infinite;
+    cursor: progress;
+    transform: scale(1) !important;
+}
+
+.button.skin-action.loading {
+}
+
+.button:active {
+    transform: scale(0.97);
+}
+
+.button:disabled {
+    opacity: .3;
+    cursor: not-allowed;
+}
+
+@keyframes progress-bar-stripes {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 40px;
+    }
+}
+

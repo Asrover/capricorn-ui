@@ -1,0 +1,40 @@
+.link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    transition: .2s border-bottom-color, .2s color;
+    cursor: pointer;
+    font-size: inherit;
+    font-weight: inherit;
+    color: var(--color-primary);
+}
+
+.link:hover {
+    color: var(--color-primary-lighter);
+}
+
+.link svg {
+    margin-right: 8px;
+}
+
+.link.hoverUnderline:hover {
+    text-decoration: underline;
+    color: var(--color-primary);
+}
+
+.link.disabled {
+    color: var(--color-gray-darkest);
+    cursor: not-allowed;
+}
+
+.link.bold {
+     font-weight: 600;
+ }
+
+.link:focus {
+     color: var(--color-primary-lightest);
+ }

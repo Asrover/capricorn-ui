@@ -1,0 +1,115 @@
+.radio {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 0 10px 10px 0;
+}
+
+.markBox {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    border: 1px solid #d9dde4;
+    transition: 0.25s border-color;
+    color: #35373b;
+}
+
+.markBox:hover {
+    border-color: var(--color-primary);
+}
+
+.markBox::after {
+    transform: scale(0);
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--color-primary);
+    border-radius: 12px;
+    transform-origin: center;
+    transition: 0.15s transform;
+    content: '';
+}
+
+.input {
+    display: none;
+}
+
+.input:checked + .markBox {
+    border-color: var(--color-primary);
+}
+
+.input:checked + .markBox::after {
+    transform: scale(1);
+}
+
+.markBox.checked {
+    border-color: var(--color-primary);
+}
+
+.radio.hasError .markBox {
+    border-color: #ff5c21;
+    color: #ff5c21;
+}
+
+.radio.disabled {
+    cursor: not-allowed;
+    color: var(--color-gray-darkest);
+}
+
+.radio.disabled .markBox {
+    color: var(--color-gray-darkest);
+}
+
+.radio.disabled .markBox {
+    border-color: var(--color-gray-darkest);
+}
+
+.radio.disabled .markBox::after {
+    background: var(--color-gray-darkest);
+}
+
+.label {
+    position: relative;
+    padding: 0 10px;
+}
+
+.error {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: 0;
+    top: calc(100% + 2px);
+    font-size: 14px;
+    white-space: nowrap;
+    color: #ff5c21;
+}
+
+.error svg {
+    position: relative;
+    top: -1px;
+    margin-right: 6px;
+}
+
+.group {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.group.hasError .radio:not(.disabled) .markBox {
+    border-color: #ff5c21;
+}
+
+.group.vertical {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.groupLabel {
+    margin-bottom: 10px;
+    font-weight: 600;
+}

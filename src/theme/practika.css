@@ -1,0 +1,11 @@
+:global(body.theme-practika) {
+    --base-hue: 214;
+    --base-saturation: 100%;
+    --base-lightness: 57%;
+    --text-color: #1D2534;
+
+    --color-gray: #F4F6F7;
+    --color-gray-lighter: #F9FAFB;
+    --color-gray-darker: #DFE2E8;
+    --color-gray-darkest: #B8BDC4;
+}
