@@ -14,7 +14,7 @@ import { Dropdown } from '../Dropdown'
 
 type InputType = 'text' | 'password' | 'money' | 'tel' | 'search' | 'code'
 
-type Option = { value: any; text: string }
+type Option = { value: any; text: string; leftContent?: ReactNode }
 
 interface InputProps {
     type?: InputType
@@ -101,15 +101,22 @@ const Index: React.FC<AllProps> = ({
     const hasSuccess = Boolean(success)
     const hasValue = Boolean(inputText)
     const hasOptions = useMemo(() => Boolean(options) && Object.keys(options).length !== 0, [options])
+    const [tillNotTypingAfterOptionsOpened, setTillNotTypingAfterOptionsOpened] = useState(true)
 
     useEffect(() => {
         setInputText(value)
     }, [value])
 
+    useEffect(() => {
+        onChange && onChange(inputText)
+        setTillNotTypingAfterOptionsOpened(false)
+    }, [inputText])
+
     useOutsideClick(inputRef, () => setOpenedOptions(false))
 
     const handleFocus = (): void => {
-        if (!disabled) {
+        setTillNotTypingAfterOptionsOpened(true)
+        if (!disabled && !loading) {
             setFocused(true)
             !optionsLikeRightLabel && setOpenedOptions(true)
             onFocus && onFocus()
@@ -121,10 +128,11 @@ const Index: React.FC<AllProps> = ({
         setOpenedOptions(false)
         onBlur && onBlur()
 
-        if (options) {
-            if (options.findIndex((option) => option.text === value) === -1) {
-                onChange && onChange()
+        if (hasOptions) {
+            if (!selectedOption.value) {
+                setInputText('')
             }
+            setFocusedOptionIndex(-1)
         }
     }
 
@@ -133,7 +141,6 @@ const Index: React.FC<AllProps> = ({
             if (typeState === 'money' && isNaN(Number(target.value))) return
 
             setInputText(target.value)
-            onChange && onChange(target.value)
             onChangeOptionValue && !optionsLikeRightLabel && onChangeOptionValue()
         }
     }
@@ -158,23 +165,16 @@ const Index: React.FC<AllProps> = ({
 
     const clearText = () => {
         setInputText('')
-        onChange && onChange('')
         forceFocus()
     }
 
     const filteredOptions = useMemo(() => {
         if (hasOptions) {
-            const withoutFilter =
-                !withSearch ||
-                optionsLikeRightLabel ||
-                options.some((option) => option.text.toLowerCase() === inputText?.toLowerCase())
-
-            // Need also to show ALL OPTIONS in case when input text equals to option text
-            return withoutFilter
+            return !withSearch || optionsLikeRightLabel || tillNotTypingAfterOptionsOpened
                 ? options
                 : options.filter((option) => option.text.toLowerCase().includes(inputText?.toLowerCase() || ''))
         }
-    }, [options, inputText, withSearch])
+    }, [options, inputText, withSearch, tillNotTypingAfterOptionsOpened])
 
     const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
 
@@ -187,6 +187,7 @@ const Index: React.FC<AllProps> = ({
                     setFocusedOptionIndex(focusedOptionIndex === 0 ? optionsLength : focusedOptionIndex - 1)
                     break
                 case 'ArrowDown':
+                    if (!openedOptions) setOpenedOptions(true)
                     setFocusedOptionIndex(focusedOptionIndex === optionsLength ? 0 : focusedOptionIndex + 1)
                     break
                 case 'Enter':
@@ -230,10 +231,10 @@ const Index: React.FC<AllProps> = ({
                 </div>
             )}
             <div className={styles.inputBox}>
-                {hasLeftContent && (
+                {(hasLeftContent || selectedOption.leftContent) && (
                     <div onClick={forceFocus} className={styles.leftContent}>
                         {typeState === 'search' && <SearchSvg />}
-                        {leftContent}
+                        {selectedOption.leftContent || leftContent}
                     </div>
                 )}
                 <div className={styles.inputWrap}>
@@ -256,13 +257,14 @@ const Index: React.FC<AllProps> = ({
                             [styles.input]: true,
                             [styles.hideCaret]:
                                 (type === 'code' && inputText?.length === codeLength) ||
-                                (hasOptions && !withSearch && !optionsLikeRightLabel),
+                                (hasOptions && !withSearch && !optionsLikeRightLabel) ||
+                                loading,
                             [styles.typeCode]: type === 'code',
                             [styles.vCenter]: type === 'code' || staticLabel,
                             [styles.withLabel]: Boolean(label),
                         })}
                         maxLength={codeLength}
-                        placeholder={placeholder || (type === 'code' && 'X'.repeat(codeLength))}
+                        placeholder={placeholder || (type === 'code' && 'X'.repeat(codeLength)) || undefined}
                         spellCheck="false"
                         ref={inputRef}
                         onKeyDown={handleKeyDown}
@@ -289,10 +291,13 @@ const Index: React.FC<AllProps> = ({
                                           [styles.selected]: selectedOption.value === option.value,
                                           [styles.focused]: focusedOptionIndex === index,
                                       })}
-                                      onClick={handleChangeOption(option, index)}
+                                      onMouseDown={handleChangeOption(option, index)}
                                   >
-                                      {selectedOption.value === option.value && <CheckMarkSvg width={12} />}
-                                      {option.text}
+                                      {option.leftContent && (
+                                          <div className={styles.optionLeftContent}>{option.leftContent}</div>
+                                      )}
+                                      <span style={{ flex: 1 }}>{option.text}</span>
+                                      {selectedOption.value === option.value &&<CheckMarkSvg width={12} />}
                                   </div>
                               ))
                             : 'Items not found'}
@@ -300,34 +305,35 @@ const Index: React.FC<AllProps> = ({
                 )}
             </div>
             {(fieldTip || error || success) && <div className={styles.fieldTip}>{error || success || fieldTip}</div>}
-            {(rightContent || loading || hasOptions) && (
+            {(rightContent || loading || hasOptions || (clearable && hasValue) || type === 'password') && (
                 <div
                     className={classNames({
                         [styles.rightIconBlock]: true,
-                        [styles.opened]: openedOptions,
+                        [styles.opened]: hasOptions && openedOptions,
                     })}
-                    onClick={forceFocus}
+                    onClick={
+                        clearable
+                            ? clearText
+                            : type === 'password'
+                            ? () => setTypeState(typeState === 'password' ? 'text' : 'password')
+                            : forceFocus
+                    }
                 >
-                    {loading ? (
+                    {clearable && hasValue && !selectedOption.value ? (
+                        <CrossSvg width={10} />
+                    ) : loading ? (
                         <LoaderSvg width={24} />
                     ) : hasOptions && !optionsLikeRightLabel ? (
                         <ChevronDownSvg width={12} />
+                    ) : type === 'password' ? (
+                        typeState === 'text' ? (
+                            <EyeSvg width={16} />
+                        ) : (
+                            <EyeHiddenSvg width={16} />
+                        )
                     ) : (
                         rightContent
                     )}
-                </div>
-            )}
-            {clearable && Boolean(value) && (
-                <div className={styles.rightIconBlock} onClick={clearText}>
-                    <CrossSvg width={10} />
-                </div>
-            )}
-            {type === 'password' && (
-                <div
-                    className={styles.rightIconBlock}
-                    onClick={() => setTypeState(typeState === 'password' ? 'text' : 'password')}
-                >
-                    {typeState === 'text' ? <EyeSvg width={16} /> : <EyeHiddenSvg width={16} />}
                 </div>
             )}
             {(optionsLikeRightLabel || rightLabel) && (

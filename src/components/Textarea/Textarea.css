@@ -1,0 +1,210 @@
+.textareaContainer {
+    position: relative;
+    width: 100%;
+    margin-bottom: 38px;
+    background: #fff;
+    border: 1px solid #d9dde4;
+    box-sizing: border-box;
+    border-radius: 6px;
+    cursor: text;
+    font-size: 0;
+    transition: 0.25s border-color;
+}
+
+.textareaContainer.focused .leftContent {
+    color: var(--color-primary);
+}
+
+.textareaContainer.smallHeight {
+    min-height: 40px;
+}
+
+.textareaContainer.error {
+    border-color: #ff5c21;
+}
+
+.textareaContainer.error .statusIcon,
+.textareaContainer.error .statusText,
+.textareaContainer.error .fieldTip {
+    color: #ff5c21;
+}
+
+.textareaContainer.success {
+    border-color: #7dd130;
+}
+
+.textareaContainer.success .statusIcon,
+.textareaContainer.success .statusText,
+.textareaContainer.success .fieldTip {
+    color: #7dd130;
+}
+
+.textareaContainer.noMarginBottom {
+    margin-bottom: 0;
+}
+
+.textareaContainer.loading .label,
+.textareaContainer.loading .rightIconBlock,
+.textareaContainer.loading .input {
+    cursor: progress;
+}
+
+.textareaContainer:hover {
+    border-color: var(--color-primary);
+}
+
+.textareaContainer.focused {
+    border-color: var(--color-primary);
+}
+
+.textareaContainer.focused .label:not(.notFocused) {
+    transform: translateY(-10px);
+    font-size: 12px;
+}
+
+.textareaContainer.fullWidth {
+    max-width: 100% !important;
+}
+
+.textareaContainer.disabled {
+    background: #f9fafb;
+}
+
+.textareaContainer.disabled .input {
+    caret-color: transparent;
+}
+
+.textareaContainer.hasValue .label {
+    transform: translateY(-10px);
+    font-size: 12px;
+}
+
+.textareaContainer.hasValue .customIcon {
+    color: var(--color-primary);
+}
+
+.textarea {
+    display: inline-block;
+    width: 100%;
+    height: 100px;
+    margin: 20px 0 6px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    resize: none;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    font-family: inherit;
+    caret-color: var(--color-primary);
+    line-height: 1.5;
+    background: transparent;
+    color: #222;
+}
+
+.textarea.adaptiveHeight {
+    height: unset !important;
+    /*padding: 15px 10px 10px 20px;*/
+}
+
+.label {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    top: 15px;
+    left: 20px;
+    font-size: 15px;
+    background: #fff;
+    color: #7e8289;
+    transition: 0.1s ease-out;
+    transition-property: color, font-size, transform;
+    z-index: 1;
+    cursor: text;
+    user-select: none;
+}
+
+.label.static {
+    position: static;
+    padding-left: 0;
+    padding-bottom: 6px;
+}
+
+.textarea.hideCaret {
+    caret-color: transparent;
+}
+
+.textarea.vCenter {
+    padding: 18px 0 17px 24px !important;
+}
+
+.textarea.typeCode {
+    box-sizing: content-box;
+    letter-spacing: 50px;
+    font-size: 16px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.textarea.withLabel {
+    margin-top: 20px;
+}
+
+.statusIcon {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 20px;
+    z-index: 2;
+}
+
+.fieldTip,
+.statusText {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 5px;
+    font-size: 13px;
+    color: #b8bdc4;
+}
+
+.fieldTip {
+    color: #b8bdc4;
+}
+
+.rightIconBlock {
+    display: flex;
+    align-items: center;
+    padding: 0 20px 0 5px;
+    color: var(--color-primary);
+    transform-origin: center center;
+    transition: 0.25s color;
+    cursor: pointer;
+}
+
+.rightIconBlock svg {
+    transition: 0.25s transform;
+}
+
+.rightIconBlock.opened svg {
+    transform: scaleY(-1);
+}
+
+.rightIconBlock:hover {
+    color: var(--color-primary);
+}
+
+.cursorPointer .label,
+.cursorPointer .input {
+    cursor: pointer;
+}
+
+.textarea::-webkit-scrollbar {
+    width: 3px;
+}
+
+.textarea::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: 4px;
+}
