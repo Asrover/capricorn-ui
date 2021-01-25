@@ -1,0 +1,89 @@
+.rightIconBlock {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    height: 100%;
+    margin: 0 -15px;
+    padding: 0 15px;
+}
+
+.rightIconBlock svg {
+    margin-left: 6px;
+    color: var(--color-primary);
+    transform-origin: center center;
+    transition: 0.25s transform;
+}
+
+.suffixIcon {
+    transition: 0.25s transform;
+}
+
+.suffixIcon.openedOptions,
+.rightIconBlock.opened svg {
+    transform: scaleY(-1);
+}
+
+.suffixIcon:hover {
+    color: var(--color-primary);
+}
+
+.optionItem {
+    display: flex;
+    align-items: center;
+    padding: 6px 18px;
+    margin: 0 -10px;
+    font-size: 15px;
+    white-space: nowrap;
+    transition: 0.25s background-color;
+    cursor: pointer;
+}
+
+.optionItem:first-child {
+    margin-top: 6px;
+}
+
+.optionItem:last-child {
+    margin-bottom: 6px;
+}
+
+.optionItem:hover,
+.optionItem.selected,
+.optionItem.focused {
+    background-color: var(--color-gray);
+}
+
+.optionItem.selected {
+    font-weight: 600;
+}
+
+.optionItem svg {
+    margin-left: 8px;
+    color: var(--color-primary);
+}
+
+.rightMode {
+    left: auto !important;
+}
+
+.rightMode .optionItem {
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 12px;
+}
+
+.optionPrefix {
+    margin-left: -4px;
+    margin-right: 15px;
+}
+
+.optionSuffix {
+    font-size: 14px;
+}
+
+.suffixText {
+    margin-right: 15px;
+}
+
+.selectedOption {
+    background-color: var(--color-gray);
+}

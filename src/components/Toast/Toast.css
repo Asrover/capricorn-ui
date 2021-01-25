@@ -1,0 +1,87 @@
+.toast {
+    position: relative;
+    display: flex;
+    width: 420px;
+    background: #ffffff;
+    border: 1px solid #f0f2f5;
+    box-sizing: border-box;
+    box-shadow: 0 18px 30px rgba(26, 30, 42, 0.08);
+    border-radius: 6px;
+    padding: 18px 30px 18px 18px;
+    margin-bottom: 20px;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    color: #d9dde4;
+    transition: 0.2s color;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: var(--color-primary);
+}
+
+@media (max-width: 500px) {
+    .toast {
+        width: 100%;
+        padding: 15px 10px 5px 10px;
+    }
+
+    .close {
+        top: 15px;
+        right: 19px;
+    }
+}
+
+.title {
+    line-height: 1.3;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 3px;
+}
+
+.message {
+    font-size: 13px;
+    color: #7e8289;
+}
+
+.content.center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.content button {
+    margin: 10px 15px 0 0;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    border-radius: 42px;
+    margin-right: 15px;
+}
+
+.skin-error .icon {
+    background: #FFF1E1;
+    color: #FF5C21;
+}
+
+.skin-success .icon {
+    background: #EBF7D1;
+    color: #7DD130;
+}
+
+.skin-message .icon {
+    background: var(--color-gray);
+    color: var(--color-primary);
+}

@@ -4,11 +4,15 @@ import AlertSvg from '../../../assets/alert.svg'
 import classNames from 'classnames'
 
 export interface RadioProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'onChange'> {
+    error?: string
     value: string | number
     disabled?: boolean
 }
 
-const InternalRadio: React.ForwardRefRenderFunction<HTMLElement, RadioProps> = ({ error, disabled, children, ...rest }, ref) => {
+const InternalRadio: React.ForwardRefRenderFunction<HTMLElement, RadioProps> = (
+    { error, disabled, children, ...rest },
+    ref,
+) => {
     return (
         <label
             className={classNames({
