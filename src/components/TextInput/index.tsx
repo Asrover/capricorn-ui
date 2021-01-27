@@ -2,22 +2,24 @@ import React, { ReactNode, RefObject, useEffect, useLayoutEffect, useRef, useSta
 import styles from './TextInput.css'
 import classNames from 'classnames'
 import WarningSvg from '../../../assets/warning-round.svg'
-import LoaderSvg from '../../../assets/h-loader.svg'
 import CrossSvg from '../../../assets/cross-thin.svg'
 import EyeSvg from '../../../assets/eye.svg'
 import SearchSvg from '../../../assets/search.svg'
 import EyeHiddenSvg from '../../../assets/eye-hidden.svg'
 import CheckMarkSvg from '../../../assets/check-mark.svg'
 import IMask, { InputMask } from 'imask/esm/imask'
+import { Spinner } from '../Spinner'
 
 type TextInputType = 'text' | 'password' | 'money' | 'tel' | 'search' | 'code'
+
+// TODO: Add lazy to IMASK
 
 export interface TextInputProps {
     type?: TextInputType
     label?: ReactNode
     /** Value of text of input */
-    value?: string
-    onChange?: (value?: string) => void
+    value: string
+    onChange: (value?: string) => void
 
     dropdownContent?: ReactNode
     rightLabel?: ReactNode
@@ -85,20 +87,17 @@ const Index: React.FC<AllProps> = ({
     disableTyping,
     ...rest
 }) => {
-    const [inputText, setInputText] = useState(value)
     const inputRef: RefObject<HTMLInputElement | undefined> = innerRef || useRef()
     const [typeState, setTypeState] = useState<TextInputType>(type)
     const [focused, setFocused] = useState(false)
     const hasPrefix = Boolean(prefix) || typeState === 'search'
     const hasError = Boolean(error)
     const hasSuccess = Boolean(success)
-    const hasValue = Boolean(inputText)
+    const hasValue = Boolean(value)
     const maskRef = useRef<InputMask<{ mask: string }>>()
 
     useEffect(() => {
-        if (value !== maskRef.current?.unmaskedValue) {
-            setInputText(value)
-        }
+        maskRef.current?.updateValue()
     }, [value])
 
     useEffect(() => {
@@ -110,33 +109,28 @@ const Index: React.FC<AllProps> = ({
             maskRef.current?.destroy()
         }
     }, [mask])
-    
-    useEffect(() => {
-        maskRef.current?.updateValue()
-        onChange && onChange(mask ? maskRef.current?.unmaskedValue : inputText)
-    }, [inputText])
 
-    const handleFocus = (): void => {
+    const handleFocus = () => {
         if (!disabled && !loading) {
             setFocused(true)
             onFocus && onFocus()
         }
     }
 
-    const handleBlur = (): void => {
+    const handleBlur = () => {
         setFocused(false)
         onBlur && onBlur()
     }
 
-    const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
+    const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
         if (!disabled && !disableTyping) {
             if (typeState === 'money' && isNaN(Number(target.value))) return
 
-            setInputText(target.value)
+            onChange(mask ? maskRef.current?.unmaskedValue : target.value)
         }
     }
 
-    const forceFocus = (): void => {
+    const forceFocus = () => {
         handleFocus()
         inputRef.current?.focus()
     }
@@ -149,7 +143,7 @@ const Index: React.FC<AllProps> = ({
     }, [autoFocus])
 
     const clearText = () => {
-        setInputText('')
+        onChange('')
         forceFocus()
     }
 
@@ -200,10 +194,10 @@ const Index: React.FC<AllProps> = ({
                     <input
                         type={typeState === 'search' || typeState === 'money' ? 'text' : typeState}
                         onChange={handleChange}
-                        value={inputText}
+                        value={mask ? maskRef.current?.value || '' : value}
                         className={classNames({
                             [styles.input]: true,
-                            [styles.hideCaret]: (type === 'code' && inputText?.length === codeLength) || loading,
+                            [styles.hideCaret]: (type === 'code' && value?.length === codeLength) || loading,
                             [styles.typeCode]: type === 'code',
                             [styles.vCenter]: type === 'code' || staticLabel,
                             [styles.withLabel]: Boolean(label),
@@ -238,7 +232,7 @@ const Index: React.FC<AllProps> = ({
                     {clearable && hasValue ? (
                         <CrossSvg width={10} />
                     ) : loading ? (
-                        <LoaderSvg width={24} />
+                        <Spinner size="s" />
                     ) : type === 'password' ? (
                         typeState === 'text' ? (
                             <EyeSvg width={16} />

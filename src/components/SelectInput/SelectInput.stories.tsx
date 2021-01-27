@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import { SelectInput } from './index'
 import { Title } from '../Title'
+import { Surface } from '../Surface'
 
 export default {
     title: 'Components/SelectInput',
@@ -47,9 +48,31 @@ export const All: React.FC = () => {
     const [value8, setValue8] = useState()
     const [value9, setValue9] = useState()
 
+    const [asyncOptions, setAsyncOptions] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [value, setValue] = useState()
+
+    useEffect(() => {
+        setTimeout(() => {
+            setAsyncOptions(options)
+            setLoading(false)
+        }, 3000)
+    }, [])
+
     return (
         <>
-            <Title level={2}>Extends: TextInput</Title>
+            <Surface>
+                <Title level={2}>Extends: TextInput</Title>
+            </Surface>
+            <br/>
+            <SelectInput
+                selectedOption={value}
+                options={asyncOptions}
+                loading={loading}
+                autoSelect
+                onChange={setValue}
+                label="Async options"
+            />
             <SelectInput selectedOption={value9} options={options} onChange={setValue9} label="Account" />
             <SelectInput
                 type="money"

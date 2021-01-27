@@ -1,0 +1,34 @@
+.space {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.column > * {
+    margin-right: 0 !important;
+}
+
+.size-s > * {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.size-space-between {
+    justify-content: space-between;
+}
+
+.size-m > * {
+    margin-right: 16px;
+    margin-bottom: 16px;
+}
+
+.size-l > * {
+    margin-right: 32px;
+    margin-bottom: 32px;
+}
+
+.space > *:last-child {
+    margin-right: 0;
+}

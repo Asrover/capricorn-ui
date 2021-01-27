@@ -35,7 +35,7 @@ export const All: React.FC = () => {
                 error="Required field"
             />
             <TextInput value={value2} onChange={setValue2} label="With success" success="Success text" />
-            <TextInput disabled value={'Some text'} label="Disabled state" />
+            <TextInput disabled value={'Some text'} loading label="Disabled and loading state" />
             <TextInput
                 value={value3}
                 onChange={setValue3}

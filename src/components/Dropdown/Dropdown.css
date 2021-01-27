@@ -19,8 +19,16 @@
     border-radius: 6px;
     border: 1px solid rgba(26, 30, 42, 0.04);
     box-shadow: 0 6px 12px rgba(26, 30, 42, 0.08);
-    max-height: 110px;
+    max-height: 150px;
     overflow: auto;
+}
+
+.dropdown.autoMaxHeight {
+    max-height: unset;
+}
+
+.dropdown.autoMaxHeight {
+    padding: 0;
 }
 
 .dropdown::-webkit-scrollbar {

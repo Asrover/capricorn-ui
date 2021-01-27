@@ -5,13 +5,15 @@ import classNames from 'classnames'
 interface DropdownProps {
     active?: boolean
     position?: 'right' | 'bottom'
+    autoMaxHeight?: boolean
+    noPadding?: boolean
 }
 
 type AllProps = DropdownProps & React.HTMLAttributes<HTMLDivElement>
 
 // Todo: to Transition Group
 
-const Index: React.FC<AllProps> = ({ active, className, position, children, ...rest }) => {
+const Index: React.FC<AllProps> = ({ active, autoMaxHeight, noPadding, className, position, children, ...rest }) => {
     return (
         <div
             {...rest}
@@ -25,6 +27,8 @@ const Index: React.FC<AllProps> = ({ active, className, position, children, ...r
             <div
                 className={classNames({
                     [styles.dropdown]: true,
+                    [styles.autoMaxHeight]: autoMaxHeight,
+                    [styles.noPadding]: noPadding,
                 })}
             >
                 {children}

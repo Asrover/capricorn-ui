@@ -1,0 +1,25 @@
+.surface {
+    width: 100%;
+    background: #fff;
+    box-sizing: border-box;
+    box-shadow: 0 26px 30px #edf1f3;
+    border-radius: 6px;
+    transition: box-shadow .25s, transform .25s;
+}
+
+.surface:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(26,30,42,.14);
+}
+
+@media screen and (max-width: 600px) {
+    .surface {
+        padding: 24px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .surface {
+        padding: 20px;
+    }
+}

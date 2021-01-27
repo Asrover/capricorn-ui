@@ -1,322 +1,109 @@
-.inputContainer {
-    display: flex;
-    align-items: stretch;
-    flex-wrap: wrap;
-    position: relative;
+:global(.react-calendar) {
     width: 100%;
-    min-height: 54px;
-    margin-bottom: 38px;
-    background: #fff;
-    border: 1px solid #d9dde4;
+}
+:global(.react-calendar--doubleView) {
+    width: 700px;
+}
+:global(.react-calendar--doubleView .react-calendar__viewContainer) {
+    display: flex;
+    margin: -0.5em;
+}
+:global(.react-calendar--doubleView .react-calendar__viewContainer) > * {
+    width: 50%;
+    margin: 0.5em;
+}
+:global(.react-calendar),
+:global(.react-calendar) *,
+:global(.react-calendar) *:before,
+:global(.react-calendar) *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    border-radius: 6px;
-    cursor: text;
-    transition: 0.25s border-color;
 }
-
-.inputContainer.focused .leftContent {
-    color: var(--color-primary);
-}
-
-.inputContainer.smallHeight {
-    min-height: 40px;
-}
-
-.inputContainer.error {
-    border-color: #ff5c21;
-}
-
-.inputContainer.error .statusIcon,
-.inputContainer.error .statusText,
-.inputContainer.error .fieldTip {
-    color: #ff5c21;
-}
-
-.inputContainer.success {
-    border-color: #7dd130;
-}
-
-.inputContainer.success .statusIcon,
-.inputContainer.success .statusText,
-.inputContainer.success .fieldTip {
-    color: #7dd130;
-}
-
-.inputContainer.smallHeight input {
-    font-size: 14px;
-}
-
-.inputContainer.noMarginBottom {
-    margin-bottom: 0;
-}
-
-.inputContainer.loading .label,
-.inputContainer.loading .rightIconBlock,
-.inputContainer.loading .input {
-    cursor: progress;
-}
-
-.inputContainer:hover {
-    border-color: var(--color-primary);
-}
-
-.inputContainer.focused {
-    border-color: var(--color-primary);
-}
-
-.inputContainer.focused .label:not(.notFocused) {
-    transform: translateY(-10px);
-    font-size: 12px;
-}
-
-.inputContainer.focused .customIcon {
-    color: var(--color-primary);
-}
-
-.inputContainer.fullWidth {
-    max-width: 100% !important;
-}
-
-.inputContainer.disabled {
-    background: #f9fafb;
-}
-
-.inputContainer.disabled .input {
-    caret-color: transparent;
-}
-
-.inputContainer.hasValue .label {
-    transform: translateY(-10px);
-    font-size: 12px;
-}
-
-.inputContainer.hasValue .customIcon {
-    color: var(--color-primary);
-}
-
-.inputBox {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    flex-wrap: wrap;
-}
-
-.inputWrap {
-    position: relative;
-    width: 100%;
-    flex: 1;
-}
-
-.label {
-    display: flex;
-    position: absolute;
-    align-items: center;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    padding-left: 20px;
-    font-size: 15px;
-    line-height: 1.2;
-    color: #7e8289;
-    transition: 0.15s;
-    transition-property: color, font-size, transform;
-    z-index: 1;
-    cursor: text;
-    user-select: none;
-}
-
-.label.static {
-    position: static;
-    padding-left: 0;
-    padding-bottom: 6px;
-}
-
-.inputContainer.hasLeftContent .label,
-.inputContainer.hasLeftContent .input {
-    padding-left: 15px;
-}
-
-.input {
-    position: relative;
-    box-sizing: border-box;
-    width: 100%;
-    min-width: 100px;
-    height: 100%;
-    padding: 10px 10px 10px 20px;
-    background: transparent;
-    border: none;
+:global(.react-calendar) button {
+    margin: 0;
+    border: 0;
     outline: none;
-    font-size: 15px;
-    transition: 0.25s border-color;
-    caret-color: var(--color-primary);
-    border-radius: 6px;
+    transition: .25s background-color;
+    font-size: 1.1em;
 }
-
-.input.hideCaret {
-    caret-color: transparent;
-}
-
-.input.vCenter {
-    padding: 18px 0 17px 24px !important;
-}
-
-.input.typeCode {
-    box-sizing: content-box;
-    letter-spacing: 50px;
-    font-size: 16px;
-    font-family: 'Roboto Mono', monospace;
-}
-
-.input.withLabel {
-    padding-top: 25px;
-}
-
-.statusIcon {
-    display: flex;
-    position: absolute;
-    align-items: center;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    right: 20px;
-    background: #fff;
-    z-index: 2;
-}
-
-.fieldTip,
-.statusText {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 5px;
-    font-size: 13px;
-    color: #b8bdc4;
-}
-
-.fieldTip {
-    color: #b8bdc4;
-}
-
-.rightIconBlock {
-    display: flex;
-    align-items: center;
-    padding: 0 20px 0 5px;
-    color: var(--color-primary);
-    transform-origin: center center;
-    transition: 0.25s color;
+:global(.react-calendar) button:enabled:hover {
     cursor: pointer;
 }
-
-.rightIconBlock svg {
-    transition: 0.25s transform;
+:global(.react-calendar__navigation) {
+    height: 44px;
+    margin-bottom: 1em;
 }
-
-.rightIconBlock.opened svg {
-    transform: scaleY(-1);
+:global(.react-calendar__navigation) button {
+    min-width: 44px;
+    background: none;
 }
-
-.rightIconBlock:hover {
-    color: var(--color-primary);
+:global(.react-calendar__navigation) button:enabled:hover,
+:global(.react-calendar__navigation) button:enabled:focus {
+    background-color: var(--color-gray);
 }
-
-.typeLabel {
-    position: relative;
+:global(.react-calendar__navigation) button[disabled] {
+    background-color: var(--color-gray-darker);
+}
+:global(.react-calendar__month-view__weekdays) {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+:global(.react-calendar__month-view__weekdays__weekday) {
+    padding: 0.5em;
+}
+:global(.react-calendar__month-view__weekNumbers) {
+    font-weight: bold;
+}
+:global(.react-calendar__month-view__weekNumbers .react-calendar__tile) {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 15px;
-    border-left: 1px solid #d9dde4;
-    border-radius: 0 5px 5px 0;
-    background: #f9fafb;
-    font-size: 12px;
-    color: #35373b;
-    transition: 0.25s border-color;
+    font-size: 0.85em;
+    padding: calc(0.75em / 0.75) calc(0.5em / 0.75);
 }
-
-.typeLabel.withDropdown {
-    cursor: pointer;
+:global(.react-calendar__month-view__days__day--weekend) {
+    color: #d10000;
 }
-
-.typeLabel.withDropdown .rightIconBlock {
-    padding: 0 0 0 8px;
+:global(.react-calendar__month-view__days__day--neighboringMonth) {
+    color: #757575;
 }
-
-.leftContent {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    padding-left: 15px;
-    color: #b8bdc4;
-    transition: 0.25s color;
-    z-index: 1;
+:global(.react-calendar__year-view .react-calendar__tile),
+:global(.react-calendar__decade-view .react-calendar__tile),
+:global(.react-calendar__century-view .react-calendar__tile) {
+    padding: 2em 0.5em;
 }
-
-.optionItem {
-    display: flex;
-    align-items: center;
-    padding: 6px 18px;
-    margin: 0 -10px;
-    font-size: 15px;
-    white-space: nowrap;
-    transition: 0.25s background-color;
-    cursor: pointer;
+:global(.react-calendar__tile) {
+    max-width: 100%;
+    text-align: center;
+    padding: 0.75em 0.5em;
+    background: none;
 }
-
-.optionItem:first-child {
-    margin-top: 6px;
+:global(.react-calendar__tile:disabled) {
+    background-color: #f0f0f0;
 }
-
-.optionItem:last-child {
-    margin-bottom: 6px;
+:global(.react-calendar__tile):enabled:hover,
+:global(.react-calendar__tile):enabled:focus {
+    background-color: #e6e6e6;
 }
-
-.optionItem:hover,
-.optionItem.selected,
-.optionItem.focused {
-    background-color: var(--color-gray);
+:global(.react-calendar__tile--hasActive) {
+    background: var(--color-primary);
+    color: #fff;
 }
-
-.optionItem.selected {
-    font-weight: 600;
+:global(.react-calendar__tile--hasActive):enabled:hover,
+:global(.react-calendar__tile--hasActive):enabled:focus {
+    background: var(--color-primary-lighter);
 }
-
-.optionItem svg {
-    margin-left: 8px;
-    color: var(--color-primary);
+:global(.react-calendar__tile--active) {
+    background: var(--color-primary);
+    color: white;
 }
-
-.numberDelimiter {
-    position: absolute;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+:global(.react-calendar__tile--active):enabled:hover,
+:global(.react-calendar__tile--active):enabled:focus {
+    background: var(--color-primary-lighter);
 }
-
-.codeDelimiter {
-    width: 1px;
-    height: 100%;
-    background-color: #d9dde4;
-}
-
-.cursorPointer .label,
-.cursorPointer .input {
-    cursor: pointer;
-}
-
-.rightMode {
-    left: auto !important;
-}
-
-.rightMode .optionItem {
-    padding-left: 12px;
-    padding-right: 12px;
-    font-size: 12px;
-}
-
-.optionLeftContent {
-    margin-left: -4px;
-    margin-right: 15px;
+:global(.react-calendar--selectRange .react-calendar__tile--hover) {
+    background-color: #e6e6e6;
 }

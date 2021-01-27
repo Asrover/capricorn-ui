@@ -5,17 +5,20 @@ import styles from './SelectInput.css'
 import ChevronDownSvg from '../../../assets/chevron-down.svg'
 import { Dropdown } from '../Dropdown'
 import CheckMarkSvg from '../../../assets/check-mark.svg'
+import { useWindowSize } from 'react-use'
 
 type Option = { value: any; text: string; prefix?: ReactNode; suffix?: ReactNode }
 
 interface SelectInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
+    options: Option[]
     selectedOption?: Option
-    options?: Option[]
     inputValue?: string
     onChange?: (option?: Option) => void
     onSearch?: (value: string) => void
     withSearch?: boolean
     optionsLikeRightLabel?: boolean
+    /** Auto select the first option, useful in case when options are async */
+    autoSelect?: boolean
 }
 
 const Index: React.FC<SelectInputProps> = ({
@@ -26,12 +29,21 @@ const Index: React.FC<SelectInputProps> = ({
     withSearch,
     options,
     inputValue,
+    autoSelect,
     ...rest
 }) => {
+    const width = useWindowSize().width
     const [inputText, setInputText] = useState(optionsLikeRightLabel ? inputValue : selectedOption?.text)
     const [openedOptions, setOpenedOptions] = useState(false)
     const [tillNotTypingAfterOptionsOpened, setTillNotTypingAfterOptionsOpened] = useState(true)
     const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
+
+    useEffect(() => {
+        if (autoSelect && options.length !== 0 && !selectedOption.value) {
+            onChange && onChange(options[0])
+            !optionsLikeRightLabel && setInputText(options[0].text)
+        }
+    }, [options])
 
     useEffect(() => {
         setInputText(inputValue)
@@ -56,9 +68,6 @@ const Index: React.FC<SelectInputProps> = ({
         setInputText(value)
 
         onSearch && onSearch(value)
-        // if (!(hasOptions && !withSearch && !optionsLikeRightLabel)) {
-        //     onChange && !optionsLikeRightLabel && onChange()
-        // }
         setTillNotTypingAfterOptionsOpened(false)
     }
 
@@ -93,6 +102,14 @@ const Index: React.FC<SelectInputProps> = ({
         }
     }
 
+    const nativeSelectOption = (event: React.FormEvent<HTMLSelectElement>) => {
+        const option = options.find((option) => option.value === event.currentTarget.value)
+
+        if (option) {
+            handleChangeOption(option, -1)
+        }
+    }
+
     const getRightLabel = () => (
         <div
             onClick={() => setOpenedOptions(true)}
@@ -106,32 +123,41 @@ const Index: React.FC<SelectInputProps> = ({
         </div>
     )
 
-    const getDropdownContent = () => (
-        <Dropdown
-            className={classNames({ [styles.rightMode]: optionsLikeRightLabel })}
-            active={openedOptions}
-            position="bottom"
-        >
-            {filteredOptions.length !== 0
-                ? filteredOptions.map((option, index) => (
-                      <div
-                          key={option.value}
-                          className={classNames({
-                              [styles.optionItem]: true,
-                              [styles.selectedOption]: selectedOption.value === option.value,
-                              [styles.focused]: focusedOptionIndex === index,
-                          })}
-                          onMouseDown={handleChangeOption(option, index)}
-                      >
-                          {option.prefix && <div className={styles.optionPrefix}>{option.prefix}</div>}
-                          <span style={{ flex: 1 }}>{option.text}</span>
-                          {option.suffix && <span className={styles.optionSuffix}>{option.suffix}</span>}
-                          {selectedOption.value === option.value && <CheckMarkSvg width={12} />}
-                      </div>
-                  ))
-                : 'Items not found'}
-        </Dropdown>
-    )
+    const getDropdownContent = () =>
+        width > 600 ? (
+            <Dropdown
+                className={classNames({ [styles.rightMode]: optionsLikeRightLabel })}
+                active={openedOptions}
+                position="bottom"
+            >
+                {filteredOptions.length !== 0
+                    ? filteredOptions.map((option, index) => (
+                          <div
+                              key={option.value}
+                              className={classNames({
+                                  [styles.optionItem]: true,
+                                  [styles.selectedOption]: selectedOption.value === option.value,
+                                  [styles.focused]: focusedOptionIndex === index,
+                              })}
+                              onMouseDown={handleChangeOption(option, index)}
+                          >
+                              {option.prefix && <div className={styles.optionPrefix}>{option.prefix}</div>}
+                              <span style={{ flex: 1 }}>{option.text}</span>
+                              {option.suffix && <span className={styles.optionSuffix}>{option.suffix}</span>}
+                              {selectedOption.value === option.value && <CheckMarkSvg width={12} />}
+                          </div>
+                      ))
+                    : 'Items not found'}
+            </Dropdown>
+        ) : (
+            <select onChange={nativeSelectOption} defaultValue={selectedOption.value} className={styles.nativeSelect}>
+                {options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                        {option.text}
+                    </option>
+                ))}
+            </select>
+        )
 
     const getSuffix = () =>
         !optionsLikeRightLabel && (
@@ -140,7 +166,7 @@ const Index: React.FC<SelectInputProps> = ({
                 <ChevronDownSvg
                     className={classNames({
                         [styles.rightContentIcon]: true,
-                        [styles.openedOptions]: openedOptions,
+                        [styles.opened]: openedOptions,
                     })}
                     width={12}
                 />
