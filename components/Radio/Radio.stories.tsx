@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import styles from '../../storybook.css'
 import Radio, { RadioGroup } from './index'
 
 export default {
@@ -14,7 +13,7 @@ export const All: React.FC = () => {
     const [group3, setGroup3] = useState()
 
     return (
-        <div className={styles.marginBetweenAll}>
+        <>
             <Radio.Group name="radio-group-name" label="Radio group with a label" onChange={setGroup} value={group}>
                 <Radio value={1}>The first option</Radio>
                 <Radio value={2}>The second option</Radio>
@@ -52,6 +51,6 @@ export const All: React.FC = () => {
                     Disabled
                 </Radio>
             </Radio.Group>
-        </div>
+        </>
     )
 }

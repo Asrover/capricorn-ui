@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
     'stories': [
         '../components/**/*.stories.mdx',
@@ -5,9 +7,9 @@ module.exports = {
     ],
     'addons': [
         '@storybook/addon-links',
+        '@storybook/addon-docs',
         '@storybook/addon-essentials',
         'storybook-addon-themes',
-        '@storybook/addon-docs',
     ],
     typescript: {
         check: false,
@@ -29,13 +31,21 @@ module.exports = {
                 {
                     loader: 'css-loader',
                     options: {
-                        modules: true,
+                        modules: {
+                            localIdentName: '[name]__[local]',
+                        },
                         importLoaders: 1,
-                        localIdentName: '[name]__[local]',
                     },
                 },
             ],
         };
+
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            "constants": path.resolve(__dirname, '../constants/'),
+            "assets": path.resolve(__dirname, '../assets/'),
+            "theme": path.resolve(__dirname, '../theme/'),
+        }
 
         config.module.rules[svgLoaderIndex].test = /\.(ico|jpg|jpeg|png|apng|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/
 

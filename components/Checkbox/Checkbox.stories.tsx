@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import { Checkbox } from './index'
-import styles from '../../storybook.css'
 
 export default {
     title: 'Components/Checkbox',
@@ -14,7 +13,7 @@ export const All: React.FC = () => {
     const [state3, setState3] = useState(false)
 
     return (
-        <div className={styles.marginBetweenAll}>
+        <>
             <Checkbox checked={state} onChange={setState}>
                 Check it
             </Checkbox>
@@ -30,6 +29,6 @@ export const All: React.FC = () => {
             <Checkbox checked={false} onChange={() => {}} disabled>
                 Disabled and unchecked
             </Checkbox>
-        </div>
+        </>
     )
 }

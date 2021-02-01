@@ -1,3 +1,7 @@
+import "../theme/index.css"
+import "../theme/capitalist.css"
+import "../theme/practika.css"
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   themes: [

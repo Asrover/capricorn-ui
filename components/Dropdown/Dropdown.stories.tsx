@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import { Dropdown } from './index'
-import styles from '../../storybook.css'
 
 export default {
     title: 'Components/Dropdown',
@@ -13,7 +12,7 @@ export const All: React.FC = () => {
     const [active2, setActive2] = useState(false)
 
     return (
-        <div className={styles.marginBetweenAll}>
+        <>
             <span style={{ position: 'relative' }}>
                 <span onMouseOver={() => setActive(true)} onMouseLeave={() => setActive(false)}>
                     Hover me Right
@@ -30,6 +29,6 @@ export const All: React.FC = () => {
                     Bottom text
                 </Dropdown>
             </span>
-        </div>
+        </>
     )
 }
