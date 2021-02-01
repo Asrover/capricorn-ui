@@ -7,7 +7,7 @@ const mode = 'production'
 const config = {
     mode,
     entry: {
-        'capricorn-ui': './src/index.ts'
+        'capricorn-ui': './index.ts'
     },
     devtool: 'source-map',
     output: {
@@ -27,6 +27,11 @@ const config = {
     ],
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
+        alias: {
+            "constants": path.resolve(__dirname, '../constants/'),
+            "assets": path.resolve(__dirname, '../assets/'),
+            "theme": path.resolve(__dirname, '../theme/'),
+        }
     },
     module: {
         rules: [
@@ -44,7 +49,7 @@ const config = {
                         options: {
                             modules: true,
                             importLoaders: 1,
-                            localIdentName: '[name]__[local]',
+                            localIdentName: 'cprn_ui_[name]__[local]',
                         },
                     }
                 ],

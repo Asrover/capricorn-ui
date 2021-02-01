@@ -1,0 +1,217 @@
+.tabs {
+
+}
+
+.tabs.size-s .tabHeaderItem {
+    padding: 5px 15px;
+    font-size: 12px;
+}
+
+.tabs.size-m .tabHeaderItem {
+    padding: 8px 25px;
+    font-size: 13px;
+}
+
+.tabs.size-l .tabHeaderItem {
+    padding: 10px 25px;
+    font-size: 16px;
+}
+
+.indicator {
+    position: absolute;
+    height: 2px;
+    left: 0;
+    bottom: 0;
+    background: var(--color-primary);
+    transition-timing-function: cubic-bezier(.6,.01,.59,1.31);
+    transition: .3s transform, .3s width;
+}
+
+.tabHeaderItem {
+    display: flex;
+    position: relative;
+    box-sizing: content-box;
+    align-items: center;
+    text-align: center;
+    padding: 10px 18px;
+    border-bottom: 3px solid transparent;
+    color: #7e8289;
+    cursor: pointer;
+    flex: 0 0 auto;
+    margin-bottom: -1px;
+    transition: 0.25s color, 0.25s background;
+}
+
+.tabHeaderItem.active {
+    color: var(--color-primary);
+    cursor: default;
+}
+
+.tabHeaderItem.disabled {
+    cursor: not-allowed;
+    color: #d9dde4;
+}
+
+.tabHeaderItem:hover {
+    color: var(--color-primary-lighter);
+}
+
+.skin-default .tabHeaderItem.active {
+    -webkit-text-stroke: .5px var(--color-primary);
+}
+
+.skin-button .indicator {
+    height: 100%;
+    border-radius: 6px;
+    z-index: -1;
+}
+
+.skin-button .tabHeaderItem.active {
+    font-weight: normal;
+    color: #fff;
+}
+
+.skin-button .tabHeaderItem {
+    border: none;
+    border-radius: 10px;
+}
+
+.skin-button .tabHeader {
+    display: inline-flex;
+    width: auto;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 18px 30px rgba(26, 30, 42, 0.08);
+}
+
+.skin-steps .tabHeaderItem {
+    display: table-cell;
+    position: relative;
+    box-sizing: border-box;
+    margin-left: -10px;
+    padding: 10px 20px 10px 40px;
+    border: 1px solid #b8bdc4;
+    border-left: none;
+    border-right: none;
+    font-weight: 600;
+    color: #b8bdc4;
+    cursor: default;
+}
+
+.skin-steps .tabHeaderItem.active {
+    border-color: var(--color-primary-lighter) !important;
+    color: var(--color-primary);
+    cursor: default;
+}
+
+.skin-steps .tabHeaderItem.active::after {
+    border-color: var(--color-primary-lighter);
+}
+
+.skin-steps .tabHeaderItem:first-child {
+    padding-left: 20px;
+    border-left: 1px solid #b8bdc4;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.skin-steps .tabHeaderItem::after {
+    position: absolute;
+    right: -18px;
+    bottom: 6px;
+    width: 35px;
+    height: 35px;
+    transform: rotate(45deg);
+    transform-origin: center;
+    border-top: 1px solid #b8bdc4;
+    border-right: 1px solid #b8bdc4;
+    border-top-right-radius: 6px;
+    z-index: 1;
+    content: '';
+}
+
+.skin-steps .tabHeaderItem:last-child {
+    padding-right: 20px;
+    border-right: 1px solid #b8bdc4;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.skin-steps .tabHeaderItem:last-child::after {
+    content: "";
+}
+
+.skin-group-button .indicator {
+    height: 100%;
+    z-index: 2;
+}
+
+.skin-group-button .tabHeaderItem.active {
+    font-weight: normal;
+    color: #fff;
+}
+
+.skin-group-button .tabHeaderItem {
+    box-sizing: border-box;
+    border: 1px solid var(--color-gray-darker);
+    border-left-color: transparent;
+}
+
+.skin-group-button .tabHeaderItem span {
+    position: relative;
+    z-index: 3;
+}
+
+.skin-group-button .tabHeaderItem:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-left-color: var(--color-gray-darker);
+}
+
+.skin-group-button .tabHeaderItem.lastChild {
+    border-left-color: transparent;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.skin-group-button .tabHeader {
+    display: inline-flex;
+    width: auto;
+    border-radius: 7px;
+    border: none;
+    box-shadow: 0 18px 30px rgba(26, 30, 42, 0.08);
+}
+
+.tabHeaderItem svg {
+    margin-right: 12px;
+}
+
+.tabHeader {
+    position: relative;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    padding-bottom: 1px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #d9dde4;
+    margin-bottom: 15px;
+}
+
+.tabHeader.headerSpaceBetween {
+    justify-content: space-between;
+}
+
+.tabHeader::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent;
+}
+
+.tabHeader::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+.tabContent {
+
+}

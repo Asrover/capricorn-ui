@@ -1,19 +1,19 @@
 {
   "name": "capricorn-ui",
-  "version": "0.0.13",
+  "version": "0.1.2",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "build": "webpack -c .config/build.config.js",
-    "build:lib-esm": "tsc -m es6 --outDir lib-esm && yarn copy-css:lib-esm",
+    "build:es": "tsc -m es6 --outDir es && yarn copy-css:es",
     "build:lib": "tsc && yarn copy-css:lib",
+    "css:lib": "rsync -R components/**/*.css lib && cleancss -o lib/",
+    "css:es": "rsync -R components/**/*.css es",
     "sb": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "format:css": "csscomb src/components/**/*.css",
     "format:js": "prettier --write src/**/*.{ts,tsx}",
-    "copy-css:lib": "cp src/components/**/*.css lib/components/** & mkdir lib/theme & cp src/theme/*.css lib/theme",
-    "copy-css:lib-esm": "cp src/components/**/*.css lib-esm/components/** & mkdir lib-esm/theme & cp src/theme/*.css lib-esm/theme",
-    "build:all": "yarn build & yarn build:lib-esm & yarn build:lib",
+    "build:all": "yarn build & yarn build:es & yarn build:lib && yarn copy-css:lib & yarn copy-css:es",
     "publish": "yarn publish"
   },
   "dependencies": {
@@ -79,5 +79,12 @@
   "peerDependencies": {
     "react": ">=17.0.1",
     "react-dom": ">=17.0.1"
-  }
+  },
+  "files": [
+    "assets",
+    "constants",
+    "dist",
+    "lib",
+    "es"
+  ]
 }

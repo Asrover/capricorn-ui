@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "skipLibCheck": true,
     "moduleResolution": "node",
     "module": "esnext",
     "target": "es5",
@@ -10,11 +11,18 @@
     "forceConsistentCasingInFileNames": true,
     "sourceMap": true,
     "declaration": true,
-    "jsx": "react"
+    "jsx": "react",
+    "removeComments": true,
+    "baseUrl": "./",
+    "paths": {
+      "constants/*": ["constants/*"],
+      "assets/*": ["assets/*"],
+      "theme/*": ["theme/*"]
+    }
   },
   "files": [
-    "./src/index.ts",
-    "./src/index.d.ts"
+    "index.ts",
+    "index.d.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false
