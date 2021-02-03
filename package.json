@@ -1,19 +1,19 @@
 {
   "name": "capricorn-ui",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "build": "webpack -c .config/build.config.js",
-    "build:es": "tsc -m es6 --outDir es && yarn copy-css:es",
-    "build:lib": "tsc && yarn copy-css:lib",
-    "css:lib": "rsync -R components/**/*.css lib && cleancss -o lib/",
+    "build:es": "tsc -m es6 --outDir es && yarn css:es && tsc-alias -outDir es",
+    "build:lib": "tsc && yarn css:lib && tsc-alias",
+    "css:lib": "rsync -R components/**/*.css lib && cd lib && rsync -a components/ ./ && rm -rf components",
     "css:es": "rsync -R components/**/*.css es",
     "sb": "start-storybook -p 6006",
     "build:sb": "build-storybook",
     "format:css": "csscomb src/components/**/*.css",
     "format:js": "prettier --write src/**/*.{ts,tsx}",
-    "build:all": "yarn build & yarn build:es & yarn build:lib && yarn copy-css:lib & yarn copy-css:es",
+    "build:all": "yarn build & yarn build:es & yarn build:lib && yarn css:lib & yarn css:es",
     "publish": "yarn publish"
   },
   "dependencies": {

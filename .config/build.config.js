@@ -47,9 +47,10 @@ const config = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true,
+                            modules: {
+                                localIdentName: 'cprn_ui_[name]__[local]',
+                            },
                             importLoaders: 1,
-                            localIdentName: 'cprn_ui_[name]__[local]',
                         },
                     }
                 ],

@@ -20,8 +20,13 @@
       "theme/*": ["theme/*"]
     }
   },
+  "include": [
+    "components/**/*"
+  ],
+  "exclude": [
+    "**/*.stories.tsx"
+  ],
   "files": [
-    "index.ts",
     "index.d.ts"
   ],
   "compileOnSave": false,
