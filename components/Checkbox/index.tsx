@@ -52,4 +52,4 @@ const Index: React.FC<AllProps> = ({ error, checked, disabled, children, onChang
     )
 }
 
-export const Checkbox = React.memo(Index)
+export const Checkbox = Index

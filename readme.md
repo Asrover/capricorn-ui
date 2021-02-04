@@ -16,5 +16,7 @@
 
 ### Usage in projects
 
-- `yarn add capricorn-ui`
-- add css-class `theme-practika` or `theme-capitalist` to your body component.
+1. `yarn add capricorn-ui`
+2. Add styles to root file:
+    - `import 'capricorn-ui/theme/index.css'`
+    - `import 'capricorn-ui/theme/(practika/capitalist).css'` for theme.

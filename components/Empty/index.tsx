@@ -24,4 +24,4 @@ const Index: React.FC<AllProps> = ({ size = 'm', overlay, children, ...rest }) =
     )
 }
 
-export const Empty = React.memo(Index)
+export const Empty = Index

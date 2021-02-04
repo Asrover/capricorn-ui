@@ -49,4 +49,4 @@ const Index: React.FC<AllProps> = ({ value, vertical, error, name, label, onChan
     )
 }
 
-export const RadioGroup = React.memo(Index)
+export const RadioGroup = Index

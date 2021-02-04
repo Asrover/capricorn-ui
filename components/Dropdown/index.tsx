@@ -37,4 +37,4 @@ const Index: React.FC<AllProps> = ({ active, autoMaxHeight, noPadding, className
     )
 }
 
-export const Dropdown = React.memo(Index)
+export const Dropdown = Index

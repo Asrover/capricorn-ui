@@ -1,4 +1,4 @@
-:global(body.theme-capitalist) {
+body {
     --base-hue: 83;
     --base-saturation: 74%;
     --base-lightness: 42%;

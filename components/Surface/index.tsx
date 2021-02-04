@@ -13,4 +13,4 @@ const Index: React.FC<SurfaceProps & React.HTMLAttributes<HTMLDivElement>> = ({ 
     )
 }
 
-export const Surface = React.memo(Index)
+export const Surface = Index

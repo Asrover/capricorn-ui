@@ -63,4 +63,4 @@ const Index: React.FC<AllProps> = ({
     )
 }
 
-export const CopyText = React.memo(Index)
+export const CopyText = Index

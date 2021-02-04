@@ -31,4 +31,4 @@ const Index: React.FC<AllProps> = ({ size = 'm', align, wrap, column, children, 
     )
 }
 
-export const Space = React.memo(Index)
+export const Space = Index

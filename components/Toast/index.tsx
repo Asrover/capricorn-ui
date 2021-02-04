@@ -65,4 +65,4 @@ const Index: React.FC<AllProps> = ({
     )
 }
 
-export const Toast = React.memo(Index)
+export const Toast = Index

@@ -166,4 +166,4 @@ const Index: React.FC<AllProps> = ({
     )
 }
 
-export const Textarea = React.memo(Index)
+export const Textarea = Index

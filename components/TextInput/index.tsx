@@ -7,7 +7,7 @@ import EyeSvg from 'assets/eye.svg'
 import SearchSvg from 'assets/search.svg'
 import EyeHiddenSvg from 'assets/eye-hidden.svg'
 import CheckMarkSvg from 'assets/check-mark.svg'
-import IMask from 'imask/esm/imask'
+import IMask from 'imask/esm'
 import { Spinner } from '../Spinner'
 
 type TextInputType = 'text' | 'password' | 'money' | 'tel' | 'search' | 'code'

@@ -22,4 +22,4 @@ const Index: React.FC<AllProps> = ({ size = 'm', overlay, children, ...rest }) =
     )
 }
 
-export const Spinner = React.memo(Index)
+export const Spinner = Index

@@ -63,4 +63,4 @@ const Index: React.FC<AllProps> = ({
     )
 }
 
-export const Button = React.memo(Index)
+export const Button = Index

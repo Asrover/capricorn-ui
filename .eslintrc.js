@@ -22,5 +22,5 @@ module.exports = {
         '@typescript-eslint/no-use-before-define': 'off',
         'react/prop-types': 'off',
     },
-    ignorePatterns: ['es', 'lib'],
+    ignorePatterns: ['esm', 'lib'],
 }

@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "skipLibCheck": true,
-    "moduleResolution": "node",
     "module": "esnext",
     "target": "es5",
     "lib": [ "es2015", "dom" ],
-    "outDir": "lib",
+    "outDir": "../lib",
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "suppressImplicitAnyIndexErrors": true,
     "forceConsistentCasingInFileNames": true,
@@ -15,19 +15,21 @@
     "removeComments": true,
     "baseUrl": "./",
     "paths": {
-      "constants/*": ["constants/*"],
-      "assets/*": ["assets/*"],
-      "theme/*": ["theme/*"]
-    }
+      "constants/*": ["../constants/*"],
+      "assets/*": ["../assets/*"],
+      "theme/*": ["../theme/*"]
+    },
   },
   "include": [
-    "components/**/*"
+    "../components/**/*"
   ],
   "exclude": [
-    "**/*.stories.tsx"
+    "../**/*.stories.tsx",
+    "../esm",
+    "../lib"
   ],
   "files": [
-    "index.d.ts"
+    "../index.d.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false

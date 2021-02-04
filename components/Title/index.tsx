@@ -12,4 +12,4 @@ const Index: React.FC<AllProps> = ({ level = 1, children, ...rest }) => {
     return <Title {...rest}>{children}</Title>
 }
 
-export const Title = React.memo(Index)
+export const Title = Index

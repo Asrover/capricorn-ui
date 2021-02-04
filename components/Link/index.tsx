@@ -33,4 +33,4 @@ const Index: React.FC<AllProps> = ({ href, hoverUnderline, disabled, bold, child
     )
 }
 
-export const Link = React.memo(Index)
+export const Link = Index
