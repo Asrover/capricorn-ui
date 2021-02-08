@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import SelectInput from './index'
 import Title from '../Title'
 import Surface from '../Surface'
+import Space from '../Space'
 
 export default {
     title: 'Components/SelectInput',
@@ -16,6 +17,14 @@ const typeLabelOptions = [
     { value: 'rub', text: 'RUB' },
     { value: 'one', text: 'TWO' },
     { value: 'three', text: 'THREE' },
+]
+
+const viewTextOptions = [
+    { value: 'usd', text: 'USD' },
+    { value: 'usdt', text: 'USDT' },
+    { value: 'eur', text: 'EUR' },
+    { value: 'btc', text: 'BTC' },
+    { value: 'rub', text: 'RUB' },
 ]
 
 const Currency: React.FC = ({ children }) => (
@@ -47,6 +56,7 @@ export const All: React.FC = () => {
     const [value6, setValue6] = useState()
     const [value8, setValue8] = useState()
     const [value9, setValue9] = useState()
+    const [value10, setValue10] = useState()
 
     const [asyncOptions, setAsyncOptions] = useState([])
     const [loading, setLoading] = useState(true)
@@ -59,12 +69,19 @@ export const All: React.FC = () => {
         }, 3000)
     }, [])
 
+    const textViewInputStyles = useMemo(
+        () => ({
+            caretColor: 'transparent',
+            fontSize: 20,
+        }),
+        [],
+    )
+
     return (
-        <>
+        <Space column size="l">
             <Surface>
                 <Title level={2}>Extends: TextInput</Title>
             </Surface>
-            <br />
             <SelectInput
                 selectedOption={value}
                 options={asyncOptions}
@@ -74,20 +91,20 @@ export const All: React.FC = () => {
                 label="Async options"
             />
             <SelectInput selectedOption={value9} options={options} onChange={setValue9} label="Account" />
-            <SelectInput
-                type="money"
-                selectedOption={currency}
-                options={typeLabelOptions}
-                onChange={setCurrency}
-                onSearch={setValue6}
-                optionsLikeRightLabel
-                noMarginBottom
-                label="Amount and currency"
-            />
-            Amount: {value6}
-            Currency: {currency?.text}
-            <br />
-            <br />
+            <div>
+                <SelectInput
+                    type="money"
+                    selectedOption={currency}
+                    options={typeLabelOptions}
+                    onChange={setCurrency}
+                    onSearch={setValue6}
+                    optionsLikeRightLabel
+                    noMarginBottom
+                    label="Amount and currency"
+                />
+                Amount: {value6}
+                Currency: {currency?.text}
+            </div>
             <SelectInput
                 selectedOption={value8}
                 options={options}
@@ -96,11 +113,27 @@ export const All: React.FC = () => {
                 clearable
                 label="Search"
             />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-        </>
+            <div>
+                <SelectInput
+                    selectedOption={value10}
+                    options={viewTextOptions}
+                    onChange={setValue10}
+                    value={value10?.text || 'Choose a currency'}
+                    view="text"
+                    textInputStyles={textViewInputStyles}
+                    loading={true}
+                />
+                <br/>
+                <br/>
+                <SelectInput
+                    selectedOption={value10}
+                    options={viewTextOptions}
+                    onChange={setValue10}
+                    value={value10?.text || 'Choose a currency'}
+                    view="text"
+                    textInputStyles={textViewInputStyles}
+                />
+            </div>
+        </Space>
     )
 }

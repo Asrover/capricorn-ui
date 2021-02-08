@@ -7,13 +7,23 @@ interface DropdownProps {
     position?: 'right' | 'bottom'
     autoMaxHeight?: boolean
     noPadding?: boolean
+    widthAuto?: boolean
 }
 
 type AllProps = DropdownProps & React.HTMLAttributes<HTMLDivElement>
 
 // Todo: to Transition Group
 
-const Dropdown: React.FC<AllProps> = ({ active, autoMaxHeight, noPadding, className, position, children, ...rest }) => {
+const Dropdown: React.FC<AllProps> = ({
+    active,
+    widthAuto,
+    autoMaxHeight,
+    noPadding,
+    className,
+    position,
+    children,
+    ...rest
+}) => {
     return (
         <div
             {...rest}
@@ -22,6 +32,7 @@ const Dropdown: React.FC<AllProps> = ({ active, autoMaxHeight, noPadding, classN
                 [styles.area]: true,
                 [styles.active]: active,
                 [styles[`position-${position}`]]: position !== 'right',
+                [styles.widthAuto]: widthAuto,
             })}
         >
             <div

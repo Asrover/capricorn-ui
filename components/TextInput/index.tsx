@@ -11,6 +11,7 @@ import IMask from 'imask/esm'
 import Spinner from '../Spinner'
 
 type TextInputType = 'text' | 'password' | 'money' | 'tel' | 'search' | 'code'
+type TextInputView = 'default' | 'text'
 
 // TODO: Add lazy to IMASK
 
@@ -19,6 +20,7 @@ export interface TextInputProps {
     label?: ReactNode
     value: string
     onChange: (value?: string) => void
+    view?: TextInputView
 
     dropdownContent?: ReactNode
     rightLabel?: ReactNode
@@ -50,6 +52,7 @@ export interface TextInputProps {
     staticLabel?: boolean
     mask?: string
     disableTyping?: boolean
+    textInputStyles?: Record<string, string | number>
 }
 
 type AllProps = TextInputProps &
@@ -58,6 +61,7 @@ type AllProps = TextInputProps &
 const TextInput: React.FC<AllProps> = ({
     label,
     type = 'text',
+    view = 'default',
     error,
     success,
     prefix,
@@ -83,6 +87,8 @@ const TextInput: React.FC<AllProps> = ({
     maxWidth = 360,
     mask,
     disableTyping,
+    style,
+    textInputStyles,
     ...rest
 }) => {
     const inputRef: RefObject<HTMLInputElement | undefined> = innerRef || useRef()
@@ -92,7 +98,7 @@ const TextInput: React.FC<AllProps> = ({
     const hasError = Boolean(error)
     const hasSuccess = Boolean(success)
     const hasValue = Boolean(value)
-    const maskRef = useRef<any>()
+    const maskRef = useRef<IMask>()
 
     useEffect(() => {
         if (mask) {
@@ -156,8 +162,9 @@ const TextInput: React.FC<AllProps> = ({
                 [styles.disabled]: disabled,
                 [styles.success]: hasSuccess,
                 [styles.hasPrefix]: hasPrefix,
+                [styles[`view-${view}`]]: true,
             })}
-            style={{ maxWidth: codeLength ? codeLength * 60 : maxWidth }}
+            style={{ ...style, maxWidth: codeLength ? codeLength * 60 : maxWidth }}
         >
             {type === 'code' && (
                 <div className={styles.numberDelimiter}>
@@ -199,6 +206,7 @@ const TextInput: React.FC<AllProps> = ({
                         spellCheck="false"
                         ref={inputRef}
                         onKeyDown={onKeyDown}
+                        style={{ ...textInputStyles, width: `calc(${(value?.length || 0) + 1.5}ch` }}
                     />
                     {type !== 'code' && (hasError || hasSuccess) && (
                         <div className={styles.statusIcon}>

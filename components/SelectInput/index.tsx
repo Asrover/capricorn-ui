@@ -10,6 +10,7 @@ import { useWindowSize } from 'react-use'
 type Option = { value: any; text: string; prefix?: ReactNode; suffix?: ReactNode }
 
 interface SelectInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
+    view?: 'default' | 'text'
     options: Option[]
     selectedOption?: Option
     inputValue?: string
@@ -30,6 +31,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
     options,
     inputValue,
     autoSelect,
+    view,
     ...rest
 }) => {
     const width = useWindowSize().width
@@ -129,6 +131,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
                 className={classNames({ [styles.rightMode]: optionsLikeRightLabel })}
                 active={openedOptions}
                 position="bottom"
+                widthAuto={view === 'text'}
             >
                 {filteredOptions.length !== 0
                     ? filteredOptions.map((option, index) => (
@@ -162,7 +165,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
     const getSuffix = () =>
         !optionsLikeRightLabel && (
             <>
-                <span className={styles.suffixText}>{selectedOption.suffix}</span>
+                {view !== 'text' && <span className={styles.suffixText}>{selectedOption.suffix}</span>}
                 <ChevronDownSvg
                     className={classNames({
                         [styles.rightContentIcon]: true,
@@ -185,6 +188,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
             value={inputText}
             suffix={getSuffix()}
             disableTyping={!withSearch && !optionsLikeRightLabel}
+            view={view}
             {...rest}
         />
     )

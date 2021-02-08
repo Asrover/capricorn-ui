@@ -307,3 +307,22 @@
     margin-left: -4px;
     margin-right: 15px;
 }
+
+.inputContainer.view-text {
+    display: inline-flex;
+    width: auto;
+    max-width: 100% !important;
+    border: none;
+    height: auto;
+}
+
+.inputContainer.view-text .input {
+    min-width: auto;
+    width: auto;
+    padding: 0;
+    cursor: pointer;
+}
+
+.inputContainer.view-text .suffix {
+    padding: 0;
+}
