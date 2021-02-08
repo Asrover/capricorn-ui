@@ -9,7 +9,7 @@ interface SpinnerProps {
 
 type AllProps = SpinnerProps & React.HTMLAttributes<HTMLDivElement>
 
-const Index: React.FC<AllProps> = ({ size = 'm', overlay, children, ...rest }) => {
+const Spinner: React.FC<AllProps> = ({ size = 'm', overlay, children, ...rest }) => {
     return (
         <div
             className={classNames({
@@ -22,4 +22,4 @@ const Index: React.FC<AllProps> = ({ size = 'm', overlay, children, ...rest }) =
     )
 }
 
-export const Spinner = Index
+export default Spinner

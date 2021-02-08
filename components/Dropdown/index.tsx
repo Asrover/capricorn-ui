@@ -13,7 +13,7 @@ type AllProps = DropdownProps & React.HTMLAttributes<HTMLDivElement>
 
 // Todo: to Transition Group
 
-const Index: React.FC<AllProps> = ({ active, autoMaxHeight, noPadding, className, position, children, ...rest }) => {
+const Dropdown: React.FC<AllProps> = ({ active, autoMaxHeight, noPadding, className, position, children, ...rest }) => {
     return (
         <div
             {...rest}
@@ -37,4 +37,4 @@ const Index: React.FC<AllProps> = ({ active, autoMaxHeight, noPadding, className
     )
 }
 
-export const Dropdown = Index
+export default Dropdown

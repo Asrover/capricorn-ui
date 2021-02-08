@@ -1,9 +1,9 @@
 import React, { ReactNode, useEffect, useMemo, useState } from 'react'
-import { TextInput, TextInputProps } from '../TextInput'
+import TextInput, { TextInputProps } from '../TextInput'
 import classNames from 'classnames'
 import styles from './SelectInput.css'
 import ChevronDownSvg from 'assets/chevron-down.svg'
-import { Dropdown } from '../Dropdown'
+import Dropdown from '../Dropdown'
 import CheckMarkSvg from 'assets/check-mark.svg'
 import { useWindowSize } from 'react-use'
 
@@ -21,7 +21,7 @@ interface SelectInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
     autoSelect?: boolean
 }
 
-const Index: React.FC<SelectInputProps> = ({
+const SelectInput: React.FC<SelectInputProps> = ({
     selectedOption = {},
     optionsLikeRightLabel,
     onChange,
@@ -190,4 +190,4 @@ const Index: React.FC<SelectInputProps> = ({
     )
 }
 
-export const SelectInput = Index
+export default SelectInput

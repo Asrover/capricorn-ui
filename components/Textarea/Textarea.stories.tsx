@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { Textarea } from './index'
+import Textarea from './index'
 
 export default {
     title: 'Components/Textarea',

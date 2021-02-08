@@ -1,22 +1,26 @@
 {
   "name": "capricorn-ui",
-  "module": "esm/",
-  "sideEffects": false,
-  "version": "0.1.8",
-  "main": "index.js",
+  "module": "esm/index.js",
+  "version": "0.3.1",
+  "main": "lib/index.js",
+  "unpkg": "dist/capricorn-ui.js",
+  "typings": "lib/index.d.ts",
   "license": "MIT",
+  "sideEffects": [
+    "dist/*",
+    "*.css"
+  ],
   "scripts": {
-    "build": "webpack -c .config/build.config.js",
-    "build:esm": "tsc -p .config/tsconfig.esm.json && yarn css:esm && tsc-alias -p .config/tsconfig.esm.json",
+    "build": "webpack -c build.config.js",
+    "build:esm": "tsc -p tsconfig.esm.json && yarn css:esm && tsc-alias -p tsconfig.esm.json",
     "build:lib": "tsc && yarn css:lib && tsc-alias",
     "css:lib": "rsync -R components/**/*.css lib && cd lib && rsync -a components/ ./ && rm -rf components",
     "css:esm": "rsync -R components/**/*.css esm && cd esm && rsync -a components/ ./ && rm -rf components",
     "sb": "start-storybook -p 6006",
     "build:sb": "build-storybook",
-    "format:css": "csscomb src/components/**/*.css",
-    "format:js": "prettier --write src/**/*.{ts,tsx}",
-    "build:all": "yarn build & yarn build:es & yarn build:lib && yarn css:lib & yarn css:es",
-    "publish": "yarn publish"
+    "format:css": "csscomb components/**/*.css",
+    "format:js": "prettier --write components/**/*.{ts,tsx}",
+    "build:all": "yarn build & yarn build:es & yarn build:lib && yarn css:lib & yarn css:es"
   },
   "dependencies": {
     "classnames": "^2.2.6",
@@ -80,8 +84,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "peerDependencies": {
-    "react": ">=16.0.1",
-    "react-dom": ">=16.0.1"
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
   },
   "files": [
     "assets",

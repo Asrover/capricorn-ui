@@ -3,7 +3,7 @@ import styles from './CopyText.css'
 import classNames from 'classnames'
 import copy from 'copy-to-clipboard'
 import CopySvg from 'assets/copy.svg'
-import { Dropdown } from '../Dropdown'
+import Dropdown from '../Dropdown'
 import CheckSvg from 'assets/check-mark.svg'
 
 interface LinkProps {
@@ -19,7 +19,7 @@ interface LinkProps {
 
 type AllProps = LinkProps & Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>
 
-const Index: React.FC<AllProps> = ({
+const CopyText: React.FC<AllProps> = ({
     textToCopy,
     successCopiedText,
     bold,
@@ -63,4 +63,4 @@ const Index: React.FC<AllProps> = ({
     )
 }
 
-export const CopyText = Index
+export default CopyText

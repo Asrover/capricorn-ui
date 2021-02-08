@@ -10,7 +10,7 @@ interface SurfaceProps {
 
 type AllProps = SurfaceProps & React.HTMLAttributes<HTMLDivElement>
 
-const Index: React.FC<AllProps> = ({ size = 'm', overlay, children, ...rest }) => {
+const Empty: React.FC<AllProps> = ({ size = 'm', overlay, children, ...rest }) => {
     return (
         <div
             className={classNames({
@@ -24,4 +24,4 @@ const Index: React.FC<AllProps> = ({ size = 'm', overlay, children, ...rest }) =
     )
 }
 
-export const Empty = Index
+export default Empty

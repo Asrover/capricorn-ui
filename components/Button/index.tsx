@@ -20,7 +20,7 @@ type AllProps = ButtonProps & Omit<React.HTMLAttributes<HTMLButtonElement>, 'loa
 
 // Todo: icon before after text node
 
-const Index: React.FC<AllProps> = ({
+const Button: React.FC<AllProps> = ({
     size = 'l',
     skin = 'action',
     type = 'button',
@@ -63,4 +63,4 @@ const Index: React.FC<AllProps> = ({
     )
 }
 
-export const Button = Index
+export default Button

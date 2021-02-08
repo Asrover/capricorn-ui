@@ -1,6 +1,6 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { Toast } from './index'
+import Toast from './index'
 
 export default {
     title: 'Components/Toast',

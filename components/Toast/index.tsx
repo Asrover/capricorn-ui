@@ -5,7 +5,7 @@ import CrossSvg from 'assets/cross-thin.svg'
 import WarningSvg from 'assets/warning-round.svg'
 import CheckMarkSvg from 'assets/check-mark.svg'
 import EnvelopeSvg from 'assets/envelope.svg'
-import { Button } from '../Button'
+import Button from '../Button'
 
 interface ToastProps {
     title: ReactNode
@@ -19,7 +19,7 @@ interface ToastProps {
 
 type AllProps = ToastProps & React.HTMLAttributes<HTMLDivElement>
 
-const Index: React.FC<AllProps> = ({
+const Toast: React.FC<AllProps> = ({
     title,
     message,
     onActionClick,
@@ -65,4 +65,4 @@ const Index: React.FC<AllProps> = ({
     )
 }
 
-export const Toast = Index
+export default Toast

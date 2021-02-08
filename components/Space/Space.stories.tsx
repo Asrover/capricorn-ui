@@ -1,9 +1,9 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { Space } from './index'
-import { Surface } from '../Surface'
-import { Title } from '../Title'
-import { Button } from '../Button'
+import Space from './index'
+import Surface from '../Surface'
+import Title from '../Title'
+import Button from '../Button'
 
 export default {
     title: 'Components/Space',
@@ -89,6 +89,26 @@ export const All: React.FC = () => (
             <Space size="space-between" column>
                 <span>add</span>
                 <span>space</span>
+                <span>between</span>
+                <span>every</span>
+                <span>element</span>
+                <span>inside</span>
+            </Space>
+        </Surface>
+        <Surface>
+            <Title level={2}>Custom size: 40px</Title>
+            <Space size={40}>
+                <span>I</span>
+                <span>add</span>
+                <span>40px</span>
+                <span>between</span>
+                <span>every</span>
+                <span>element</span>
+                <span>inside</span>
+            </Space>
+            <Space size={40} column>
+                <span>add</span>
+                <span>40px</span>
                 <span>between</span>
                 <span>every</span>
                 <span>element</span>

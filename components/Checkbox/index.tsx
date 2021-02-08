@@ -13,7 +13,7 @@ interface CheckboxProps {
 
 type AllProps = CheckboxProps & Omit<React.HTMLAttributes<HTMLInputElement>, 'onChange'>
 
-const Index: React.FC<AllProps> = ({ error, checked, disabled, children, onChange, ...rest }) => {
+const Checkbox: React.FC<AllProps> = ({ error, checked, disabled, children, onChange, ...rest }) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         onChange(!checked)
     }
@@ -52,4 +52,4 @@ const Index: React.FC<AllProps> = ({ error, checked, disabled, children, onChang
     )
 }
 
-export const Checkbox = Index
+export default Checkbox

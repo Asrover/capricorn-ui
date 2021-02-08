@@ -5,7 +5,7 @@ interface SurfaceProps {
     padding?: number
 }
 
-const Index: React.FC<SurfaceProps & React.HTMLAttributes<HTMLDivElement>> = ({ children, padding = 30, ...rest }) => {
+const Surface: React.FC<SurfaceProps & React.HTMLAttributes<HTMLDivElement>> = ({ children, padding = 30, ...rest }) => {
     return (
         <div className={styles.surface} style={{ padding }} {...rest}>
             {children}
@@ -13,4 +13,4 @@ const Index: React.FC<SurfaceProps & React.HTMLAttributes<HTMLDivElement>> = ({ 
     )
 }
 
-export const Surface = Index
+export default Surface

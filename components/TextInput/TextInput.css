@@ -4,8 +4,7 @@
     flex-wrap: wrap;
     position: relative;
     width: 100%;
-    min-height: 54px;
-    margin-bottom: 38px;
+    height: 54px;
     background: #fff;
     border: 1px solid #d9dde4;
     box-sizing: border-box;
@@ -14,16 +13,12 @@
     transition: 0.25s border-color;
 }
 
-.inputContainer.noMarginBottom {
-    margin-bottom: 0;
-}
-
 .inputContainer.focused .prefix {
     color: var(--color-primary);
 }
 
 .inputContainer.smallHeight {
-    min-height: 40px;
+    height: 40px;
 }
 
 .inputContainer.error {
@@ -48,10 +43,6 @@
 
 .inputContainer.smallHeight input {
     font-size: 14px;
-}
-
-.inputContainer.noMarginBottom {
-    margin-bottom: 0;
 }
 
 .inputContainer.loading .label,

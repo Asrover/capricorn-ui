@@ -1,5 +1,5 @@
 .space {
-    display: flex;
+    display: inline-flex;
 }
 
 .column {
@@ -12,23 +12,38 @@
 
 .size-s > * {
     margin-right: 8px;
+}
+
+.column.size-s > * {
+    margin-right: 0;
     margin-bottom: 8px;
 }
 
 .size-space-between {
+    width: 100%;
+    height: 100%;
     justify-content: space-between;
 }
 
 .size-m > * {
     margin-right: 16px;
+}
+
+.column.size-m > * {
+    margin-right: 0;
     margin-bottom: 16px;
 }
 
 .size-l > * {
     margin-right: 32px;
+}
+
+.column.size-l > * {
+    margin-right: 0;
     margin-bottom: 32px;
 }
 
 .space > *:last-child {
     margin-right: 0;
+    margin-bottom: 0;
 }

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { DateInput } from './index'
-import { Title } from '../Title'
-import { Space } from '../Space'
+import DateInput from './index'
+import Title from '../Title'
+import Space from '../Space'
 
 export default {
     title: 'Components/DateInput',

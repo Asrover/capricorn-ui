@@ -6,10 +6,10 @@ interface TitleProps {
 
 type AllProps = TitleProps & React.HTMLAttributes<HTMLHeadingElement>
 
-const Index: React.FC<AllProps> = ({ level = 1, children, ...rest }) => {
+const Title: React.FC<AllProps> = ({ level = 1, children, ...rest }) => {
     const Title = `h${level}`
 
     return <Title {...rest}>{children}</Title>
 }
 
-export const Title = Index
+export default Title

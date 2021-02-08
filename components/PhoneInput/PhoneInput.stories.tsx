@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { PhoneInput } from './index'
-import { Title } from '../Title'
+import PhoneInput from './index'
+import Title from '../Title'
 
 export default {
     title: 'Components/PhoneInput',

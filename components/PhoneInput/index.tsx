@@ -1,6 +1,6 @@
 import React from 'react'
 import { countryCodes } from 'constants/countryPhoneCodes'
-import { TextInput, TextInputProps } from '../TextInput'
+import TextInput, { TextInputProps } from '../TextInput'
 
 const findByPhoneCode = (
     code: string,
@@ -31,7 +31,7 @@ const findByPhoneCode = (
     return null
 }
 
-const Index: React.FC<TextInputProps> = ({ value, ...rest }) => {
+const PhoneInput: React.FC<TextInputProps> = ({ value, ...rest }) => {
     const found = findByPhoneCode(value || '')
 
     const findByLogin = () => (found ? React.createElement(found[1].icon, { width: 32 }) : undefined)
@@ -39,4 +39,4 @@ const Index: React.FC<TextInputProps> = ({ value, ...rest }) => {
     return <TextInput {...rest} type="tel" value={value} prefix={findByLogin()} mask="+000000000000000" />
 }
 
-export const PhoneInput = Index
+export default PhoneInput

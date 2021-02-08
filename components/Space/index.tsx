@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import styles from './Space.css'
 
 interface SpaceProps {
-    size?: 's' | 'm' | 'l' | 'space-between'
+    size?: 's' | 'm' | 'l' | 'space-between' | number
     /** Align items */
     align?: 'flex-start' | 'flex-end' | 'center' | 'baseline'
     column?: boolean
@@ -12,7 +12,7 @@ interface SpaceProps {
 
 type AllProps = SpaceProps & React.HTMLAttributes<HTMLDivElement>
 
-const Index: React.FC<AllProps> = ({ size = 'm', align, wrap, column, children, ...rest }) => {
+const Space: React.FC<AllProps> = ({ size = 'm', align, wrap, column, children, ...rest }) => {
     return (
         <div
             className={classNames({
@@ -26,9 +26,19 @@ const Index: React.FC<AllProps> = ({ size = 'm', align, wrap, column, children, 
             }}
             {...rest}
         >
-            {children}
+            {typeof size === 'string'
+                ? children
+                : Array.isArray(children) &&
+                  children.map((item, index) =>
+                      React.cloneElement(item as React.ReactElement, {
+                          style: {
+                              marginRight: !column && index !== children.length - 1 && size,
+                              marginBottom: column && index !== children.length - 1 && size,
+                          },
+                      }),
+                  )}
         </div>
     )
 }
 
-export const Space = Index
+export default Space

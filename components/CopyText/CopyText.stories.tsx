@@ -1,6 +1,6 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { CopyText } from './index'
+import CopyText from './index'
 
 export default {
     title: 'Components/CopyText',

@@ -15,7 +15,7 @@ interface LinkProps {
 
 type AllProps = LinkProps & React.HTMLAttributes<HTMLLinkElement>
 
-const Index: React.FC<AllProps> = ({ href, hoverUnderline, disabled, bold, children, ...rest }) => {
+const Link: React.FC<AllProps> = ({ href, hoverUnderline, disabled, bold, children, ...rest }) => {
     const Component = href ? 'a' : ReactLink
 
     return (
@@ -33,4 +33,4 @@ const Index: React.FC<AllProps> = ({ href, hoverUnderline, disabled, bold, child
     )
 }
 
-export const Link = Index
+export default Link

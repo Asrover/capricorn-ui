@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { TextInput, TextInputProps } from '../TextInput'
+import TextInput, { TextInputProps } from '../TextInput'
 import styles from './DateInput.css'
-import { Dropdown } from '../Dropdown'
+import Dropdown from '../Dropdown'
 import CalendarSvg from 'assets/calendar.svg'
 import Calendar from 'react-calendar'
 
@@ -13,7 +13,7 @@ interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
 
 styles.imitateStylesNedeed
 
-const Index: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest }) => {
+const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest }) => {
     // const width = useWindowSize().width
     const [dateText, setDateText] = useState<string | undefined>()
     const [openedCalendar, setOpenedOptions] = useState(false)
@@ -128,4 +128,4 @@ function dateToText(date, isRange) {
     }
 }
 
-export const DateInput = Index
+export default DateInput

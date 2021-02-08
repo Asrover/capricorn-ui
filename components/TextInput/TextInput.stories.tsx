@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { TextInput } from './index'
+import TextInput from './index'
 import PrintSvg from 'assets/print.svg'
 
 export default {

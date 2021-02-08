@@ -1,8 +1,8 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import PrintSvg from 'assets/print.svg'
-import { Button } from './index'
-import { Space } from '../Space'
+import Button from './index'
+import Space from '../Space'
 
 export default {
     title: 'Components/Button',

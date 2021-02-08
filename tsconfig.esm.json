@@ -1,24 +1,22 @@
 {
   "compilerOptions": {
     "skipLibCheck": true,
+    "moduleResolution": "node",
     "module": "esnext",
-    "target": "es5",
-    "lib": [ "es2015", "dom" ],
-    "outDir": "../lib",
+    "target": "es6",
+    "outDir": "../esm",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "forceConsistentCasingInFileNames": true,
-    "sourceMap": true,
     "declaration": true,
     "jsx": "react",
+    "jsxFactory": "h",
     "removeComments": true,
     "baseUrl": "./",
     "paths": {
       "constants/*": ["../constants/*"],
       "assets/*": ["../assets/*"],
       "theme/*": ["../theme/*"]
-    },
+    }
   },
   "include": [
     "../components/**/*"
@@ -29,7 +27,7 @@
     "../lib"
   ],
   "files": [
-    "../index.d.ts"
+    "../components/index.d.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false

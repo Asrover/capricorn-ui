@@ -34,7 +34,7 @@ interface InputProps {
 
 type AllProps = InputProps & Omit<React.HTMLAttributes<HTMLInputElement>, 'onFocus' | 'onClick' | 'onChange'>
 
-const Index: React.FC<AllProps> = ({
+const Textarea: React.FC<AllProps> = ({
     label,
     error,
     success,
@@ -166,4 +166,4 @@ const Index: React.FC<AllProps> = ({
     )
 }
 
-export const Textarea = Index
+export default Textarea

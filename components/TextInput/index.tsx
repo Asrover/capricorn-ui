@@ -8,7 +8,7 @@ import SearchSvg from 'assets/search.svg'
 import EyeHiddenSvg from 'assets/eye-hidden.svg'
 import CheckMarkSvg from 'assets/check-mark.svg'
 import IMask from 'imask/esm'
-import { Spinner } from '../Spinner'
+import Spinner from '../Spinner'
 
 type TextInputType = 'text' | 'password' | 'money' | 'tel' | 'search' | 'code'
 
@@ -44,7 +44,6 @@ export interface TextInputProps {
     innerRef?: RefObject<HTMLInputElement>
     /** Required with type=code */
     codeLength?: number
-    noMarginBottom?: boolean
     fullWidth?: boolean
     maxWidth?: number
     smallHeight?: boolean
@@ -56,7 +55,7 @@ export interface TextInputProps {
 type AllProps = TextInputProps &
     Omit<React.HTMLAttributes<HTMLInputElement>, 'onFocus' | 'onClick' | 'onChange' | 'prefix'>
 
-const Index: React.FC<AllProps> = ({
+const TextInput: React.FC<AllProps> = ({
     label,
     type = 'text',
     error,
@@ -82,7 +81,6 @@ const Index: React.FC<AllProps> = ({
     codeLength,
     staticLabel,
     maxWidth = 360,
-    noMarginBottom,
     mask,
     disableTyping,
     ...rest
@@ -158,7 +156,6 @@ const Index: React.FC<AllProps> = ({
                 [styles.disabled]: disabled,
                 [styles.success]: hasSuccess,
                 [styles.hasPrefix]: hasPrefix,
-                [styles.noMarginBottom]: noMarginBottom,
             })}
             style={{ maxWidth: codeLength ? codeLength * 60 : maxWidth }}
         >
@@ -254,8 +251,8 @@ const Index: React.FC<AllProps> = ({
         </div>
     )
 
-    return staticLabel || type === 'code' ? (
-        <div>
+    return staticLabel || (type === 'code' && label) ? (
+        <div style={{ maxWidth }}>
             {label && (
                 <label
                     onClick={forceFocus}
@@ -274,4 +271,4 @@ const Index: React.FC<AllProps> = ({
     )
 }
 
-export const TextInput = Index
+export default TextInput

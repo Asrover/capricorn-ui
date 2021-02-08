@@ -1,7 +1,7 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { Spinner } from './index'
-import { Space } from '../Space'
+import Spinner from './index'
+import Space from '../Space'
 
 export default {
     title: 'Components/Spinner',

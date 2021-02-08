@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { SelectInput } from './index'
-import { Title } from '../Title'
-import { Surface } from '../Surface'
+import SelectInput from './index'
+import Title from '../Title'
+import Surface from '../Surface'
 
 export default {
     title: 'Components/SelectInput',
