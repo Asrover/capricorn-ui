@@ -1,10 +1,9 @@
 .DS_Store
 .vscode
-node_modules/
+node_modules
 yarn-error.log
 dist
-lib/
-esm/
-.next
+lib
+esm
 .idea
 .storybook-static

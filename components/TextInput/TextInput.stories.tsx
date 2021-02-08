@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import TextInput from './index'
-import PrintSvg from 'assets/print.svg'
+import PrintSvg from '../../assets/print.svg'
+import Space from '../Space'
 
 export default {
     title: 'Components/TextInput',
@@ -19,7 +20,7 @@ export const All: React.FC = () => {
     const [value5, setValue5] = useState()
 
     return (
-        <>
+        <Space column size="l">
             <TextInput
                 type="password"
                 label="Password with autoFocus"
@@ -76,6 +77,6 @@ export const All: React.FC = () => {
                 label="SMS code - 4 symbols"
                 fieldTip="We send the code on +7900***2323"
             />
-        </>
+        </Space>
     )
 }

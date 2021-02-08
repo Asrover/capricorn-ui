@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react'
 import styles from './Checkbox.css'
-import CheckSvg from 'assets/check-mark.svg'
-import AlertSvg from 'assets/alert.svg'
+import CheckSvg from '../../assets/check-mark.svg'
+import AlertSvg from '../../assets/alert.svg'
 import classNames from 'classnames'
 
 interface CheckboxProps {

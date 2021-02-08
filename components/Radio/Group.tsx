@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react'
 import styles from './Radio.css'
-import AlertSvg from 'assets/alert.svg'
+import AlertSvg from '../../assets/alert.svg'
 import classNames from 'classnames'
 
 export type RadioValueType = string | number | boolean

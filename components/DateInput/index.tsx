@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import TextInput, { TextInputProps } from '../TextInput'
 import styles from './DateInput.css'
 import Dropdown from '../Dropdown'
-import CalendarSvg from 'assets/calendar.svg'
+import CalendarSvg from '../../assets/calendar.svg'
 import Calendar from 'react-calendar'
 
 interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {

@@ -4,30 +4,29 @@
     "moduleResolution": "node",
     "module": "esnext",
     "target": "es6",
-    "outDir": "../esm",
+    "outDir": "esm",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "jsx": "react",
-    "jsxFactory": "h",
     "removeComments": true,
     "baseUrl": "./",
     "paths": {
-      "constants/*": ["../constants/*"],
-      "assets/*": ["../assets/*"],
-      "theme/*": ["../theme/*"]
+      "constants/*": ["constants/*"],
+      "assets/*": ["assets/*"],
+      "theme/*": ["theme/*"]
     }
   },
   "include": [
-    "../components/**/*"
+    "components/**/*"
   ],
   "exclude": [
-    "../**/*.stories.tsx",
-    "../esm",
-    "../lib"
+    "**/*.stories.tsx",
+    "esm",
+    "lib"
   ],
   "files": [
-    "../components/index.d.ts"
+    "components/index.d.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false

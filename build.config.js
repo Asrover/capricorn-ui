@@ -2,17 +2,18 @@ const webpack = require('webpack')
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const mode = 'production'
 
 const config = {
     mode,
     entry: {
-        'capricorn-ui': './index.ts'
+        'capricorn-ui': './components/index.ts',
     },
     devtool: 'source-map',
     output: {
         filename: `[name].js`,
-        path: path.resolve(__dirname, '../dist'),
+        path: path.resolve(__dirname, 'dist'),
         library: 'capricorn',
         libraryTarget: 'umd',
         umdNamedDefine: true,
@@ -23,15 +24,16 @@ const config = {
         new MiniCssExtractPlugin({
             filename: 'styles.[hash].css',
             chunkFilename: '[id].css',
-        })
+        }),
+        new OptimizeCssAssetsPlugin(),
     ],
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
         alias: {
-            "constants": path.resolve(__dirname, '../constants/'),
-            "assets": path.resolve(__dirname, '../assets/'),
-            "theme": path.resolve(__dirname, '../theme/'),
-        }
+            constants: path.resolve(__dirname, 'constants/'),
+            assets: path.resolve(__dirname, 'assets/'),
+            theme: path.resolve(__dirname, 'theme/'),
+        },
     },
     module: {
         rules: [
@@ -52,7 +54,7 @@ const config = {
                             },
                             importLoaders: 1,
                         },
-                    }
+                    },
                 ],
             },
             {

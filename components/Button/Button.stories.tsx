@@ -1,6 +1,6 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import PrintSvg from 'assets/print.svg'
+import PrintSvg from '../../assets/print.svg'
 import Button from './index'
 import Space from '../Space'
 

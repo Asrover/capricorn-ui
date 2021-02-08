@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import styles from './Button.css'
-import LeftArrowSvg from 'assets/left-arrow.svg'
+import LeftArrowSvg from '../../assets/left-arrow.svg'
 
 type Skin = 'default' | 'action' | 'border' | 'pseudo' | 'back' | 'link'
 

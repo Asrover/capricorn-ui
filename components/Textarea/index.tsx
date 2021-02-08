@@ -1,8 +1,8 @@
 import React, { ReactNode, RefObject, useEffect, useRef, useState } from 'react'
 import styles from './Textarea.css'
 import classNames from 'classnames'
-import CheckMarkSvg from 'assets/check-mark.svg'
-import WarningSvg from 'assets/warning-round.svg'
+import CheckMarkSvg from '../../assets/check-mark.svg'
+import WarningSvg from '../../assets/warning-round.svg'
 
 interface InputProps {
     label?: ReactNode

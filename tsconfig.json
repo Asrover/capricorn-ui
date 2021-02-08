@@ -5,7 +5,7 @@
     "moduleResolution": "node",
     "target": "es5",
     "lib": [ "es2015", "dom" ],
-    "outDir": "../lib",
+    "outDir": "lib",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "suppressImplicitAnyIndexErrors": true,
@@ -16,21 +16,22 @@
     "removeComments": true,
     "baseUrl": "./",
     "paths": {
-      "constants/*": ["../constants/*"],
-      "assets/*": ["../assets/*"],
-      "theme/*": ["../theme/*"]
-    },
+      "constants/*": ["constants/*"],
+      "assets/*": ["assets/*"],
+      "theme/*": ["theme/*"]
+    }
   },
   "include": [
-    "../components/**/*"
+    "components/**/*"
   ],
   "exclude": [
-    "../**/*.stories.tsx",
-    "../esm",
-    "../lib"
+    "build.config.js",
+    "**/*.stories.tsx",
+    "esm",
+    "lib"
   ],
   "files": [
-    "../components/index.d.ts"
+    "components/index.d.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false

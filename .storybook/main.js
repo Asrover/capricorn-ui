@@ -42,9 +42,9 @@ module.exports = {
 
         config.resolve.alias = {
             ...config.resolve.alias,
-            "constants": path.resolve(__dirname, '../constants/'),
-            "assets": path.resolve(__dirname, '../assets/'),
-            "theme": path.resolve(__dirname, '../theme/'),
+            "constants": path.resolve(__dirname, '../../constants/'),
+            "assets": path.resolve(__dirname, '../../assets/'),
+            "theme": path.resolve(__dirname, '../../theme/'),
         }
 
         config.module.rules[svgLoaderIndex].test = /\.(ico|jpg|jpeg|png|apng|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/

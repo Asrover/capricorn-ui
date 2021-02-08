@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Radio.css'
-import AlertSvg from 'assets/alert.svg'
+import AlertSvg from '../../assets/alert.svg'
 import classNames from 'classnames'
 
 export interface RadioProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'onChange'> {

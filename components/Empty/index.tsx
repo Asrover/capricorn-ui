@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import styles from './Empty.css'
-import EmptySvg from 'assets/file-tray-outline.svg'
+import EmptySvg from '../../assets/file-tray-outline.svg'
 
 interface SurfaceProps {
     size?: 's' | 'm' | 'l'

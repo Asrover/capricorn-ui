@@ -15,7 +15,7 @@ interface LinkProps {
 
 type AllProps = LinkProps & React.HTMLAttributes<HTMLLinkElement>
 
-const Link: React.FC<AllProps> = ({ href, hoverUnderline, disabled, bold, children, ...rest }) => {
+const Link: React.FC<AllProps> = ({ href, hoverUnderline, onClick, disabled, bold, children, ...rest }) => {
     const Component = href ? 'a' : ReactLink
 
     return (
@@ -27,6 +27,7 @@ const Link: React.FC<AllProps> = ({ href, hoverUnderline, disabled, bold, childr
                 [styles.disabled]: disabled,
                 [styles.bold]: bold,
             })}
+            onClick={!disabled ? onClick : undefined}
         >
             {children}
         </Component>

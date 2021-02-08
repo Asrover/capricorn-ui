@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import styles from './CopyText.css'
 import classNames from 'classnames'
 import copy from 'copy-to-clipboard'
-import CopySvg from 'assets/copy.svg'
+import CopySvg from '../../assets/copy.svg'
 import Dropdown from '../Dropdown'
-import CheckSvg from 'assets/check-mark.svg'
+import CheckSvg from '../../assets/check-mark.svg'
 
 interface LinkProps {
     children: string

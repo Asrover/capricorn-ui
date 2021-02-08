@@ -1,5 +1,5 @@
 import React from 'react'
-import { countryCodes } from 'constants/countryPhoneCodes'
+import { countryCodes } from '../../constants/countryPhoneCodes'
 import TextInput, { TextInputProps } from '../TextInput'
 
 const findByPhoneCode = (

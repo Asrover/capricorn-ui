@@ -2,9 +2,9 @@ import React, { ReactNode, useEffect, useMemo, useState } from 'react'
 import TextInput, { TextInputProps } from '../TextInput'
 import classNames from 'classnames'
 import styles from './SelectInput.css'
-import ChevronDownSvg from 'assets/chevron-down.svg'
+import ChevronDownSvg from '../../assets/chevron-down.svg'
 import Dropdown from '../Dropdown'
-import CheckMarkSvg from 'assets/check-mark.svg'
+import CheckMarkSvg from '../../assets/check-mark.svg'
 import { useWindowSize } from 'react-use'
 
 type Option = { value: any; text: string; prefix?: ReactNode; suffix?: ReactNode }

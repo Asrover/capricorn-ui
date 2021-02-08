@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react'
 import styles from './Toast.css'
 import classNames from 'classnames'
-import CrossSvg from 'assets/cross-thin.svg'
-import WarningSvg from 'assets/warning-round.svg'
-import CheckMarkSvg from 'assets/check-mark.svg'
-import EnvelopeSvg from 'assets/envelope.svg'
+import CrossSvg from '../../assets/cross-thin.svg'
+import WarningSvg from '../../assets/warning-round.svg'
+import CheckMarkSvg from '../../assets/check-mark.svg'
+import EnvelopeSvg from '../../assets/envelope.svg'
 import Button from '../Button'
 
 interface ToastProps {

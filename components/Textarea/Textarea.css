@@ -137,13 +137,6 @@
     padding: 18px 0 17px 24px !important;
 }
 
-.textarea.typeCode {
-    box-sizing: content-box;
-    letter-spacing: 50px;
-    font-size: 16px;
-    font-family: 'Roboto Mono', monospace;
-}
-
 .textarea.withLabel {
     margin-top: 20px;
 }

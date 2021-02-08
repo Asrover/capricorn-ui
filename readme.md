@@ -3,6 +3,7 @@
 ### Global Tasks
 
 - lazy load for countryPhoneCodes
+- common function __rest for each component after build
  
 ### Scripts
 
