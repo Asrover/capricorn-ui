@@ -6,4 +6,4 @@ dist
 lib
 esm
 .idea
-.storybook-static
+storybook-static
