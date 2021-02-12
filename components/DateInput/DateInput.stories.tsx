@@ -16,16 +16,24 @@ export const All: React.FC = () => {
     return (
         <>
             <Title level={2}>Extends: TextInput</Title>
-            <Space column>
-                <div>
-                    <DateInput label="Дата" value={value} onChange={setValue} noMarginBottom />
-                    Value: {value?.toLocaleDateString()}
-                </div>
-                <div>
-                    <DateInput label="Диапазон дат" value={value2} isRange onChange={setValue2} noMarginBottom />
-                    Value1: {value2 && value2[0]?.toLocaleDateString()} <br />
-                    Value2: {value2 && value2[1]?.toLocaleDateString()}
-                </div>
+            <Space column size="l">
+                <DateInput
+                    label="Дата"
+                    value={value}
+                    onChange={setValue}
+                    noMarginBottom
+                    fieldTip={`Value: ${value?.toLocaleDateString()}`}
+                />
+                <DateInput
+                    label="Диапазон дат"
+                    value={value2}
+                    isRange
+                    onChange={setValue2}
+                    fieldTip={`Value1: ${value2 && value2[0]?.toLocaleDateString()} Value2: ${
+                        value2 && value2[1]?.toLocaleDateString()
+                    }`}
+                    noMarginBottom
+                />
             </Space>
         </>
     )

@@ -18,6 +18,7 @@ const Space: React.FC<AllProps> = ({ size = 'm', align, wrap, column, children, 
             className={classNames({
                 [styles.space]: true,
                 [styles[`size-${size}`]]: true,
+                [styles.row]: !column,
                 [styles.column]: column,
             })}
             style={{

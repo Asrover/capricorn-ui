@@ -15,104 +15,104 @@ export const All: React.FC = () => (
         <Surface>
             <Title level={2}>Size: l</Title>
             <Space size="l" align="center">
-                <span>I</span>
-                <span>add</span>
-                <span>space</span>
+                <div>I</div>
+                <div>add</div>
+                <div>space</div>
                 <Button>Between</Button>
-                <span>every</span>
-                <span>element</span>
+                <div>every</div>
+                <div>element</div>
                 <Button size="s">Inside</Button>
             </Space>
             <Space size="l" align="center" column>
-                <span>add</span>
-                <span>space</span>
-                <span>between</span>
-                <span>every</span>
-                <span>element</span>
-                <span>inside</span>
+                <div>add</div>
+                <div>space</div>
+                <div>between</div>
+                <div>every</div>
+                <div>element</div>
+                <div>inside</div>
             </Space>
         </Surface>
         <br />
         <Surface>
             <Title level={2}>Size: m</Title>
             <Space>
-                <span>I</span>
-                <span>add</span>
-                <span>space</span>
-                <span>between</span>
-                <span>every</span>
-                <span>element</span>
-                <span>inside</span>
+                <div>I</div>
+                <div>add</div>
+                <div>space</div>
+                <div>between</div>
+                <div>every</div>
+                <div>element</div>
+                <div>inside</div>
             </Space>
             <Space column>
-                <span>add</span>
-                <span>space</span>
-                <span>between</span>
-                <span>every</span>
-                <span>element</span>
-                <span>inside</span>
+                <div>add</div>
+                <div>space</div>
+                <div>between</div>
+                <div>every</div>
+                <div>element</div>
+                <div>inside</div>
             </Space>
         </Surface>
         <br />
         <Surface>
             <Title level={2}>Size: s</Title>
             <Space size="s">
-                <span>I</span>
-                <span>add</span>
-                <span>space</span>
-                <span>between</span>
-                <span>every</span>
-                <span>element</span>
-                <span>inside</span>
+                <div>I</div>
+                <div>add</div>
+                <div>space</div>
+                <div>between</div>
+                <div>every</div>
+                <div>element</div>
+                <div>inside</div>
             </Space>
             <Space size="s" column>
-                <span>add</span>
-                <span>space</span>
-                <span>between</span>
-                <span>every</span>
-                <span>element</span>
-                <span>inside</span>
+                <div>add</div>
+                <div>space</div>
+                <div>between</div>
+                <div>every</div>
+                <div>element</div>
+                <div>inside</div>
             </Space>
         </Surface>
         <br />
         <Surface>
             <Title level={2}>Size: space-between</Title>
             <Space size="space-between">
-                <span>I</span>
-                <span>add</span>
-                <span>space</span>
-                <span>between</span>
-                <span>every</span>
-                <span>element</span>
-                <span>inside</span>
+                <div>I</div>
+                <div>add</div>
+                <div>space</div>
+                <div>between</div>
+                <div>every</div>
+                <div>element</div>
+                <div>inside</div>
             </Space>
             <Space size="space-between" column>
-                <span>add</span>
-                <span>space</span>
-                <span>between</span>
-                <span>every</span>
-                <span>element</span>
-                <span>inside</span>
+                <div>add</div>
+                <div>space</div>
+                <div>between</div>
+                <div>every</div>
+                <div>element</div>
+                <div>inside</div>
             </Space>
         </Surface>
         <Surface>
             <Title level={2}>Custom size: 40px</Title>
             <Space size={40}>
-                <span>I</span>
-                <span>add</span>
-                <span>40px</span>
-                <span>between</span>
-                <span>every</span>
-                <span>element</span>
-                <span>inside</span>
+                <div>I</div>
+                <div>add</div>
+                <div>40px</div>
+                <div>between</div>
+                <div>every</div>
+                <div>element</div>
+                <div>inside</div>
             </Space>
             <Space size={40} column>
-                <span>add</span>
-                <span>40px</span>
-                <span>between</span>
-                <span>every</span>
-                <span>element</span>
-                <span>inside</span>
+                <div>add</div>
+                <div>40px</div>
+                <div>between</div>
+                <div>every</div>
+                <div>element</div>
+                <div>inside</div>
             </Space>
         </Surface>
     </>

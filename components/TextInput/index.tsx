@@ -11,7 +11,7 @@ import IMask from 'imask/esm'
 import Spinner from '../Spinner'
 
 type TextInputType = 'text' | 'password' | 'money' | 'tel' | 'search' | 'code'
-type TextInputView = 'default' | 'text'
+type TextInputView = 'default' | 'text' | 'underscore'
 
 // TODO: Add lazy to IMASK
 
@@ -206,7 +206,7 @@ const TextInput: React.FC<AllProps> = ({
                         spellCheck="false"
                         ref={inputRef}
                         onKeyDown={onKeyDown}
-                        style={{ ...textInputStyles, width: `calc(${(value?.length || 0) + 1.5}ch` }}
+                        style={{ ...textInputStyles }}
                     />
                     {type !== 'code' && (hasError || hasSuccess) && (
                         <div className={styles.statusIcon}>

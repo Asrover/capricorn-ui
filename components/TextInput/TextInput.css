@@ -4,7 +4,7 @@
     flex-wrap: wrap;
     position: relative;
     width: 100%;
-    height: 54px;
+    height: 52px;
     background: #fff;
     border: 1px solid #d9dde4;
     box-sizing: border-box;
@@ -137,7 +137,7 @@
     width: 100%;
     min-width: 100px;
     height: 100%;
-    padding: 10px 10px 10px 20px;
+    padding: 10px 10px 8px 20px;
     background: transparent;
     border: none;
     outline: none;
@@ -326,3 +326,20 @@
 .inputContainer.view-text .suffix {
     padding: 0;
 }
+
+.inputContainer.view-underscore {
+    height: 44px;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #d9dde4;
+}
+
+.inputContainer.view-underscore .input {
+    border-radius: 0;
+    padding: 0;
+}
+
+.inputContainer.view-underscore .suffix {
+    padding: 0;
+}
+

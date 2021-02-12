@@ -9,6 +9,11 @@ export default {
     component: TextInput,
 } as Meta
 
+const textViewInputStyles = {
+    fontWeight: 600,
+    fontSize: 22,
+}
+
 export const All: React.FC = () => {
     const [password, setPassword] = useState()
     const [code, setCode] = useState()
@@ -76,6 +81,16 @@ export const All: React.FC = () => {
                 onChange={setCode2}
                 label="SMS code - 4 symbols"
                 fieldTip="We send the code on +7900***2323"
+            />
+            <TextInput
+                view="underscore"
+                type="money"
+                fieldTip="View: underscore"
+                autoFocus
+                suffix="EUR"
+                onChange={setPassword}
+                value={password}
+                textInputStyles={textViewInputStyles}
             />
         </Space>
     )

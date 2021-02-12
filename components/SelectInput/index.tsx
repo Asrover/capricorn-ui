@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useMemo, useState } from 'react'
+import React, { ReactNode, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import TextInput, { TextInputProps } from '../TextInput'
 import classNames from 'classnames'
 import styles from './SelectInput.css'
@@ -7,15 +7,15 @@ import Dropdown from '../Dropdown'
 import CheckMarkSvg from '../../assets/check-mark.svg'
 import { useWindowSize } from 'react-use'
 
-type Option = { value: any; text: string; prefix?: ReactNode; suffix?: ReactNode }
+export type Option = { value: string; text: string; prefix?: ReactNode; suffix?: ReactNode; payload?: any }
 
-interface SelectInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
+export interface SelectInputProps extends Omit<TextInputProps, 'onChange' | 'value' | 'clearable'> {
     view?: 'default' | 'text'
     options: Option[]
+    onChange: (option?: Option) => void
     selectedOption?: Option
-    inputValue?: string
-    onChange?: (option?: Option) => void
-    onSearch?: (value: string) => void
+    onChangeInputText?: (value: string) => void
+    textInputValue?: string
     withSearch?: boolean
     optionsLikeRightLabel?: boolean
     /** Auto select the first option, useful in case when options are async */
@@ -26,30 +26,46 @@ const SelectInput: React.FC<SelectInputProps> = ({
     selectedOption = {},
     optionsLikeRightLabel,
     onChange,
-    onSearch,
+    onChangeInputText,
     withSearch,
     options,
-    inputValue,
     autoSelect,
     view,
+    textInputStyles,
+    textInputValue,
     ...rest
 }) => {
     const width = useWindowSize().width
-    const [inputText, setInputText] = useState(optionsLikeRightLabel ? inputValue : selectedOption?.text)
     const [openedOptions, setOpenedOptions] = useState(false)
     const [tillNotTypingAfterOptionsOpened, setTillNotTypingAfterOptionsOpened] = useState(true)
     const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
+    const [inputText, setInputText] = useState(textInputValue)
+
+    useEffect(() => {
+        if (inputText !== textInputValue) {
+            setInputText(textInputValue)
+        }
+    }, [textInputValue])
+
+    useLayoutEffect(() => {
+        if (selectedOption?.value) {
+            setInputText(selectedOption.text)
+        }
+    }, [selectedOption?.value])
+
+    useEffect(() => {
+        onChangeInputText && onChangeInputText(inputText)
+    }, [inputText])
 
     useEffect(() => {
         if (autoSelect && options.length !== 0 && !selectedOption.value) {
             onChange && onChange(options[0])
-            !optionsLikeRightLabel && setInputText(options[0].text)
+
+            if (!optionsLikeRightLabel && onChangeInputText) {
+                onChangeInputText(options[0].text)
+            }
         }
     }, [options])
-
-    useEffect(() => {
-        setInputText(inputValue)
-    }, [inputValue])
 
     const handleFocus = () => {
         setTillNotTypingAfterOptionsOpened(true)
@@ -61,20 +77,18 @@ const SelectInput: React.FC<SelectInputProps> = ({
         setFocusedOptionIndex(-1)
 
         if (!optionsLikeRightLabel && selectedOption.value && !options.some((option) => option.text === inputText)) {
-            onChange && onChange()
+            onChange()
             setInputText('')
         }
     }
 
     const handleChangeInputText = (value: string) => {
         setInputText(value)
-
-        onSearch && onSearch(value)
         setTillNotTypingAfterOptionsOpened(false)
     }
 
     const handleChangeOption = (option: Option, index: number) => () => {
-        onChange && onChange(option)
+        onChange(option)
         setFocusedOptionIndex(index)
         !optionsLikeRightLabel && setInputText(option.text)
     }
@@ -83,7 +97,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
         return !withSearch || optionsLikeRightLabel || tillNotTypingAfterOptionsOpened
             ? options
             : options.filter((option) => option.text.toLowerCase().includes(inputText?.toLowerCase() || ''))
-    }, [options, inputText, tillNotTypingAfterOptionsOpened])
+    }, [options, tillNotTypingAfterOptionsOpened])
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         const optionsLength = options.length - 1
@@ -97,9 +111,11 @@ const SelectInput: React.FC<SelectInputProps> = ({
                 setFocusedOptionIndex(focusedOptionIndex === optionsLength ? 0 : focusedOptionIndex + 1)
                 break
             case 'Enter':
-                setInputText(options[focusedOptionIndex].text)
+                if (!optionsLikeRightLabel) {
+                    setInputText(options[focusedOptionIndex].text)
+                }
                 setOpenedOptions(!openedOptions)
-                onChange && onChange(options[focusedOptionIndex])
+                onChange(options[focusedOptionIndex])
                 break
         }
     }
@@ -165,10 +181,10 @@ const SelectInput: React.FC<SelectInputProps> = ({
     const getSuffix = () =>
         !optionsLikeRightLabel && (
             <>
-                {view !== 'text' && <span className={styles.suffixText}>{selectedOption.suffix}</span>}
+                {view !== 'text' && <div className={styles.suffixText}>{selectedOption.suffix}</div>}
                 <ChevronDownSvg
                     className={classNames({
-                        [styles.rightContentIcon]: true,
+                        [styles.chevron]: true,
                         [styles.opened]: openedOptions,
                     })}
                     width={12}
@@ -185,10 +201,14 @@ const SelectInput: React.FC<SelectInputProps> = ({
             dropdownContent={getDropdownContent()}
             prefix={selectedOption.prefix}
             rightLabel={optionsLikeRightLabel && getRightLabel()}
-            value={inputText}
             suffix={getSuffix()}
             disableTyping={!withSearch && !optionsLikeRightLabel}
             view={view}
+            value={inputText}
+            textInputStyles={{
+                ...textInputStyles,
+                width: view === 'text' && `calc(${(inputText?.length || 0) + 1.5}ch`,
+            }}
             {...rest}
         />
     )

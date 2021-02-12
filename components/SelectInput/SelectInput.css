@@ -14,6 +14,15 @@
     transition: 0.25s transform;
 }
 
+.chevron {
+    transform-origin: center center;
+    transition: 0.25s transform;
+}
+
+.chevron.opened {
+    transform: scaleY(-1);
+}
+
 .suffixIcon {
     transition: 0.25s transform;
 }
@@ -81,7 +90,17 @@
 }
 
 .suffixText {
-    margin-right: 15px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 16px;
+    height: 100%;
+    margin-right: 16px;
+    font-size: 10px;
+    font-weight: 300;
+}
+
+.suffixText b {
+    font-weight: 600;
 }
 
 .selectedOption {

@@ -11,8 +11,6 @@ interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
     isRange?: boolean
 }
 
-styles.imitateStylesNedeed
-
 const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest }) => {
     // const width = useWindowSize().width
     const [dateText, setDateText] = useState<string | undefined>()
@@ -70,7 +68,7 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest
     }
 
     const getDropdownContent = () => (
-        <Dropdown active={openedCalendar} position="bottom" autoMaxHeight noPadding>
+        <Dropdown className={styles.dropDownContent} active={openedCalendar} position="bottom" autoMaxHeight noPadding>
             <Calendar selectRange={isRange} onChange={handleChangeDate} value={value} />
         </Dropdown>
     )
