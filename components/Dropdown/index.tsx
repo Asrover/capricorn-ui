@@ -2,12 +2,13 @@ import React from 'react'
 import styles from './Dropdown.css'
 import classNames from 'classnames'
 
-interface DropdownProps {
+export interface DropdownProps {
     active?: boolean
     position?: 'right' | 'bottom'
     autoMaxHeight?: boolean
     noPadding?: boolean
     widthAuto?: boolean
+    minWidth?: number
 }
 
 type AllProps = DropdownProps & React.HTMLAttributes<HTMLDivElement>
@@ -22,6 +23,7 @@ const Dropdown: React.FC<AllProps> = ({
     className,
     position,
     children,
+    minWidth,
     ...rest
 }) => {
     return (
@@ -41,6 +43,7 @@ const Dropdown: React.FC<AllProps> = ({
                     [styles.autoMaxHeight]: autoMaxHeight,
                     [styles.noPadding]: noPadding,
                 })}
+                style={{ minWidth: minWidth || 'auto' }}
             >
                 {children}
             </div>

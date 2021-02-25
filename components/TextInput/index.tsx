@@ -15,7 +15,8 @@ type TextInputView = 'default' | 'text' | 'underscore'
 
 // TODO: Add lazy to IMASK
 
-export interface TextInputProps {
+export interface TextInputProps
+    extends Omit<React.HTMLProps<HTMLInputElement>, 'onFocus' | 'onClick' | 'onChange' | 'prefix' | 'label'> {
     type?: TextInputType
     label?: ReactNode
     value: string
@@ -55,10 +56,7 @@ export interface TextInputProps {
     textInputStyles?: Record<string, string | number>
 }
 
-type AllProps = TextInputProps &
-    Omit<React.HTMLProps<HTMLInputElement>, 'onFocus' | 'onClick' | 'onChange' | 'prefix' | 'label'>
-
-const TextInput: React.FC<AllProps> = ({
+const TextInput: React.FC<TextInputProps> = ({
     name,
     label,
     type = 'text',

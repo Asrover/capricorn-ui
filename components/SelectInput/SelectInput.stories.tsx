@@ -30,7 +30,6 @@ export const All: React.FC = () => {
     const [loading, setLoading] = useState(true)
     const [value, setValue] = useState()
     const [value8, setValue8] = useState()
-    const [value7, setValue7] = useState()
     const [value9, setValue9] = useState(options[1])
     const [value10, setValue10] = useState(options[1])
 
@@ -57,6 +56,7 @@ export const All: React.FC = () => {
             />
             <SelectInput selectedOption={value8} options={options} onChange={setValue8} withSearch label="Search" />
             <SelectInput
+                name="nameselect"
                 selectedOption={value9}
                 options={options}
                 onChange={setValue9}

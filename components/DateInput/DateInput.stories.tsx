@@ -18,10 +18,10 @@ export const All: React.FC = () => {
             <Title level={2}>Extends: TextInput</Title>
             <Space column size="l">
                 <DateInput
+                    name="date"
                     label="Дата"
                     value={value}
                     onChange={setValue}
-                    noMarginBottom
                     fieldTip={`Value: ${value?.toLocaleDateString()}`}
                 />
                 <DateInput
@@ -32,7 +32,6 @@ export const All: React.FC = () => {
                     fieldTip={`Value1: ${value2 && value2[0]?.toLocaleDateString()} Value2: ${
                         value2 && value2[1]?.toLocaleDateString()
                     }`}
-                    noMarginBottom
                 />
             </Space>
         </>

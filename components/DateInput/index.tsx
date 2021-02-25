@@ -42,19 +42,24 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest
 
     const handleChangeInputText = (textValue: string) => {
         if (textValue) {
+            setDateText(textValue)
+
             if (!isRange) {
                 const newDate = stringToDate(textValue)
+
                 if (isValidDate(newDate)) {
                     onChange(newDate)
-                    setDateText(textValue)
                 }
-            } else if (textValue.includes(dateDelimiter)) {
+            } else {
                 const [value1, value2] = textValue.split(dateDelimiter)
-                const date1 = stringToDate(value1)
-                const date2 = stringToDate(value2)
+                const date1 = value1 && stringToDate(value1)
+                const date2 = value2 && stringToDate(value2)
 
-                onChange([isValidDate(date1) ? date1 : value[0], isValidDate(date2) ? date2 : value[1]])
-                setDateText(textValue)
+                if (isValidDate(date1) || isValidDate(date2)) {
+                    const firstDate = value && (isValidDate(date1) ? date1 : value[0])
+                    const secondDate = value && (isValidDate(date2) ? date2 : value[1])
+                    onChange([firstDate, secondDate])
+                }
             }
         } else {
             setDateText(undefined)
@@ -88,6 +93,7 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest
             dropdownContent={getDropdownContent()}
             prefix={<CalendarSvg width={20} />}
             value={dateText}
+            mask={isRange ? '00.00.0000 - 00.00.0000' : '00.00.0000'}
             clearable
             {...rest}
         />
@@ -97,7 +103,7 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest
 const dateDelimiter = ' - '
 
 function isValidDate(d: any) {
-    return d instanceof Date
+    return d instanceof Date && !isNaN(d)
 }
 
 function stringToDate(s: string) {
