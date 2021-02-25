@@ -55,7 +55,8 @@ export interface TextInputProps {
     textInputStyles?: Record<string, string | number>
 }
 
-type AllProps = TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'onFocus' | 'onClick' | 'onChange' | 'prefix'>
+type AllProps = TextInputProps &
+    Omit<React.HTMLProps<HTMLInputElement>, 'onFocus' | 'onClick' | 'onChange' | 'prefix' | 'label'>
 
 const TextInput: React.FC<AllProps> = ({
     name,
