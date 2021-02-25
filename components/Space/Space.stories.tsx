@@ -4,6 +4,7 @@ import Space from './index'
 import Surface from '../Surface'
 import Title from '../Title'
 import Button from '../Button'
+import TextInput from '../TextInput'
 
 export default {
     title: 'Components/Space',
@@ -14,16 +15,28 @@ export const All: React.FC = () => (
     <>
         <Surface>
             <Title level={2}>Popular cases</Title>
-            <Space size="l" justify="flex-end">
-                <Button skin="border">Back</Button>
-                <Button>Continue</Button>
+            <Space column size={40}>
+                <Space align="center">
+                    <TextInput value="" onChange={() => null} />
+                    <TextInput value="" onChange={() => null} />
+                    <div>Some text</div>
+                </Space>
+                <Space align="center">
+                    <TextInput value="" onChange={() => null} />
+                    <TextInput value="" onChange={() => null} />
+                    <div style={{ color: 'red' }}>Some text</div>
+                </Space>
+                <Space justify="flex-end">
+                    <Button skin="border">Back</Button>
+                    <Button>Continue</Button>
+                </Space>
             </Space>
         </Surface>
         <br />
         <Surface>
             <Title level={2}>Size: l</Title>
-            <Space size="l" align="center">
-                <div>I</div>
+            <Space align="center">
+                <div style={{ color: 'red' }}>I</div>
                 <div>add</div>
                 <div>space</div>
                 <Button>Between</Button>
@@ -31,7 +44,7 @@ export const All: React.FC = () => (
                 <div>element</div>
                 <Button size="s">Inside</Button>
             </Space>
-            <Space size="l" align="center" column>
+            <Space align="center" column>
                 <div>add</div>
                 <div>space</div>
                 <div>between</div>
@@ -43,7 +56,7 @@ export const All: React.FC = () => (
         <br />
         <Surface>
             <Title level={2}>Size: m</Title>
-            <Space>
+            <Space size="m">
                 <div>I</div>
                 <div>add</div>
                 <div>space</div>
@@ -52,7 +65,7 @@ export const All: React.FC = () => (
                 <div>element</div>
                 <div>inside</div>
             </Space>
-            <Space column>
+            <Space size="m" column>
                 <div>add</div>
                 <div>space</div>
                 <div>between</div>

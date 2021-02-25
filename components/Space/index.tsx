@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import styles from './Space.css'
 
-interface SpaceProps {
+interface SpaceProps extends React.HTMLAttributes<HTMLDivElement> {
     size?: 's' | 'm' | 'l' | number
     /** Align items */
     align?: 'flex-start' | 'flex-end' | 'center' | 'baseline'
@@ -11,9 +11,17 @@ interface SpaceProps {
     wrap?: boolean
 }
 
-type AllProps = SpaceProps & React.HTMLAttributes<HTMLDivElement>
-
-const Space: React.FC<AllProps> = ({ size = 'm', align, justify, className, wrap, column, children, ...rest }) => {
+const Space: React.FC<SpaceProps> = ({
+    size = 'l',
+    align,
+    style,
+    justify,
+    className,
+    wrap,
+    column,
+    children,
+    ...rest
+}) => {
     return (
         <div
             className={classNames({
@@ -24,6 +32,7 @@ const Space: React.FC<AllProps> = ({ size = 'm', align, justify, className, wrap
                 [styles.column]: column,
             })}
             style={{
+                ...style,
                 alignItems: align,
                 justifyContent: justify,
                 flexWrap: wrap ? 'wrap' : undefined,
@@ -33,8 +42,8 @@ const Space: React.FC<AllProps> = ({ size = 'm', align, justify, className, wrap
             {typeof size === 'string'
                 ? children
                 : Array.isArray(children) &&
-                  children.map((item, index) =>
-                      React.cloneElement(item as React.ReactElement, {
+                  children.map((childrenItem, index) =>
+                      React.cloneElement(childrenItem as React.ReactElement, {
                           style: {
                               marginRight: !column && index !== children.length - 1 && size,
                               marginBottom: column && index !== children.length - 1 && size,
