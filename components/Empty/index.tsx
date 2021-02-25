@@ -10,10 +10,11 @@ interface SurfaceProps {
 
 type AllProps = SurfaceProps & React.HTMLAttributes<HTMLDivElement>
 
-const Empty: React.FC<AllProps> = ({ size = 'm', overlay, children, ...rest }) => {
+const Empty: React.FC<AllProps> = ({ size = 'm', className, overlay, children, ...rest }) => {
     return (
         <div
             className={classNames({
+                [className]: Boolean(className),
                 [styles.empty]: true,
             })}
             {...rest}

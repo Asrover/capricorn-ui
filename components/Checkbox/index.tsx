@@ -13,7 +13,7 @@ interface CheckboxProps {
 
 type AllProps = CheckboxProps & Omit<React.HTMLAttributes<HTMLInputElement>, 'onChange'>
 
-const Checkbox: React.FC<AllProps> = ({ error, checked, disabled, children, onChange, ...rest }) => {
+const Checkbox: React.FC<AllProps> = ({ error, checked, className, disabled, children, onChange, ...rest }) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         onChange(!checked)
     }
@@ -21,6 +21,7 @@ const Checkbox: React.FC<AllProps> = ({ error, checked, disabled, children, onCh
     return (
         <label
             className={classNames({
+                [className]: Boolean(className),
                 [styles.checkbox]: true,
                 [styles.disabled]: disabled,
                 [styles.hasError]: Boolean(error),

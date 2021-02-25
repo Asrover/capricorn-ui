@@ -10,12 +10,13 @@ export interface RadioProps extends Omit<React.HTMLAttributes<HTMLInputElement>,
 }
 
 const InternalRadio: React.ForwardRefRenderFunction<HTMLElement, RadioProps> = (
-    { error, disabled, children, ...rest },
+    { error, disabled, className, children, ...rest },
     ref,
 ) => {
     return (
         <label
             className={classNames({
+                [className]: Boolean(className),
                 [styles.radio]: true,
                 [styles.disabled]: disabled,
                 [styles.hasError]: Boolean(error),

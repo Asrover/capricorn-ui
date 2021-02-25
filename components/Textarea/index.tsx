@@ -52,6 +52,7 @@ const Textarea: React.FC<AllProps> = ({
     staticLabel,
     adaptiveHeight,
     maxWidth = 360,
+    className,
     ...rest
 }) => {
     const [inputText, setInputText] = useState(value)
@@ -106,6 +107,7 @@ const Textarea: React.FC<AllProps> = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
             className={classNames({
+                [className]: Boolean(className),
                 [styles.textareaContainer]: true,
                 [styles.focused]: focused,
                 [styles.hasValue]: hasValue,

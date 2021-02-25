@@ -19,6 +19,7 @@ const Tip: React.FC<AllProps> = ({
     children,
     onlyButton,
     openingMode = 'blur',
+    className,
     ...rest
 }) => {
     const ref = useRef()
@@ -44,6 +45,7 @@ const Tip: React.FC<AllProps> = ({
         <div
             {...rest}
             className={classNames({
+                [className]: Boolean(className),
                 [styles.tip]: true,
                 [styles.onlyButton]: onlyButton,
             })}

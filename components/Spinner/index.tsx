@@ -9,10 +9,11 @@ interface SpinnerProps {
 
 type AllProps = SpinnerProps & React.HTMLAttributes<HTMLDivElement>
 
-const Spinner: React.FC<AllProps> = ({ size = 'm', overlay, children, ...rest }) => {
+const Spinner: React.FC<AllProps> = ({ size = 'm', className, overlay, children, ...rest }) => {
     return (
         <div
             className={classNames({
+                [className]: Boolean(className),
                 [styles.spinner]: true,
                 [styles.overlay]: overlay,
                 [styles[`size-${size}`]]: true,

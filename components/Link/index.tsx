@@ -15,13 +15,14 @@ interface LinkProps {
 
 type AllProps = LinkProps & React.HTMLAttributes<HTMLLinkElement>
 
-const Link: React.FC<AllProps> = ({ href, hoverUnderline, onClick, disabled, bold, children, ...rest }) => {
+const Link: React.FC<AllProps> = ({ href, className, hoverUnderline, onClick, disabled, bold, children, ...rest }) => {
     const Component = href ? 'a' : ReactLink
 
     return (
         <Component
             {...rest}
             className={classNames({
+                [className]: Boolean(className),
                 [styles.link]: true,
                 [styles.hoverUnderline]: hoverUnderline,
                 [styles.disabled]: disabled,

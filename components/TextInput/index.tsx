@@ -88,6 +88,7 @@ const TextInput: React.FC<TextInputProps> = ({
     disableTyping,
     style,
     textInputStyles,
+    className,
     ...rest
 }) => {
     const inputRef: RefObject<HTMLInputElement | undefined> = innerRef || useRef()
@@ -151,6 +152,7 @@ const TextInput: React.FC<TextInputProps> = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
             className={classNames({
+                [className]: Boolean(className),
                 [styles.inputContainer]: true,
                 [styles.focused]: focused,
                 [styles.hasValue]: hasValue,

@@ -1,8 +1,9 @@
 .container {
+    display: flex;
     position: relative;
     align-items: center;
     cursor: default;
-    margin: 0 -10px;
+    margin: 0 -6px;
 }
 
 .container.cursorPointer {
@@ -10,7 +11,7 @@
 }
 
 .container > * {
-    margin: 0 10px;
+    margin: 0 6px;
 }
 
 .tip {

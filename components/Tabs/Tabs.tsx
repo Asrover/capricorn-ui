@@ -18,6 +18,7 @@ const InternalTabs: React.ForwardRefRenderFunction<HTMLElement, TabsProps> = ({
     onChange,
     headerSpaceBetween,
     children,
+    className,
     ...rest
 }) => {
     const [activeId, setActiveId] = useState(defaultActiveKey || children[0].props.id)
@@ -47,6 +48,7 @@ const InternalTabs: React.ForwardRefRenderFunction<HTMLElement, TabsProps> = ({
         <div
             {...rest}
             className={classNames({
+                [className]: Boolean(className),
                 [styles.tabs]: true,
                 [styles[`skin-${skin}`]]: true,
                 [styles[`size-${size}`]]: true,

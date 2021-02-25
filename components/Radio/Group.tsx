@@ -16,7 +16,7 @@ export interface RadioGroupProps {
 
 type AllProps = RadioGroupProps & Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'>
 
-const Index: React.FC<AllProps> = ({ value, vertical, error, name, label, onChange, children, ...rest }) => {
+const Index: React.FC<AllProps> = ({ value, className, vertical, error, name, label, onChange, children, ...rest }) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value)
     }
@@ -32,6 +32,7 @@ const Index: React.FC<AllProps> = ({ value, vertical, error, name, label, onChan
             {...rest}
             onChange={handleChange}
             className={classNames({
+                [className]: Boolean(className),
                 [styles.group]: true,
                 [styles.vertical]: vertical,
                 [styles.hasError]: Boolean(error),

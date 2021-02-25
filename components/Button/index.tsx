@@ -28,6 +28,7 @@ const Button: React.FC<AllProps> = ({
     disabled,
     children,
     onClick,
+    className,
     ...rest
 }) => {
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
@@ -50,6 +51,7 @@ const Button: React.FC<AllProps> = ({
             onClick={handleClick}
             onMouseDown={handleMouseDown}
             className={classNames({
+                [className]: Boolean(className),
                 [styles.button]: true,
                 [styles.loading]: loading,
                 // Просто избавляемся от лишнего класса

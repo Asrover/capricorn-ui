@@ -25,6 +25,7 @@ const CopyText: React.FC<AllProps> = ({
     bold,
     noIcon,
     highlightText,
+    className,
     children,
     ...rest
 }) => {
@@ -40,7 +41,11 @@ const CopyText: React.FC<AllProps> = ({
     }
 
     return (
-        <div {...rest} className={styles.container} onClick={onCopy}>
+        <div
+            {...rest}
+            className={classNames({ [className]: Boolean(className), [styles.container]: true })}
+            onClick={onCopy}
+        >
             <div>
                 <span
                     className={classNames({

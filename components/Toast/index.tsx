@@ -27,12 +27,14 @@ const Toast: React.FC<AllProps> = ({
     skin = 'error',
     actionText,
     dismissText,
+    className,
     ...rest
 }) => {
     return (
         <div
             {...rest}
             className={classNames({
+                [className]: Boolean(className),
                 [styles.toast]: true,
                 [styles[`skin-${skin}`]]: true,
             })}
