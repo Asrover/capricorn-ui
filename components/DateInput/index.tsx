@@ -103,6 +103,7 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest
 const dateDelimiter = ' - '
 
 function isValidDate(d: any) {
+    // @ts-ignore
     return d instanceof Date && !isNaN(d)
 }
 
