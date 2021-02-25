@@ -1,6 +1,7 @@
 .container {
     position: relative;
     display: inline-flex;
+    align-items: baseline;
     cursor: default;
     margin: 0 -5px;
 }
@@ -20,12 +21,6 @@
 .tip {
     position: relative;
     display: inline-block;
-}
-
-.title {
-    display: inline;
-    font-size: 13px;
-    color: inherit;
 }
 
 .button {

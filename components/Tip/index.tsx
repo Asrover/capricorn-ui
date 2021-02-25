@@ -64,7 +64,7 @@ const Tip: React.FC<AllProps> = ({
                 onClick={handleClick}
             >
                 <span className={styles.button}>?</span>
-                {title && <span className={styles.title}>{title}</span>}
+                {title}
                 {!onlyButton && (
                     <Dropdown {...dropdownProps} active={openedPopup}>
                         {children}
