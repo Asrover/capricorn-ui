@@ -18,7 +18,12 @@ export const All: React.FC = () => (
             quibusdam quis rem sint, suscipit!
         </Tip>
         <br />
-        <Tip title="Click mode and iconAfterTitle" iconAfterTitle openingMode="click" dropdownProps={{ minWidth: 400 }}>
+        <Tip
+            title="Click mode and iconAfterTitle"
+            iconAfterTitle
+            openingMode="click"
+            dropdownProps={{ minWidth: 400, position: 'bottom' }}
+        >
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, blanditiis consectetur consequatur
             cumque cupiditate distinctio dolorem eos eveniet exercitationem facere incidunt ipsum minima, nam nobis
             quibusdam quis rem sint, suscipit!

@@ -1,9 +1,9 @@
 .container {
     position: relative;
     display: inline-flex;
-    align-items: baseline;
+    align-items: center;
     cursor: default;
-    margin: 0 -5px;
+    margin: 0 -10px;
 }
 
 .container.cursorPointer {
@@ -15,7 +15,7 @@
 }
 
 .container > * {
-    margin: 0 5px;
+    margin: 0 10px;
 }
 
 .tip {
@@ -25,7 +25,6 @@
 
 .button {
     position: relative;
-    bottom: 1px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -34,7 +33,7 @@
     height: 18px;
     border-radius: 18px;
     background: var(--color-primary);
-    font-size: 11px;
+    font-size: 12px;
     color: #fff;
     font-weight: 400;
 }
