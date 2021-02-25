@@ -3,19 +3,21 @@ import classNames from 'classnames'
 import styles from './Space.css'
 
 interface SpaceProps {
-    size?: 's' | 'm' | 'l' | 'space-between' | number
+    size?: 's' | 'm' | 'l' | number
     /** Align items */
     align?: 'flex-start' | 'flex-end' | 'center' | 'baseline'
+    justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between'
     column?: boolean
     wrap?: boolean
 }
 
 type AllProps = SpaceProps & React.HTMLAttributes<HTMLDivElement>
 
-const Space: React.FC<AllProps> = ({ size = 'm', align, wrap, column, children, ...rest }) => {
+const Space: React.FC<AllProps> = ({ size = 'm', align, justify, className, wrap, column, children, ...rest }) => {
     return (
         <div
             className={classNames({
+                [className]: Boolean(className),
                 [styles.space]: true,
                 [styles[`size-${size}`]]: true,
                 [styles.row]: !column,
@@ -23,6 +25,7 @@ const Space: React.FC<AllProps> = ({ size = 'm', align, wrap, column, children, 
             })}
             style={{
                 alignItems: align,
+                justifyContent: justify,
                 flexWrap: wrap ? 'wrap' : undefined,
             }}
             {...rest}

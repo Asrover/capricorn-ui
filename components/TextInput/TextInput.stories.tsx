@@ -27,6 +27,7 @@ export const All: React.FC = () => {
     return (
         <Space column size="l">
             <TextInput
+                name="inputName"
                 type="password"
                 label="Password with autoFocus"
                 autoFocus

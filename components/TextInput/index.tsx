@@ -55,10 +55,10 @@ export interface TextInputProps {
     textInputStyles?: Record<string, string | number>
 }
 
-type AllProps = TextInputProps &
-    Omit<React.HTMLAttributes<HTMLInputElement>, 'onFocus' | 'onClick' | 'onChange' | 'prefix'>
+type AllProps = TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'onFocus' | 'onClick' | 'onChange' | 'prefix'>
 
 const TextInput: React.FC<AllProps> = ({
+    name,
     label,
     type = 'text',
     view = 'default',
@@ -191,6 +191,8 @@ const TextInput: React.FC<AllProps> = ({
                         </label>
                     )}
                     <input
+                        {...rest}
+                        name={name}
                         type={typeState === 'search' || typeState === 'money' ? 'text' : typeState}
                         onChange={handleChange}
                         value={value}

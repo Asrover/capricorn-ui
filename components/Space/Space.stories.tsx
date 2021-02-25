@@ -13,6 +13,14 @@ export default {
 export const All: React.FC = () => (
     <>
         <Surface>
+            <Title level={2}>Popular cases</Title>
+            <Space size="l" justify="flex-end">
+                <Button skin="border">Back</Button>
+                <Button>Continue</Button>
+            </Space>
+        </Surface>
+        <br />
+        <Surface>
             <Title level={2}>Size: l</Title>
             <Space size="l" align="center">
                 <div>I</div>
@@ -77,7 +85,7 @@ export const All: React.FC = () => (
         <br />
         <Surface>
             <Title level={2}>Size: space-between</Title>
-            <Space size="space-between">
+            <Space justify="space-between">
                 <div>I</div>
                 <div>add</div>
                 <div>space</div>
@@ -86,7 +94,7 @@ export const All: React.FC = () => (
                 <div>element</div>
                 <div>inside</div>
             </Space>
-            <Space size="space-between" column>
+            <Space justify="space-between" column>
                 <div>add</div>
                 <div>space</div>
                 <div>between</div>

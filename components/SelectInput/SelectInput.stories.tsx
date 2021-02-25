@@ -63,14 +63,16 @@ export const All: React.FC = () => {
                 withSearch
                 label="Default value"
             />
-            <SelectInput
-                selectedOption={value10}
-                options={options}
-                onChange={setValue10}
-                textInputValue={value10?.text}
-                view="text"
-                textInputStyles={textViewInputStyles}
-            />
+            <div>
+                <SelectInput
+                    selectedOption={value10}
+                    options={options}
+                    onChange={setValue10}
+                    textInputValue={value10?.text}
+                    view="text"
+                    textInputStyles={textViewInputStyles}
+                />
+            </div>
         </Space>
     )
 }
