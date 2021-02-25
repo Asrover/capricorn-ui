@@ -1,6 +1,5 @@
 .container {
     position: relative;
-    display: inline-flex;
     align-items: center;
     cursor: default;
     margin: 0 -10px;
@@ -8,10 +7,6 @@
 
 .container.cursorPointer {
     cursor: pointer;
-}
-
-.container.reverse {
-    flex-direction: row-reverse;
 }
 
 .container > * {

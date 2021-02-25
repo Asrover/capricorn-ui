@@ -2,13 +2,11 @@ import React, { useRef, useState } from 'react'
 import styles from './Tip.css'
 import classNames from 'classnames'
 import Dropdown, { DropdownProps } from '../Dropdown'
-import Space from '../Space/index'
 
 interface ToastProps {
     title?: React.ReactNode
     children?: React.ReactNode
     onlyButton?: boolean
-    iconAfterTitle?: boolean
     dropdownProps?: DropdownProps
     openingMode?: 'blur' | 'click'
 }
@@ -20,7 +18,6 @@ const Tip: React.FC<AllProps> = ({
     dropdownProps,
     children,
     onlyButton,
-    iconAfterTitle,
     openingMode = 'blur',
     ...rest
 }) => {
@@ -57,14 +54,13 @@ const Tip: React.FC<AllProps> = ({
             <div
                 className={classNames({
                     [styles.container]: true,
-                    [styles.reverse]: iconAfterTitle,
                     [styles.cursorPointer]: openingMode === 'click',
                 })}
                 ref={ref}
                 onClick={handleClick}
             >
+                {title && <div>{title}</div>}
                 <span className={styles.button}>?</span>
-                {title}
                 {!onlyButton && (
                     <Dropdown {...dropdownProps} active={openedPopup}>
                         {children}
