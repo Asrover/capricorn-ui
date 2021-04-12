@@ -10,13 +10,13 @@ export default {
 } as Meta
 
 export const All: React.FC = () => {
-    const [value, setValue] = useState<Date>()
+    const [value, setValue] = useState<Date>(new Date())
     const [value2, setValue2] = useState<Date[]>()
 
     return (
         <>
             <Title level={2}>Extends: TextInput</Title>
-            <Space column size="l">
+            <Space column>
                 <DateInput
                     name="date"
                     label="Дата"

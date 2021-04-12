@@ -13,7 +13,7 @@ interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
 
 const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest }) => {
     // const width = useWindowSize().width
-    const [dateText, setDateText] = useState<string | undefined>()
+    const [dateText, setDateText] = useState<string | undefined>(dateToText(value, isRange))
     const [openedCalendar, setOpenedOptions] = useState(false)
 
     const handleFocus = () => {
@@ -73,7 +73,7 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest
     }
 
     const getDropdownContent = () => (
-        <Dropdown className={styles.dropDownContent} active={openedCalendar} position="bottom" autoMaxHeight noPadding>
+        <Dropdown className={styles.dropDownContent} active={openedCalendar} position="bottom" maxHeight="auto" noPadding>
             <Calendar selectRange={isRange} onChange={handleChangeDate} value={value} />
         </Dropdown>
     )
@@ -94,7 +94,6 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest
             prefix={<CalendarSvg width={20} />}
             value={dateText}
             mask={isRange ? '00.00.0000 - 00.00.0000' : '00.00.0000'}
-            clearable
             {...rest}
         />
     )

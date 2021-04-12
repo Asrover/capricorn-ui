@@ -3,11 +3,11 @@ import styles from './Toast.css'
 import classNames from 'classnames'
 import CrossSvg from '../../assets/cross-thin.svg'
 import WarningSvg from '../../assets/warning-round.svg'
-import CheckMarkSvg from '../../assets/check-mark.svg'
+import CheckMarkRoundSvg from '../../assets/check-mark-round.svg'
 import EnvelopeSvg from '../../assets/envelope.svg'
 import Button from '../Button'
 
-interface ToastProps {
+export interface ToastProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
     title: ReactNode
     message?: ReactNode
     actionText?: string
@@ -17,9 +17,7 @@ interface ToastProps {
     skin?: 'message' | 'success' | 'error'
 }
 
-type AllProps = ToastProps & React.HTMLAttributes<HTMLDivElement>
-
-const Toast: React.FC<AllProps> = ({
+const Toast: React.FC<ToastProps> = ({
     title,
     message,
     onActionClick,
@@ -43,7 +41,7 @@ const Toast: React.FC<AllProps> = ({
                 {skin === 'error' ? (
                     <WarningSvg width={22} />
                 ) : skin === 'success' ? (
-                    <CheckMarkSvg width={16} />
+                    <CheckMarkRoundSvg width={22} />
                 ) : (
                     <EnvelopeSvg width={24} />
                 )}
@@ -51,16 +49,18 @@ const Toast: React.FC<AllProps> = ({
             <div className={styles.content}>
                 <div className={styles.title}>{title}</div>
                 {message && <div className={styles.message}>{message}</div>}
-                {actionText && (
-                    <Button onClick={onActionClick} size="s">
-                        {actionText}
-                    </Button>
-                )}
-                {dismissText && (
-                    <Button onClick={onDismissClick} size="s" skin="default">
-                        {dismissText}
-                    </Button>
-                )}
+                <div>
+                    {actionText && (
+                        <Button onClick={onActionClick} size="s">
+                            {actionText}
+                        </Button>
+                    )}
+                    {dismissText && (
+                        <Button onClick={onDismissClick} size="s" skin="default">
+                            {dismissText}
+                        </Button>
+                    )}
+                </div>
             </div>
             <CrossSvg onClick={onDismissClick} className={styles.close} width={11} />
         </div>

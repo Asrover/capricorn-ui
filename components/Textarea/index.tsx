@@ -4,7 +4,8 @@ import classNames from 'classnames'
 import CheckMarkSvg from '../../assets/check-mark.svg'
 import WarningSvg from '../../assets/warning-round.svg'
 
-interface InputProps {
+interface TextAreaProps
+    extends Omit<React.HTMLProps<HTMLInputElement>, 'onFocus' | 'onClick' | 'onChange' | 'prefix' | 'label'> {
     label?: ReactNode
     value?: string
     onChange?: (value?: string) => void
@@ -32,7 +33,7 @@ interface InputProps {
     staticLabel?: boolean
 }
 
-type AllProps = InputProps & Omit<React.HTMLAttributes<HTMLInputElement>, 'onFocus' | 'onClick' | 'onChange'>
+type AllProps = TextAreaProps & Omit<React.HTMLAttributes<HTMLInputElement>, 'onFocus' | 'onClick' | 'onChange'>
 
 const Textarea: React.FC<AllProps> = ({
     label,
@@ -53,6 +54,7 @@ const Textarea: React.FC<AllProps> = ({
     adaptiveHeight,
     maxWidth = 360,
     className,
+    name,
     ...rest
 }) => {
     const [inputText, setInputText] = useState(value)
@@ -125,6 +127,7 @@ const Textarea: React.FC<AllProps> = ({
                 </label>
             )}
             <textarea
+                name={name}
                 onChange={handleChange}
                 value={inputText}
                 className={classNames({

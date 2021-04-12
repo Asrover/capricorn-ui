@@ -42,18 +42,18 @@
     font-size: 16px;
     font-weight: 600;
     color: var(--text-color);
-    margin-bottom: 3px;
 }
 
 .message {
+    margin-top: 4px;
     font-size: 13px;
     color: #7e8289;
 }
 
-.content.center {
+.content {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .content button {

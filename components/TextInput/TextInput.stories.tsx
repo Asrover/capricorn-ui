@@ -25,12 +25,13 @@ export const All: React.FC = () => {
     const [value5, setValue5] = useState()
 
     return (
-        <Space column size="l">
+        <Space column>
             <TextInput
                 name="inputName"
                 type="password"
                 label="Password with autoFocus"
                 autoFocus
+                prefix="Prefix"
                 onChange={setPassword}
                 value={password}
             />

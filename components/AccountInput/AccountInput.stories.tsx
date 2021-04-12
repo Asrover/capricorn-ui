@@ -51,7 +51,7 @@ export const All: React.FC = () => {
     // )
 
     return (
-        <Space column size="l">
+        <Space column >
             <Surface>
                 <Title level={2}>Extends: SelectInput</Title>
             </Surface>

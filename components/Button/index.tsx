@@ -7,7 +7,7 @@ type Skin = 'default' | 'action' | 'border' | 'pseudo' | 'back' | 'link'
 
 type Size = 's' | 'm' | 'l' | 'xl'
 
-interface ButtonProps {
+interface ButtonProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'loading' | 'onClick'> {
     type?: 'submit' | 'button'
     skin?: Skin
     size?: Size
@@ -16,11 +16,9 @@ interface ButtonProps {
     onClick?: () => void
 }
 
-type AllProps = ButtonProps & Omit<React.HTMLAttributes<HTMLButtonElement>, 'loading' | 'onClick'>
-
 // Todo: icon before after text node
 
-const Button: React.FC<AllProps> = ({
+const Button: React.FC<ButtonProps> = ({
     size = 'l',
     skin = 'action',
     type = 'button',

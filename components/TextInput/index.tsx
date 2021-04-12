@@ -6,11 +6,11 @@ import CrossSvg from '../../assets/cross-thin.svg'
 import EyeSvg from '../../assets/eye.svg'
 import SearchSvg from '../../assets/search.svg'
 import EyeHiddenSvg from '../../assets/eye-hidden.svg'
-import CheckMarkSvg from '../../assets/check-mark.svg'
+import CheckMarkSvg from '../../assets/check-mark-round.svg'
 import IMask from 'imask/esm'
 import Spinner from '../Spinner'
 
-type TextInputType = 'text' | 'password' | 'money' | 'tel' | 'search' | 'code'
+type TextInputType = 'text' | 'password' | 'money' | 'tel' | 'search' | 'code' | 'number'
 type TextInputView = 'default' | 'text' | 'underscore'
 
 // TODO: Add lazy to IMASK
@@ -30,6 +30,7 @@ export interface TextInputProps
     onBlur?: () => void
     onClick?: () => void
     onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
+    onMouseDown?: () => void
 
     /** it will overwrite suffix */
     error?: ReactNode
@@ -44,6 +45,7 @@ export interface TextInputProps
     autofocus?: boolean
     loading?: boolean
     readOnly?: boolean
+    innerContainerRef?: RefObject<HTMLDivElement>
     innerRef?: RefObject<HTMLInputElement>
     /** Required with type=code */
     codeLength?: number
@@ -67,6 +69,7 @@ const TextInput: React.FC<TextInputProps> = ({
     placeholder,
     value = '',
     onKeyDown,
+    onMouseDown,
     dropdownContent,
     disabled,
     fullWidth,
@@ -79,6 +82,7 @@ const TextInput: React.FC<TextInputProps> = ({
     onChange,
     suffix,
     innerRef,
+    innerContainerRef,
     onBlur,
     onFocus,
     codeLength,
@@ -92,6 +96,8 @@ const TextInput: React.FC<TextInputProps> = ({
     ...rest
 }) => {
     const inputRef: RefObject<HTMLInputElement | undefined> = innerRef || useRef()
+    const containerRef: RefObject<HTMLDivElement | undefined> = innerContainerRef || useRef()
+
     const [typeState, setTypeState] = useState<TextInputType>(type)
     const [focused, setFocused] = useState(false)
     const hasPrefix = Boolean(prefix) || typeState === 'search'
@@ -129,28 +135,23 @@ const TextInput: React.FC<TextInputProps> = ({
         }
     }
 
-    const forceFocus = () => {
-        handleFocus()
-        inputRef.current?.focus()
-    }
-
     useEffect(() => {
         if (autoFocus) {
             inputRef.current?.focus()
-            handleFocus()
         }
     }, [autoFocus])
 
     const clearText = () => {
         onChange('')
-        forceFocus()
     }
 
     const getContent = () => (
         <div
             {...rest}
+            ref={containerRef}
             onFocus={handleFocus}
             onBlur={handleBlur}
+            onMouseDown={onMouseDown}
             className={classNames({
                 [className]: Boolean(className),
                 [styles.inputContainer]: true,
@@ -180,17 +181,13 @@ const TextInput: React.FC<TextInputProps> = ({
             )}
             <div className={styles.inputBox}>
                 {hasPrefix && (
-                    <div onClick={forceFocus} className={styles.prefix}>
-                        {typeState === 'search' && <SearchSvg />}
+                    <div className={styles.prefix}>
+                        {typeState === 'search' && !prefix && <SearchSvg />}
                         {prefix}
                     </div>
                 )}
                 <div className={styles.inputWrap}>
-                    {label && !(staticLabel || type === 'code') && (
-                        <label onClick={forceFocus} className={styles.label}>
-                            {label}
-                        </label>
-                    )}
+                    {label && !(staticLabel || type === 'code') && <label className={styles.label}>{label}</label>}
                     <input
                         {...rest}
                         name={name}
@@ -211,17 +208,15 @@ const TextInput: React.FC<TextInputProps> = ({
                         onKeyDown={onKeyDown}
                         style={{ ...textInputStyles }}
                     />
-                    {type !== 'code' && (hasError || hasSuccess) && (
-                        <div className={styles.statusIcon}>
-                            {hasError && <WarningSvg width={20} />}
-                            {hasSuccess && <CheckMarkSvg width={16} />}
-                        </div>
-                    )}
                 </div>
                 {dropdownContent}
             </div>
             {(fieldTip || error || success) && <div className={styles.fieldTip}>{error || success || fieldTip}</div>}
-            {(suffix || loading || (clearable && hasValue) || type === 'password') && (
+            {(suffix ||
+                loading ||
+                (clearable && hasValue) ||
+                type === 'password' ||
+                (type !== 'code' && (hasError || hasSuccess))) && (
                 <div
                     className={styles.suffix}
                     onClick={
@@ -229,10 +224,15 @@ const TextInput: React.FC<TextInputProps> = ({
                             ? clearText
                             : type === 'password'
                             ? () => setTypeState(typeState === 'password' ? 'text' : 'password')
-                            : forceFocus
+                            : () => {}
                     }
                 >
-                    {clearable && hasValue ? (
+                    {type !== 'code' && (hasError || hasSuccess) ? (
+                        <div className={styles.statusIcon}>
+                            {hasError && <WarningSvg width={22} />}
+                            {hasSuccess && <CheckMarkSvg width={22} />}
+                        </div>
+                    ) : clearable && hasValue ? (
                         <CrossSvg width={10} />
                     ) : loading ? (
                         <Spinner size="s" />
@@ -254,7 +254,6 @@ const TextInput: React.FC<TextInputProps> = ({
                         [styles.hasPrefix]: hasPrefix,
                         [styles.withLabel]: Boolean(label),
                     })}
-                    onClick={forceFocus}
                 >
                     {rightLabel}
                 </div>
@@ -266,7 +265,6 @@ const TextInput: React.FC<TextInputProps> = ({
         <div style={{ maxWidth }}>
             {label && (
                 <label
-                    onClick={forceFocus}
                     className={classNames({
                         [styles.label]: true,
                         [styles.static]: true,

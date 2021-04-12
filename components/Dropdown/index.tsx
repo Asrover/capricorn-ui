@@ -2,23 +2,21 @@ import React from 'react'
 import styles from './Dropdown.css'
 import classNames from 'classnames'
 
-export interface DropdownProps {
+export interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {
     active?: boolean
     position?: 'right' | 'bottom'
-    autoMaxHeight?: boolean
+    maxHeight?: number | string
     noPadding?: boolean
     widthAuto?: boolean
     minWidth?: number
 }
 
-type AllProps = DropdownProps & React.HTMLAttributes<HTMLDivElement>
-
 // Todo: to Transition Group
 
-const Dropdown: React.FC<AllProps> = ({
+const Dropdown: React.FC<DropdownProps> = ({
     active,
     widthAuto,
-    autoMaxHeight,
+    maxHeight,
     noPadding,
     className,
     position,
@@ -40,10 +38,9 @@ const Dropdown: React.FC<AllProps> = ({
             <div
                 className={classNames({
                     [styles.dropdown]: true,
-                    [styles.autoMaxHeight]: autoMaxHeight,
                     [styles.noPadding]: noPadding,
                 })}
-                style={{ minWidth: minWidth || 'auto' }}
+                style={{ minWidth: minWidth || 'auto', maxHeight: maxHeight || 150 }}
             >
                 {children}
             </div>

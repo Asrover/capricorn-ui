@@ -4,22 +4,21 @@ import CheckSvg from '../../assets/check-mark.svg'
 import AlertSvg from '../../assets/alert.svg'
 import classNames from 'classnames'
 
-interface CheckboxProps {
+export interface CheckboxProps extends Omit<React.HTMLAttributes<HTMLLabelElement>, 'onChange'>{
     onChange: (value: boolean) => void
     checked: boolean
     disabled?: boolean
     error?: React.ReactNode
 }
 
-type AllProps = CheckboxProps & Omit<React.HTMLAttributes<HTMLInputElement>, 'onChange'>
-
-const Checkbox: React.FC<AllProps> = ({ error, checked, className, disabled, children, onChange, ...rest }) => {
+const Checkbox: React.FC<CheckboxProps> = ({ error, checked, className, disabled, children, onChange, ...rest }) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         onChange(!checked)
     }
 
     return (
         <label
+            {...rest}
             className={classNames({
                 [className]: Boolean(className),
                 [styles.checkbox]: true,
@@ -35,7 +34,7 @@ const Checkbox: React.FC<AllProps> = ({ error, checked, className, disabled, chi
             >
                 <CheckSvg />
             </div>
-            <input {...rest} disabled={disabled} checked={checked} onChange={handleChange} type="checkbox" />
+            <input disabled={disabled} checked={checked} onChange={handleChange} type="checkbox" />
             <span
                 className={classNames({
                     [styles.label]: true,

@@ -9,6 +9,7 @@ export default {
 
 export const All: React.FC = () => (
     <>
+        <Toast title="Success without message" skin="success" />
         <Toast title="Something went wrong" message="Some message" />
         <Toast title="Something went well" skin="success" message="Some message" />
         <Toast

@@ -7,7 +7,7 @@
     left: calc(100% + 15px);
     cursor: default;
     transition-property: transform, visibility, opacity;
-    transition-duration: 0.15s;
+    transition-duration: 0.2s;
     transition-timing-function: ease-out;
     z-index: 50;
 }
@@ -49,13 +49,12 @@
     border-radius: 6px;
     border: 1px solid rgba(26, 30, 42, 0.04);
     box-shadow: 0 6px 12px rgba(26, 30, 42, 0.08);
-    max-height: 150px;
     overflow: auto;
     font: 400 14px/1.4 sans-serif;
 }
 
-.dropdown.autoMaxHeight {
-    max-height: unset;
+.dropdown.noPadding {
+    padding: 0;
 }
 
 .dropdown.autoMaxHeight {

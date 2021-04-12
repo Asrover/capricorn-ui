@@ -9,7 +9,7 @@ export default {
 } as Meta
 
 export const All: React.FC = () => (
-    <Space column size="l">
+    <Space column >
         <br />
         <br />
         <Tip title="Hover mode" dropdownProps={{ minWidth: 400 }}>

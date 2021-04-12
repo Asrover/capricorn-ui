@@ -3,9 +3,7 @@ import styles from './Link.css'
 import classNames from 'classnames'
 import { Link as ReactLink } from 'react-router-dom'
 
-interface LinkProps {
-    /** for external links */
-    href?: string
+interface LinkProps extends React.HTMLProps<HTMLAnchorElement> {
     /** for inner links (React Router DOM)*/
     to?: string
     hoverUnderline?: boolean
@@ -13,9 +11,7 @@ interface LinkProps {
     bold?: boolean
 }
 
-type AllProps = LinkProps & React.HTMLAttributes<HTMLLinkElement>
-
-const Link: React.FC<AllProps> = ({ href, className, hoverUnderline, onClick, disabled, bold, children, ...rest }) => {
+const Link: React.FC<LinkProps> = ({ href, className, hoverUnderline, onClick, disabled, bold, children, ...rest }) => {
     const Component = href ? 'a' : ReactLink
 
     return (

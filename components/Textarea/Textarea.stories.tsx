@@ -15,7 +15,7 @@ export const All: React.FC = () => {
 
     return (
         <>
-            <Textarea label="Comment" value={value} onChange={setValue} />
+            <Textarea name="comment" label="Comment" value={value} onChange={setValue} />
             <Textarea label="Error state" error="Reqired field" value={value3} onChange={setValue3} />
             <Textarea label="Success state" success="Success text" value={value4} onChange={setValue4} />
             <Textarea
