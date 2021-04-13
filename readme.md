@@ -1,4 +1,4 @@
-# Components library for Capitalist and Practika
+# Components library
 
 ### Global Tasks
 

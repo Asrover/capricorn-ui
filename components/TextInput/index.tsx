@@ -135,9 +135,13 @@ const TextInput: React.FC<TextInputProps> = ({
         }
     }
 
+    const forceFocus = () => {
+        inputRef.current?.focus()
+    }
+
     useEffect(() => {
         if (autoFocus) {
-            inputRef.current?.focus()
+            forceFocus()
         }
     }, [autoFocus])
 
@@ -165,6 +169,7 @@ const TextInput: React.FC<TextInputProps> = ({
                 [styles.success]: hasSuccess,
                 [styles.hasPrefix]: hasPrefix,
                 [styles[`view-${view}`]]: true,
+                [styles.disableTyping]: disableTyping,
             })}
             style={{ ...style, maxWidth: codeLength ? codeLength * 60 : maxWidth }}
         >

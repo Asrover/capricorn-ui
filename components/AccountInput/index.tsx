@@ -15,8 +15,16 @@ interface AccountInputProps
     hideAccountCurrencyIcon?: boolean
 }
 
-const AccountInput: React.FC<AccountInputProps> = ({ accounts, hideAccountCurrencyIcon, onChangeAccount, selectedAccount, ...rest }) => {
-    const options = useMemo(() => accounts.map((account) => accountToOption(account, hideAccountCurrencyIcon)), [accounts])
+const AccountInput: React.FC<AccountInputProps> = ({
+    accounts,
+    hideAccountCurrencyIcon,
+    onChangeAccount,
+    selectedAccount,
+    ...rest
+}) => {
+    const options = useMemo(() => accounts.map((account) => accountToOption(account, hideAccountCurrencyIcon)), [
+        accounts,
+    ])
 
     const onChange = (option) => {
         if (option) {
@@ -35,11 +43,7 @@ const AccountInput: React.FC<AccountInputProps> = ({ accounts, hideAccountCurren
     )
 }
 
-const Currency: React.FC = ({ children }) => (
-    <div className={styles.currency}>
-        {children}
-    </div>
-)
+const Currency: React.FC = ({ children }) => <div className={styles.currency}>{children}</div>
 
 const currencyToSymbol = {
     eur: '€',

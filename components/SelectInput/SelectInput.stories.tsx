@@ -56,30 +56,32 @@ export const All: React.FC = () => {
             setUpdOptions(newOptions)
         }, 3000)
     }, [])
-
+    
+    console.log('--- value8', value8)
+    
     return (
         <Space column>
             <Surface>
                 <Title level={2}>Extends: TextInput, Dropdown</Title>
             </Surface>
-            <SelectInput
-                selectedOption={value}
-                options={asyncOptions}
-                loading={loading}
-                autoSelect
-                onChange={setValue}
-                label="Async options and autoSelect"
-                fieldTip={`Value: ${value?.value}`}
-            />
-            <SelectInput
-                selectedOption={value2}
-                options={options}
-                onChange={setValue2}
-                onChangeInputText={setValue3}
-                optionsLikeRightLabel
-                label="Options like right label"
-                fieldTip={`Value: ${value3} ${value2?.value}`}
-            />
+            {/*<SelectInput*/}
+            {/*    selectedOption={value}*/}
+            {/*    options={asyncOptions}*/}
+            {/*    loading={loading}*/}
+            {/*    autoSelect*/}
+            {/*    onChange={setValue}*/}
+            {/*    label="Async options and autoSelect"*/}
+            {/*    fieldTip={`Value: ${value?.value}`}*/}
+            {/*/>*/}
+            {/*<SelectInput*/}
+            {/*    selectedOption={value2}*/}
+            {/*    options={options}*/}
+            {/*    onChange={setValue2}*/}
+            {/*    onChangeInputText={setValue3}*/}
+            {/*    optionsLikeRightLabel*/}
+            {/*    label="Options like right label"*/}
+            {/*    fieldTip={`Value: ${value3} ${value2?.value}`}*/}
+            {/*/>*/}
             <SelectInput
                 selectedOption={value8}
                 options={updOptions}
@@ -90,25 +92,25 @@ export const All: React.FC = () => {
                 fieldTip="Value will reset in three seconds, 'cause options will change"
                 success="success"
             />
-            <SelectInput
-                name="nameselect"
-                selectedOption={value9}
-                options={options}
-                onChange={setValue9}
-                withSearch
-                label="Default value"
-                error="Some error"
-            />
-            <div>
-                <SelectInput
-                    selectedOption={value10}
-                    options={options}
-                    onChange={setValue10}
-                    textInputValue={value10?.text}
-                    view="text"
-                    textInputStyles={textViewInputStyles}
-                />
-            </div>
+            {/*<SelectInput*/}
+            {/*    name="nameselect"*/}
+            {/*    selectedOption={value9}*/}
+            {/*    options={options}*/}
+            {/*    onChange={setValue9}*/}
+            {/*    withSearch*/}
+            {/*    label="Default value"*/}
+            {/*    error="Some error"*/}
+            {/*/>*/}
+            {/*<div>*/}
+            {/*    <SelectInput*/}
+            {/*        selectedOption={value10}*/}
+            {/*        options={options}*/}
+            {/*        onChange={setValue10}*/}
+            {/*        textInputValue={value10?.text}*/}
+            {/*        view="text"*/}
+            {/*        textInputStyles={textViewInputStyles}*/}
+            {/*    />*/}
+            {/*</div>*/}
         </Space>
     )
 }

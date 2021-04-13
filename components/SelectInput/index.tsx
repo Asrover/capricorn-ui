@@ -91,14 +91,22 @@ const SelectInput: React.FC<SelectInputProps> = ({
     const hideOptions = () => {
         setOpenedOptions(false)
         setFocusedOptionIndex(-1)
-
-        if (!optionsLikeRightLabel && selectedOption.value && !options.some((option) => option.text === inputText)) {
-            onChange()
-            setInputText('')
-        }
+        setInputText(selectedOption.text)
     }
 
-    useOutsideClick(inputRef, hideOptions)
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (inputRef.current && !inputRef.current.contains(event.target as any)) {
+                hideOptions()
+            }
+        }
+
+        document.addEventListener('click', handleClickOutside)
+
+        return function cleanup() {
+            document.removeEventListener('click', handleClickOutside)
+        }
+    }, [options, selectedOption.value, inputText, optionsLikeRightLabel])
 
     const openOptions = () => {
         setTillNotTypingAfterOptionsOpened(true)
@@ -216,10 +224,14 @@ const SelectInput: React.FC<SelectInputProps> = ({
             </>
         )
 
+    const handleBlur = () => {
+        hideOptions()
+    }
+
     return (
         <TextInput
             onFocus={handleFocus}
-            onBlur={hideOptions}
+            onBlur={handleBlur}
             onChange={handleChangeInputText}
             onKeyDown={handleKeyDown}
             onMouseDown={handleMouseDown}
@@ -238,21 +250,6 @@ const SelectInput: React.FC<SelectInputProps> = ({
             {...rest}
         />
     )
-}
-
-const useOutsideClick = (ref: RefObject<HTMLDivElement | undefined>, callback: () => void) => {
-    function handleClickOutside(event: MouseEvent) {
-        if (ref.current && !ref.current.contains(event.target as any)) {
-            callback()
-        }
-    }
-
-    useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside)
-        return function cleanup() {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
-    }, [])
 }
 
 export default SelectInput
