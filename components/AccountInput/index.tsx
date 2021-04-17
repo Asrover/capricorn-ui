@@ -4,7 +4,7 @@ import styles from './AccountInput.css'
 
 type Account = { id: string; currency: string; balance: number }
 
-interface AccountInputProps
+export interface AccountInputProps
     extends Omit<
         SelectInputProps,
         'options' | 'selectedOption' | 'onChange' | 'onSearch' | 'textInputValue' | 'withSearch'
@@ -59,10 +59,10 @@ const optionToAccount = (option: Option): Account => ({
 const accountToOption = (account: Account, noPrefix?: boolean): Option => ({
     value: account?.id,
     text: account?.id,
-    prefix: !noPrefix && <Currency>{currencyToSymbol[account?.currency]}</Currency>,
+    prefix: !noPrefix && <Currency>{currencyToSymbol[account?.currency.toLowerCase()]}</Currency>,
     suffix: (
         <>
-            <b>{account?.balance}</b>,00 {account?.currency.toUpperCase()}
+            {typeof account?.balance === 'number' && formatBalance(account.balance)} {account?.currency.toUpperCase()}
         </>
     ),
     payload: {
@@ -70,5 +70,25 @@ const accountToOption = (account: Account, noPrefix?: boolean): Option => ({
         balance: account?.balance,
     },
 })
+
+const formatBalance = (balance: number) => {
+    const [integer, float] = convertExponentialToDecimal(balance).toString().split('.')
+
+    return (
+        <>
+            <b>{integer}</b>.{float || '00'}
+        </>
+    )
+}
+
+const convertExponentialToDecimal = (exponentialNumber: number | string): number | string => {
+    const str = exponentialNumber.toString()
+    if (str.indexOf('e-') !== -1) {
+        const exponent = parseInt(str.split('-')[1], 10)
+        return Number(exponentialNumber).toFixed(exponent)
+    } else {
+        return exponentialNumber
+    }
+}
 
 export default AccountInput

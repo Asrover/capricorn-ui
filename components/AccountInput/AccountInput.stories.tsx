@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import AccountInput from './index'
 import Title from '../Title'
@@ -30,6 +30,11 @@ const accounts = [
 
 export const All: React.FC = () => {
     const [account, setAccount] = useState(accounts[0])
+    const [account2, setAccount2] = useState()
+    
+    useEffect(() => {
+        setAccount2(accounts[1])
+    }, [])
 
     // const [asyncOptions, setAsyncOptions] = useState([])
     // const [loading, setLoading] = useState(true)
@@ -63,9 +68,9 @@ export const All: React.FC = () => {
             />
             <AccountInput
                 label="Счет списания"
-                selectedAccount={account}
+                selectedAccount={account2}
                 accounts={accounts}
-                onChangeAccount={setAccount}
+                onChangeAccount={setAccount2}
                 fieldTip="With hideAccountCurrencyIcon"
                 hideAccountCurrencyIcon
             />

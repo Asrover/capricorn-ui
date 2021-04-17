@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import CheckMarkSvg from '../../assets/check-mark.svg'
 import WarningSvg from '../../assets/warning-round.svg'
 
-interface TextAreaProps
+export interface TextAreaProps
     extends Omit<React.HTMLProps<HTMLInputElement>, 'onFocus' | 'onClick' | 'onChange' | 'prefix' | 'label'> {
     label?: ReactNode
     value?: string

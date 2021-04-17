@@ -97,7 +97,6 @@
 
 .group {
     position: relative;
-    margin-bottom: 40px;
 }
 
 .group.hasError .radio:not(.disabled) .markBox {

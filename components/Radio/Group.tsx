@@ -5,7 +5,7 @@ import classNames from 'classnames'
 
 export type RadioValueType = string | number | boolean
 
-export interface RadioGroupProps {
+export interface RadioGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
     name: string
     onChange: (value: RadioValueType) => void
     label?: string
@@ -14,15 +14,23 @@ export interface RadioGroupProps {
     error?: React.ReactNode
 }
 
-type AllProps = RadioGroupProps & Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'>
-
-const Index: React.FC<AllProps> = ({ value, className, vertical, error, name, label, onChange, children, ...rest }) => {
+const Index: React.FC<RadioGroupProps> = ({
+    value,
+    className,
+    vertical,
+    error,
+    name,
+    label,
+    onChange,
+    children,
+    ...rest
+}) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value)
     }
     const childrenWithProps = React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
-            return React.cloneElement(child, { name })
+            return React.cloneElement(child, { name, defaultChecked: child.props.value === value })
         }
         return child
     })

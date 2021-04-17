@@ -2,6 +2,7 @@ require('../theme/index.css')
 require('../theme/capitalist.css')
 require('../theme/practika.css')
 
+export { default as AccountInput } from './AccountInput'
 export { default as Button } from './Button'
 export { default as Checkbox } from './Checkbox'
 export { default as CopyText } from './CopyText'
