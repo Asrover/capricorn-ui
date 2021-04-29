@@ -7,7 +7,7 @@
     transition: box-shadow .25s, transform .25s;
 }
 
-.surface:hover {
+.surface:not(.noSurfacing):hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 30px rgba(26,30,42,.14);
 }

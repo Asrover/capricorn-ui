@@ -35,6 +35,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
     options,
     autoSelect,
     view,
+    suffix,
     textInputStyles,
     textInputValue,
     dropdownProps,
@@ -213,7 +214,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
     const getSuffix = () =>
         !optionsLikeRightLabel && (
             <>
-                {view !== 'text' && <div className={styles.suffixText}>{selectedOption.suffix}</div>}
+                {view !== 'text' && <div className={styles.suffixText}>{suffix || selectedOption.suffix}</div>}
                 <ChevronDownSvg
                     className={classNames({
                         [styles.chevron]: true,

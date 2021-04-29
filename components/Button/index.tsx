@@ -4,7 +4,6 @@ import styles from './Button.css'
 import LeftArrowSvg from '../../assets/left-arrow.svg'
 
 type Skin = 'default' | 'action' | 'border' | 'pseudo' | 'back' | 'link'
-
 type Size = 's' | 'm' | 'l' | 'xl'
 
 interface ButtonProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'loading' | 'onClick'> {

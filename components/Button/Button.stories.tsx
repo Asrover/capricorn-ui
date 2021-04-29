@@ -20,7 +20,7 @@ export const Action: React.FC = () => (
                 Loading
             </Button>
             <Button size="xl">
-                <PrintSvg />
+                <PrintSvg width={32} />
                 Print
             </Button>
         </Space>
@@ -29,7 +29,7 @@ export const Action: React.FC = () => (
             <Button disabled>Disabled</Button>
             <Button loading>Loading</Button>
             <Button>
-                <PrintSvg />
+                <PrintSvg width={24} />
                 Print
             </Button>
         </Space>
@@ -42,7 +42,7 @@ export const Action: React.FC = () => (
                 Loading
             </Button>
             <Button size="m">
-                <PrintSvg />
+                <PrintSvg width={16} />
                 Print
             </Button>
         </Space>
@@ -55,7 +55,7 @@ export const Action: React.FC = () => (
                 Loading
             </Button>
             <Button size="s">
-                <PrintSvg />
+                <PrintSvg width={12} />
                 Print
             </Button>
         </Space>
@@ -74,7 +74,7 @@ export const Default: React.FC = () => (
                 Loading
             </Button>
             <Button size="xl" skin="default">
-                <PrintSvg />
+                <PrintSvg width={32} />
                 Print
             </Button>
         </Space>
@@ -87,7 +87,7 @@ export const Default: React.FC = () => (
                 Loading
             </Button>
             <Button skin="default">
-                <PrintSvg />
+                <PrintSvg width={24} />
                 Print
             </Button>
         </Space>
@@ -102,7 +102,7 @@ export const Default: React.FC = () => (
                 Loading
             </Button>
             <Button size="m" skin="default">
-                <PrintSvg />
+                <PrintSvg width={16} />
                 Print
             </Button>
         </Space>
@@ -117,7 +117,7 @@ export const Default: React.FC = () => (
                 Loading
             </Button>
             <Button size="s" skin="default">
-                <PrintSvg />
+                <PrintSvg width={12} />
                 Print
             </Button>
         </Space>
@@ -136,7 +136,7 @@ export const Border: React.FC = () => (
                 Loading
             </Button>
             <Button size="xl" skin="border">
-                <PrintSvg />
+                <PrintSvg width={32} />
                 Print
             </Button>
         </Space>
@@ -149,7 +149,7 @@ export const Border: React.FC = () => (
                 Loading
             </Button>
             <Button skin="border">
-                <PrintSvg />
+                <PrintSvg width={24} />
                 Print
             </Button>
         </Space>
@@ -164,7 +164,7 @@ export const Border: React.FC = () => (
                 Loading
             </Button>
             <Button size="m" skin="border">
-                <PrintSvg />
+                <PrintSvg width={16} />
                 Print
             </Button>
         </Space>
@@ -179,7 +179,7 @@ export const Border: React.FC = () => (
                 Loading
             </Button>
             <Button size="s" skin="border">
-                <PrintSvg />
+                <PrintSvg width={12} />
                 Print
             </Button>
         </Space>
@@ -198,7 +198,7 @@ export const Pseudo: React.FC = () => (
                 Loading
             </Button>
             <Button size="xl" skin="pseudo">
-                <PrintSvg />
+                <PrintSvg width={32} />
                 Print
             </Button>
         </Space>
@@ -211,7 +211,7 @@ export const Pseudo: React.FC = () => (
                 Loading
             </Button>
             <Button skin="pseudo">
-                <PrintSvg />
+                <PrintSvg width={24} />
                 Print
             </Button>
         </Space>
@@ -226,7 +226,7 @@ export const Pseudo: React.FC = () => (
                 Loading
             </Button>
             <Button size="m" skin="pseudo">
-                <PrintSvg />
+                <PrintSvg width={16} />
                 Print
             </Button>
         </Space>
@@ -241,7 +241,7 @@ export const Pseudo: React.FC = () => (
                 Loading
             </Button>
             <Button size="s" skin="pseudo">
-                <PrintSvg />
+                <PrintSvg width={12} />
                 Print
             </Button>
         </Space>
@@ -306,7 +306,7 @@ export const Link: React.FC = () => (
                 Loading
             </Button>
             <Button size="xl" skin="link">
-                <PrintSvg />
+                <PrintSvg width={32} />
                 Print
             </Button>
         </Space>
@@ -319,7 +319,7 @@ export const Link: React.FC = () => (
                 Loading
             </Button>
             <Button skin="link">
-                <PrintSvg />
+                <PrintSvg width={24} />
                 Print
             </Button>
         </Space>
@@ -334,7 +334,7 @@ export const Link: React.FC = () => (
                 Loading
             </Button>
             <Button size="m" skin="link">
-                <PrintSvg />
+                <PrintSvg width={16} />
                 Print
             </Button>
         </Space>
@@ -349,7 +349,7 @@ export const Link: React.FC = () => (
                 Loading
             </Button>
             <Button size="s" skin="link">
-                <PrintSvg />
+                <PrintSvg width={12} />
                 Print
             </Button>
         </Space>

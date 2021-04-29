@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextInput, { TextInputProps } from '../TextInput'
 import styles from './DateInput.css'
 import Dropdown from '../Dropdown'
 import CalendarSvg from '../../assets/calendar.svg'
 import Calendar from 'react-calendar'
 
-interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
+export interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
     onChange: (value?: Date | Date[]) => void
     value?: Date | Date[]
     isRange?: boolean
@@ -15,6 +15,10 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest
     // const width = useWindowSize().width
     const [dateText, setDateText] = useState<string | undefined>(dateToText(value, isRange))
     const [openedCalendar, setOpenedOptions] = useState(false)
+
+    useEffect(() => {
+        setDateText(dateToText(value, isRange))
+    }, [value, isRange])
 
     const handleFocus = () => {
         setOpenedOptions(true)
@@ -73,7 +77,13 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest
     }
 
     const getDropdownContent = () => (
-        <Dropdown className={styles.dropDownContent} active={openedCalendar} position="bottom" maxHeight="auto" noPadding>
+        <Dropdown
+            className={styles.dropDownContent}
+            active={openedCalendar}
+            position="bottom"
+            maxHeight="auto"
+            noPadding
+        >
             <Calendar selectRange={isRange} onChange={handleChangeDate} value={value} />
         </Dropdown>
     )

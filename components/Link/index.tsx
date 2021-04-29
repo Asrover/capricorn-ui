@@ -17,6 +17,7 @@ const Link: React.FC<LinkProps> = ({ href, className, hoverUnderline, onClick, d
     return (
         <Component
             {...rest}
+            href={href}
             className={classNames({
                 [className]: Boolean(className),
                 [styles.link]: true,

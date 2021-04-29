@@ -3,19 +3,18 @@ import classNames from 'classnames'
 import styles from './Empty.css'
 import EmptySvg from '../../assets/file-tray-outline.svg'
 
-interface SurfaceProps {
-    size?: 's' | 'm' | 'l'
-    overlay?: boolean
+export interface EmptyProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Text-align: center */
+    center?: boolean
 }
 
-type AllProps = SurfaceProps & React.HTMLAttributes<HTMLDivElement>
-
-const Empty: React.FC<AllProps> = ({ size = 'm', className, overlay, children, ...rest }) => {
+const Empty: React.FC<EmptyProps> = ({ className, center, children, ...rest }) => {
     return (
         <div
             className={classNames({
                 [className]: Boolean(className),
                 [styles.empty]: true,
+                [styles.center]: center,
             })}
             {...rest}
         >

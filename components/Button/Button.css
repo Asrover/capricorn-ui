@@ -47,9 +47,7 @@
 }
 
 .button svg {
-    height: 48%;
-    min-height: 16px;
-    margin: 0 15% 0 -5%;
+    margin-right: 16px;
 }
 
 .button.size-s {
@@ -58,16 +56,28 @@
     font-size: 13px;
 }
 
+.button.size-s svg {
+    margin-right: 8px;
+}
+
 .button.size-m {
     height: 40px;
     padding: 0 20px;
     font-size: 16px;
 }
 
+.button.size-m svg {
+    margin-right: 12px;
+}
+
 .button.size-xl {
     height: 60px;
     padding: 0 30px;
     font-size: 22px;
+}
+
+.button.size-xl svg {
+    margin-right: 20px;
 }
 
 .button.skin-action {

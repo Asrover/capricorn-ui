@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import SelectInput, { Option, SelectInputProps } from '../SelectInput'
 import styles from './AccountInput.css'
 
-type Account = { id: string; currency: string; balance: number }
+type Account = { id: string; currency: string; balance: number; payload?: any }
 
 export interface AccountInputProps
     extends Omit<
@@ -68,6 +68,7 @@ const accountToOption = (account: Account, noPrefix?: boolean): Option => ({
     payload: {
         currency: account?.currency,
         balance: account?.balance,
+        payload: account?.payload,
     },
 })
 

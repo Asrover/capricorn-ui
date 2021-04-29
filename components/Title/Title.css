@@ -1,0 +1,40 @@
+.title {
+    margin: 1.2em 0 .5em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
+
+* > .title:first-child {
+    margin-top: 0;
+}
+
+.title.level-1 {
+    font-size: 42px;
+    line-height: 1.45;
+}
+
+.title.level-2 {
+    font-size: 32px;
+    line-height: 1.55;
+}
+
+.title.level-3 {
+    font-size: 26px;
+    line-height: 1.5;
+}
+
+.title.level-4 {
+    font-size: 22px;
+    line-height: 1.65;
+}
+
+.title.level-5 {
+    font-size: 18px;
+    line-height: 1.2;
+}
+
+.title.level-6 {
+    font-size: 16px;
+    line-height: 1.7;
+    font-weight: 600;
+}

@@ -11,21 +11,21 @@ export default {
 } as Meta
 
 const options = [
-    { value: 'eur', text: 'EUR' },
-    { value: 'usd', text: 'USD' },
-    { value: 'gbp', text: 'GBP' },
-    { value: 'btc', text: 'BTC' },
-    { value: 'eth', text: 'ETH' },
-    { value: 'usdt', text: 'USDT' },
+    { value: 'eur', text: 'EUR', suffix: <span>suffix</span>, },
+    { value: 'usd', text: 'USD', suffix: 'suffix' },
+    { value: 'gbp', text: 'GBP', suffix: 'suffix' },
+    { value: 'btc', text: 'BTC', suffix: 'suffix' },
+    { value: 'eth', text: 'ETH', suffix: 'suffix' },
+    { value: 'usdt', text: 'USDT', suffix: 'suffix' },
 ]
 
 const newOptions = [
-    { value: 'new-eur', text: 'NEWEUR' },
-    { value: 'new-usd', text: 'NEWUSD' },
-    { value: 'new-gbp', text: 'NEWGBP' },
-    { value: 'new-btc', text: 'NEWBTC' },
-    { value: 'new-eth', text: 'NEWETH' },
-    { value: 'new-usdt', text: 'NEWUSDT' },
+    { value: 'new-eur', text: 'NEWEUR', suffix: 'suffix' },
+    { value: 'new-usd', text: 'NEWUSD', suffix: 'suffix' },
+    { value: 'new-gbp', text: 'NEWGBP', suffix: 'suffix' },
+    { value: 'new-btc', text: 'NEWBTC', suffix: 'suffix' },
+    { value: 'new-eth', text: 'NEWETH', suffix: 'suffix' },
+    { value: 'new-usdt', text: 'NEWUSDT', suffix: 'suffix' },
 ]
 
 const textViewInputStyles = {
@@ -87,10 +87,10 @@ export const All: React.FC = () => {
                 options={updOptions}
                 onChange={setValue8}
                 withSearch
+                prefix="prefix"
                 label="Options will update"
                 dropdownProps={{ maxHeight: 300 }}
                 fieldTip="Value will reset in three seconds, 'cause options will change"
-                success="success"
             />
             {/*<SelectInput*/}
             {/*    name="nameselect"*/}
