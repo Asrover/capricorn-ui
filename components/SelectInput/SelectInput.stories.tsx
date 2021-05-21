@@ -32,6 +32,8 @@ const textViewInputStyles = {
     fontWeight: 'bold',
     fontSize: 26,
     caretColor: 'transparent',
+    borderRadius: '0',
+    borderBottom: '1px solid #000',
 }
 
 export const All: React.FC = () => {
@@ -92,25 +94,16 @@ export const All: React.FC = () => {
                 dropdownProps={{ maxHeight: 300 }}
                 fieldTip="Value will reset in three seconds, 'cause options will change"
             />
-            {/*<SelectInput*/}
-            {/*    name="nameselect"*/}
-            {/*    selectedOption={value9}*/}
-            {/*    options={options}*/}
-            {/*    onChange={setValue9}*/}
-            {/*    withSearch*/}
-            {/*    label="Default value"*/}
-            {/*    error="Some error"*/}
-            {/*/>*/}
-            {/*<div>*/}
-            {/*    <SelectInput*/}
-            {/*        selectedOption={value10}*/}
-            {/*        options={options}*/}
-            {/*        onChange={setValue10}*/}
-            {/*        textInputValue={value10?.text}*/}
-            {/*        view="text"*/}
-            {/*        textInputStyles={textViewInputStyles}*/}
-            {/*    />*/}
-            {/*</div>*/}
+            <div>
+                <SelectInput
+                    selectedOption={value10}
+                    options={options}
+                    onChange={setValue10}
+                    textInputValue={value10?.text}
+                    view="text"
+                    textInputStyles={textViewInputStyles}
+                />
+            </div>
         </Space>
     )
 }

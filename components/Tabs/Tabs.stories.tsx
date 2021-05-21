@@ -1,6 +1,7 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import Tabs from './index'
+import Title from '../Title'
 
 export default {
     title: 'Components/Tabs',
@@ -9,6 +10,7 @@ export default {
 
 export const All: React.FC = () => (
     <>
+        <Title level={2}>Extends: Button (skin="button")</Title>
         <Tabs size="l" headerSpaceBetween>
             <Tabs.Item title="First" id="first1">
                 Skin: Default, The first - Size l, headerSpaceBetween: true
@@ -22,7 +24,7 @@ export const All: React.FC = () => (
         </Tabs>
         <br />
         <br />
-        <Tabs>
+        <Tabs noItemHorizontalSpace>
             <Tabs.Item title="First" id="first2">
                 Skin: Default, The first - Size m (default)
             </Tabs.Item>
@@ -88,7 +90,7 @@ export const All: React.FC = () => (
         </Tabs>
         <br />
         <br />
-        <Tabs skin="group-button" size="m">
+        <Tabs skin="group-button">
             <Tabs.Item title="First" id="first9">
                 Skin: group-button, The first - Size m
             </Tabs.Item>

@@ -246,7 +246,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
             innerContainerRef={inputRef}
             textInputStyles={{
                 ...textInputStyles,
-                width: view === 'text' && `calc(${(inputText?.length || 0) + 1.5}ch`,
+                width: view === 'text' && `calc(${inputText?.length * 0.7}em`,
             }}
             {...rest}
         />

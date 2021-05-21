@@ -15,6 +15,8 @@
 }
 
 .chevron {
+    margin-left: 10px;
+    color: #000 !important;
     transform-origin: center center;
     transition: 0.25s transform;
 }

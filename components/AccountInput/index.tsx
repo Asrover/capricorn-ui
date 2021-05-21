@@ -62,7 +62,7 @@ const accountToOption = (account: Account, noPrefix?: boolean): Option => ({
     prefix: !noPrefix && <Currency>{currencyToSymbol[account?.currency.toLowerCase()]}</Currency>,
     suffix: (
         <>
-            {typeof account?.balance === 'number' && formatBalance(account.balance)} {account?.currency.toUpperCase()}
+            {formatBalance(account?.balance)} {account?.currency.toUpperCase()}
         </>
     ),
     payload: {
@@ -72,8 +72,9 @@ const accountToOption = (account: Account, noPrefix?: boolean): Option => ({
     },
 })
 
-const formatBalance = (balance: number) => {
-    const [integer, float] = convertExponentialToDecimal(balance).toString().split('.')
+const formatBalance = (balance?: number | string) => {
+    if (balance === undefined) return ''
+    const [integer, float] = convertExponentialToDecimal(Number(balance)).toString().split('.')
 
     return (
         <>
