@@ -4,6 +4,7 @@ import SelectInput from './index'
 import Title from '../Title'
 import Surface from '../Surface'
 import Space from '../Space'
+import Button from '../Button'
 
 export default {
     title: 'Components/SelectInput',
@@ -59,8 +60,6 @@ export const All: React.FC = () => {
         }, 3000)
     }, [])
     
-    console.log('--- value8', value8)
-    
     return (
         <Space column>
             <Surface>
@@ -94,6 +93,9 @@ export const All: React.FC = () => {
                 dropdownProps={{ maxHeight: 300 }}
                 fieldTip="Value will reset in three seconds, 'cause options will change"
             />
+            <div>
+                <Button onClick={() => setValue8()}>Clear option above</Button>
+            </div>
             <div>
                 <SelectInput
                     selectedOption={value10}

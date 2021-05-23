@@ -55,10 +55,8 @@ const SelectInput: React.FC<SelectInputProps> = ({
     }, [textInputValue])
 
     useLayoutEffect(() => {
-        if (selectedOption?.value) {
-            if (!optionsLikeRightLabel) {
-                setInputText(selectedOption.text)
-            }
+        if (!optionsLikeRightLabel) {
+            setInputText(selectedOption.text)
         }
     }, [selectedOption?.value])
 
