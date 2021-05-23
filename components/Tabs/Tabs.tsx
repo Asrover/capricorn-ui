@@ -1,13 +1,13 @@
-import React, { ReactElement, useLayoutEffect, useMemo, useState } from 'react'
+import React, { ReactElement, useEffect, useMemo, useRef, useState } from 'react'
 import styles from './Tabs.css'
 import classNames from 'classnames'
 import Button from '../Button'
 
 export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
     children: React.ReactElement[]
+    activeId: null | string
     skin?: 'default' | 'button' | 'group-button' | 'steps'
     size?: 's' | 'm' | 'l'
-    defaultActiveKey?: number
     onChange?: (id: string) => void
     headerSpaceBetween?: boolean
     noItemHorizontalSpace?: boolean
@@ -16,7 +16,7 @@ export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'o
 const InternalTabs: React.ForwardRefRenderFunction<HTMLElement, TabsProps> = ({
     size = 'm',
     skin = 'default',
-    defaultActiveKey,
+    activeId,
     onChange,
     headerSpaceBetween,
     children,
@@ -24,21 +24,26 @@ const InternalTabs: React.ForwardRefRenderFunction<HTMLElement, TabsProps> = ({
     noItemHorizontalSpace,
     ...rest
 }) => {
-    const [activeId, setActiveId] = useState(defaultActiveKey || children[0].props.id)
+    const isInitialIndicatorMount = useRef(true)
     const [tabIndicator, setTabIndicator] = useState({ offset: 0, width: 0 })
 
     const handleChangeActive = (id: string) => () => {
-        setActiveId(id)
         onChange && onChange(id)
     }
 
-    useLayoutEffect(() => {
-        const activeTab = document.getElementsByClassName(tabsId)[0] as HTMLDivElement
+    useEffect(() => {
+        if (activeId) {
+            const activeTab = document.getElementsByClassName(tabsId)[0] as HTMLDivElement
 
-        setTabIndicator({
-            offset: activeTab?.offsetLeft,
-            width: skin === 'group-button' ? activeTab?.clientWidth + 1 : activeTab?.clientWidth,
-        })
+            setTabIndicator({
+                offset: activeTab?.offsetLeft,
+                width: skin === 'group-button' ? activeTab?.clientWidth + 1 : activeTab?.clientWidth,
+            })
+
+            if (tabIndicator.width !== 0) {
+                isInitialIndicatorMount.current = false
+            }
+        }
     }, [activeId])
 
     const activeTabContent = useMemo(() => children.find(({ props }: ReactElement) => props.id === activeId), [
@@ -91,7 +96,10 @@ const InternalTabs: React.ForwardRefRenderFunction<HTMLElement, TabsProps> = ({
                 )}
                 {(skin === 'default' || skin === 'button' || skin === 'group-button') && tabIndicator && (
                     <div
-                        className={styles.indicator}
+                        className={classNames({
+                            [styles.indicator]: true,
+                            [styles.noTransition]: isInitialIndicatorMount.current,
+                        })}
                         style={{
                             transform: `translateX(${tabIndicator?.offset}px)`,
                             width: `${tabIndicator?.width}px`,
@@ -99,13 +107,15 @@ const InternalTabs: React.ForwardRefRenderFunction<HTMLElement, TabsProps> = ({
                     />
                 )}
             </div>
-            <div
-                className={classNames({
-                    [styles.tabContent]: true,
-                })}
-            >
-                {activeTabContent.props.children}
-            </div>
+            {activeTabContent?.props?.children && (
+                <div
+                    className={classNames({
+                        [styles.tabContent]: true,
+                    })}
+                >
+                    {activeTabContent.props.children}
+                </div>
+            )}
         </div>
     )
 }

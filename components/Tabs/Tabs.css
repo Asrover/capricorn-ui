@@ -37,6 +37,10 @@
     transition: .3s transform, .3s width;
 }
 
+.indicator.noTransition {
+    transition-duration: 0s;
+}
+
 .tabHeaderItem {
     display: flex;
     position: relative;
