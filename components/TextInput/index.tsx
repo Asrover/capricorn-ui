@@ -14,6 +14,7 @@ type TextInputType = 'text' | 'password' | 'money' | 'tel' | 'search' | 'code' |
 type TextInputView = 'default' | 'text' | 'underscore'
 
 // TODO: Add lazy to IMASK
+// TODO: CodeInput to separate component
 
 export interface TextInputProps
     extends Omit<React.HTMLProps<HTMLInputElement>, 'onFocus' | 'onClick' | 'onChange' | 'prefix' | 'label'> {
@@ -170,6 +171,7 @@ const TextInput: React.FC<TextInputProps> = ({
                 [styles.hasPrefix]: hasPrefix,
                 [styles[`view-${view}`]]: true,
                 [styles.disableTyping]: disableTyping,
+                [styles.typeCode6]: type === 'code' && codeLength === 6,
             })}
             style={{ ...style, maxWidth: codeLength ? codeLength * 60 : maxWidth }}
         >
@@ -203,6 +205,7 @@ const TextInput: React.FC<TextInputProps> = ({
                             [styles.input]: true,
                             [styles.hideCaret]: (type === 'code' && value?.length === codeLength) || loading,
                             [styles.typeCode]: type === 'code',
+                            [styles.typeCode6]: type === 'code' && codeLength === 6,
                             [styles.vCenter]: type === 'code' || staticLabel,
                             [styles.withLabel]: Boolean(label),
                         })}

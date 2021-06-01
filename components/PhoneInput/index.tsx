@@ -36,7 +36,16 @@ const PhoneInput: React.FC<TextInputProps> = ({ value, ...rest }) => {
 
     const findByLogin = () => (found ? React.createElement(found[1].icon, { width: 32 }) : undefined)
 
-    return <TextInput {...rest} type="tel" value={value} prefix={findByLogin()} mask="+000000000000000" />
+    return (
+        <TextInput
+            {...rest}
+            type="tel"
+            inputMode={rest.inputMode || 'tel'}
+            value={value}
+            prefix={findByLogin()}
+            mask="+000000000000000"
+        />
+    )
 }
 
 export default PhoneInput

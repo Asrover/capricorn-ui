@@ -154,9 +154,20 @@
 
 .input.typeCode {
     box-sizing: content-box;
-    letter-spacing: 50px;
     font-size: 16px;
+    letter-spacing: 50px;
     font-family: 'Courier', monospace;
+}
+
+@media screen and (max-width: 500px) {
+    .inputContainer.typeCode6 {
+        max-width: 300px !important;
+    }
+
+    .input.typeCode6 {
+        padding-left: 19px !important;
+        letter-spacing: 40px;
+    }
 }
 
 .input.withLabel {
