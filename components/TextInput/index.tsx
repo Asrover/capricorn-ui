@@ -105,7 +105,7 @@ const TextInput: React.FC<TextInputProps> = ({
     const hasSuccess = Boolean(success)
     const hasValue = Boolean(value)
     const maskRef = useRef<IMask>()
-    
+
     useEffect(() => {
         if (mask) {
             maskRef.current = IMask(inputRef.current, { mask })

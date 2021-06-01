@@ -95,8 +95,8 @@
     margin-right: 12px;
 }
 
-.skin-button .tabHeader button:last-child {
-    margin-right: 0;
+.skin-button .tabHeader .lastChild {
+    margin-right: 0 !important;
 }
 
 .skin-button .tabHeader {

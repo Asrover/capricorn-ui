@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import Calendar from 'react-calendar'
 import TextInput, { TextInputProps } from '../TextInput'
 import styles from './DateInput.css'
 import Dropdown from '../Dropdown'
 import CalendarSvg from '../../assets/calendar.svg'
-import Calendar from 'react-calendar'
+import { useWindowSize } from 'react-use/esm'
+import classNames from 'classnames'
 
 export interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
     onChange: (value?: Date | Date[]) => void
@@ -12,9 +14,10 @@ export interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value
 }
 
 const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest }) => {
-    // const width = useWindowSize().width
+    const width = useWindowSize().width
     const [dateText, setDateText] = useState<string | undefined>(dateToText(value, isRange))
     const [openedCalendar, setOpenedOptions] = useState(false)
+    const nativeView = !isRange && width < 600
 
     useEffect(() => {
         setDateText(dateToText(value, isRange))
@@ -76,24 +79,31 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest
         setDateText(dateToText(date, isRange))
     }
 
-    const getDropdownContent = () => (
-        <Dropdown
-            className={styles.dropDownContent}
-            active={openedCalendar}
-            position="bottom"
-            maxHeight="auto"
-            noPadding
-        >
-            <Calendar selectRange={isRange} onChange={handleChangeDate} value={value} />
-        </Dropdown>
-    )
-    // width > 600 ? (
-    //     <Dropdown active={openedCalendar} position="bottom" autoMaxHeight noPadding>
-    //         <Calendar selectRange={isRange} onChange={handleChangeDate} value={value} />
-    //     </Dropdown>
-    // ) : (
-    //     <input type="date" value={value} />
-    // )
+    const selectNativeDate = (event: React.FormEvent<HTMLInputElement>) => {
+        handleChangeDate(new Date(event.currentTarget.value))
+    }
+
+    const getDropdownContent = () =>
+        nativeView ? (
+            <input
+                type="date"
+                onChange={selectNativeDate}
+                value={!Array.isArray(value) ? value.toISOString().split('T')[0] : ''}
+                className={classNames({
+                    [styles.nativeDate]: true,
+                })}
+            />
+        ) : (
+            <Dropdown
+                className={styles.dropDownContent}
+                active={openedCalendar}
+                position="bottom"
+                maxHeight="auto"
+                noPadding
+            >
+                <Calendar selectRange={isRange} onChange={handleChangeDate} value={value} />
+            </Dropdown>
+        )
 
     return (
         <TextInput

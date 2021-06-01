@@ -120,6 +120,13 @@
     opacity: 0;
 }
 
+.nativeRightMode {
+    left: auto;
+    width: auto;
+    min-width: 70px;
+    z-index: 1;
+}
+
 .multiSelectItem {
     display: inline-flex;
     align-items: center;

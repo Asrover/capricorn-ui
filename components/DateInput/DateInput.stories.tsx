@@ -15,7 +15,7 @@ export const All: React.FC = () => {
 
     return (
         <>
-            <Title level={2}>Extends: TextInput</Title>
+            <Title level={2}>Extends: TextInput, Dropdown</Title>
             <Space column>
                 <DateInput
                     name="date"

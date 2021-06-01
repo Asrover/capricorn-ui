@@ -111,3 +111,15 @@
 :global(.react-calendar--selectRange .react-calendar__tile--hover) {
     background-color: #e6e6e6;
 }
+
+.nativeDate {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    min-width: 100%;
+    opacity: 0;
+    z-index: 1;
+}

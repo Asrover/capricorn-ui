@@ -32,17 +32,15 @@ const InternalTabs: React.ForwardRefRenderFunction<HTMLElement, TabsProps> = ({
     }
 
     useEffect(() => {
-        if (activeId) {
-            const activeTab = document.getElementsByClassName(tabsId)[0] as HTMLDivElement
+        const activeTab = document.getElementsByClassName(tabsId)[0] as HTMLDivElement
 
-            setTabIndicator({
-                offset: activeTab?.offsetLeft,
-                width: skin === 'group-button' ? activeTab?.clientWidth + 1 : activeTab?.clientWidth,
-            })
+        setTabIndicator({
+            offset: activeTab?.offsetLeft || 0,
+            width: (skin === 'group-button' ? activeTab?.clientWidth + 1 || 0 : activeTab?.clientWidth) || 0,
+        })
 
-            if (tabIndicator.width !== 0) {
-                isInitialIndicatorMount.current = false
-            }
+        if (tabIndicator.width !== 0) {
+            isInitialIndicatorMount.current = false
         }
     }, [activeId])
 
@@ -69,31 +67,38 @@ const InternalTabs: React.ForwardRefRenderFunction<HTMLElement, TabsProps> = ({
                     [styles.headerSpaceBetween]: headerSpaceBetween,
                 })}
             >
-                {children.map(({ props }: ReactElement, index) =>
-                    skin === 'button' ? (
+                {children.map(({ props }: ReactElement, index) => {
+                    const { id, title, ...rest } = props
+
+                    return skin === 'button' ? (
                         <Button
-                            skin={props.id === activeId ? 'action' : 'default'}
-                            key={props.id}
+                            {...rest}
+                            skin={id === activeId ? 'action' : 'default'}
+                            key={id}
                             size={size}
-                            onClick={handleChangeActive(props.id)}
+                            onClick={handleChangeActive(id)}
+                            className={classNames({
+                                [styles.lastChild]: index === children.length - 1,
+                            })}
                         >
-                            {props.title}
+                            {title}
                         </Button>
                     ) : (
                         <div
-                            key={props.id}
+                            {...rest}
+                            key={id}
                             className={classNames({
-                                [tabsId]: props.id === activeId,
+                                [tabsId]: id === activeId,
                                 [styles.tabHeaderItem]: true,
-                                [styles.active]: props.id === activeId,
+                                [styles.active]: id === activeId,
                                 [styles.lastChild]: index === children.length - 1,
                             })}
-                            onClick={handleChangeActive(props.id)}
+                            onClick={handleChangeActive(id)}
                         >
-                            <span>{props.title}</span>
+                            <span>{title}</span>
                         </div>
-                    ),
-                )}
+                    )
+                })}
                 {(skin === 'default' || skin === 'button' || skin === 'group-button') && tabIndicator && (
                     <div
                         className={classNames({

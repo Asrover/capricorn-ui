@@ -10,10 +10,12 @@ import { useWindowSize } from 'react-use/esm'
 export type Option = { value: string; text: string; prefix?: ReactNode; suffix?: ReactNode; payload?: any }
 
 export interface SelectInputProps extends Omit<TextInputProps, 'onChange' | 'value' | 'clearable'> {
-    view?: 'default' | 'text'
     options: Option[]
-    onChange: (option?: Option) => void
-    selectedOption?: Option
+    onChange: (option?: Option | string) => void
+    /** It helps when you need only string value from selectedOption */
+    returnOnlyOptionValue?: boolean
+    view?: 'default' | 'text'
+    selectedOption?: Option | string
     onChangeInputText?: (value: string) => void
     textInputValue?: string
     withSearch?: boolean
@@ -26,12 +28,13 @@ export interface SelectInputProps extends Omit<TextInputProps, 'onChange' | 'val
 }
 
 const SelectInput: React.FC<SelectInputProps> = ({
-    selectedOption = {},
+    selectedOption: selectedOptionProp = {},
     optionsLikeRightLabel,
     onChange,
     onChangeInputText,
     withSearch = false,
     withTyping = false,
+    returnOnlyOptionValue,
     options,
     autoSelect,
     view,
@@ -41,6 +44,14 @@ const SelectInput: React.FC<SelectInputProps> = ({
     dropdownProps,
     ...rest
 }) => {
+    const selectedOption: Option | Record<string, never> = useMemo(() => {
+        if (returnOnlyOptionValue) {
+            return options.find((item) => item.value === selectedOptionProp)
+        } else {
+            return selectedOptionProp
+        }
+    }, [returnOnlyOptionValue, selectedOptionProp])
+
     const inputRef: RefObject<HTMLInputElement | undefined> = useRef()
     const width = useWindowSize().width
     const [openedOptions, setOpenedOptions] = useState(false)
@@ -56,7 +67,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
 
     useLayoutEffect(() => {
         if (!optionsLikeRightLabel) {
-            setInputText(selectedOption.text)
+            setInputText(selectedOption?.text)
         }
     }, [selectedOption?.value])
 
@@ -65,8 +76,8 @@ const SelectInput: React.FC<SelectInputProps> = ({
     }, [inputText])
 
     useEffect(() => {
-        if (autoSelect && options.length !== 0 && !selectedOption.value) {
-            onChange(options[0])
+        if (autoSelect && options.length !== 0 && !selectedOption?.value) {
+            onChange(returnOnlyOptionValue ? options[0].value : options[0])
 
             if (!optionsLikeRightLabel && onChangeInputText) {
                 onChangeInputText(options[0].text)
@@ -90,7 +101,9 @@ const SelectInput: React.FC<SelectInputProps> = ({
     const hideOptions = () => {
         setOpenedOptions(false)
         setFocusedOptionIndex(-1)
-        setInputText(selectedOption.text)
+        if (!optionsLikeRightLabel) {
+            setInputText(selectedOption?.text)
+        }
     }
 
     useEffect(() => {
@@ -105,7 +118,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
         return function cleanup() {
             document.removeEventListener('click', handleClickOutside)
         }
-    }, [options, selectedOption.value, inputText, optionsLikeRightLabel])
+    }, [options, selectedOption?.value, inputText, optionsLikeRightLabel])
 
     const openOptions = () => {
         setTillNotTypingAfterOptionsOpened(true)
@@ -118,7 +131,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
     }
 
     const handleChangeOption = (option: Option, index: number) => () => {
-        onChange(option)
+        onChange(returnOnlyOptionValue ? option.value : option)
         setFocusedOptionIndex(index)
         !optionsLikeRightLabel && setInputText(option.text)
     }
@@ -145,16 +158,16 @@ const SelectInput: React.FC<SelectInputProps> = ({
                     setInputText(options[focusedOptionIndex].text)
                 }
                 setOpenedOptions(!openedOptions)
-                onChange(options[focusedOptionIndex])
+                onChange(returnOnlyOptionValue ? options[focusedOptionIndex].value : options[focusedOptionIndex])
                 break
         }
     }
 
-    const nativeSelectOption = (event: React.FormEvent<HTMLSelectElement>) => {
+    const selectNativeOption = (event: React.FormEvent<HTMLSelectElement>) => {
         const option = options.find((option) => option.value === event.currentTarget.value)
 
         if (option) {
-            handleChangeOption(option, -1)
+            handleChangeOption(option, -1)()
         }
     }
 
@@ -166,7 +179,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
                 [styles.opened]: openedOptions,
             })}
         >
-            {selectedOption.text}
+            {selectedOption?.text}
             <ChevronDownSvg width={12} />
         </div>
     )
@@ -186,7 +199,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
                               key={option.value}
                               className={classNames({
                                   [styles.optionItem]: true,
-                                  [styles.selectedOption]: selectedOption.value === option.value,
+                                  [styles.selectedOption]: selectedOption?.value === option.value,
                                   [styles.focused]: focusedOptionIndex === index,
                               })}
                               onMouseDown={handleChangeOption(option, index)}
@@ -194,13 +207,20 @@ const SelectInput: React.FC<SelectInputProps> = ({
                               {option.prefix && <div className={styles.optionPrefix}>{option.prefix}</div>}
                               <span style={{ flex: 1 }}>{option.text}</span>
                               {option.suffix && <span className={styles.optionSuffix}>{option.suffix}</span>}
-                              {selectedOption.value === option.value && <CheckMarkSvg width={12} />}
+                              {selectedOption?.value === option.value && <CheckMarkSvg width={12} />}
                           </div>
                       ))
                     : 'Items not found'}
             </Dropdown>
         ) : (
-            <select onChange={nativeSelectOption} defaultValue={selectedOption.value} className={styles.nativeSelect}>
+            <select
+                onChange={selectNativeOption}
+                value={selectedOption?.value}
+                className={classNames({
+                    [styles.nativeSelect]: true,
+                    [styles.nativeRightMode]: optionsLikeRightLabel,
+                })}
+            >
                 {options.map((option) => (
                     <option key={option.value} value={option.value}>
                         {option.text}
@@ -212,7 +232,9 @@ const SelectInput: React.FC<SelectInputProps> = ({
     const getSuffix = () =>
         !optionsLikeRightLabel && (
             <>
-                {view !== 'text' && <div className={styles.suffixText}>{suffix || selectedOption.suffix}</div>}
+                {view !== 'text' && (suffix || selectedOption?.suffix) && (
+                    <div className={styles.suffixText}>{suffix || selectedOption?.suffix}</div>
+                )}
                 <ChevronDownSvg
                     className={classNames({
                         [styles.chevron]: true,
@@ -235,7 +257,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
             onKeyDown={handleKeyDown}
             onMouseDown={handleMouseDown}
             dropdownContent={getDropdownContent()}
-            prefix={selectedOption.prefix}
+            prefix={selectedOption?.prefix}
             rightLabel={optionsLikeRightLabel && getRightLabel()}
             suffix={getSuffix()}
             disableTyping={!withSearch && !optionsLikeRightLabel && !withTyping}

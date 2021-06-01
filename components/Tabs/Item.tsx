@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { HTMLAttributes } from 'react'
 
-export interface TabItemProps {
+export interface TabItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
     title: React.ReactNode
     id: string
 }

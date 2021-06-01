@@ -1,14 +1,16 @@
 import React from 'react'
 import styles from './Dropdown.css'
 import classNames from 'classnames'
+import useWindowSize from 'react-use/esm/useWindowSize'
 
 export interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {
     active?: boolean
-    position?: 'right' | 'bottom'
+    position?: 'right' | 'bottom' | 'top'
     maxHeight?: number | string
     noPadding?: boolean
     widthAuto?: boolean
     minWidth?: number
+    toggleFullScreenWhenMobile?: boolean
 }
 
 // Todo: to Transition Group
@@ -22,8 +24,11 @@ const Dropdown: React.FC<DropdownProps> = ({
     position,
     children,
     minWidth,
+    toggleFullScreenWhenMobile,
     ...rest
 }) => {
+    const windowWidth = useWindowSize().width
+
     return (
         <div
             {...rest}
@@ -33,6 +38,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 [styles.active]: active,
                 [styles[`position-${position}`]]: position !== 'right',
                 [styles.widthAuto]: widthAuto,
+                [styles.fullScreen]: toggleFullScreenWhenMobile && windowWidth < 600,
             })}
         >
             <div

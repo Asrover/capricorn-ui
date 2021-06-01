@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import SelectInput from './index'
 import Title from '../Title'
@@ -12,7 +12,7 @@ export default {
 } as Meta
 
 const options = [
-    { value: 'eur', text: 'EUR', suffix: <span>suffix</span>, },
+    { value: 'eur', text: 'EUR', suffix: <span>suffix</span> },
     { value: 'usd', text: 'USD', suffix: 'suffix' },
     { value: 'gbp', text: 'GBP', suffix: 'suffix' },
     { value: 'btc', text: 'BTC', suffix: 'suffix' },
@@ -44,7 +44,7 @@ export const All: React.FC = () => {
     const [value2, setValue2] = useState(options[0])
     const [value3, setValue3] = useState()
     const [value8, setValue8] = useState(options[0])
-    const [value9, setValue9] = useState(options[1])
+    const [value9, setValue9] = useState(options[1].value)
     const [value10, setValue10] = useState(options[1])
 
     const [updOptions, setUpdOptions] = useState(options)
@@ -59,30 +59,38 @@ export const All: React.FC = () => {
             setUpdOptions(newOptions)
         }, 3000)
     }, [])
-    
+
     return (
         <Space column>
             <Surface>
                 <Title level={2}>Extends: TextInput, Dropdown</Title>
             </Surface>
-            {/*<SelectInput*/}
-            {/*    selectedOption={value}*/}
-            {/*    options={asyncOptions}*/}
-            {/*    loading={loading}*/}
-            {/*    autoSelect*/}
-            {/*    onChange={setValue}*/}
-            {/*    label="Async options and autoSelect"*/}
-            {/*    fieldTip={`Value: ${value?.value}`}*/}
-            {/*/>*/}
-            {/*<SelectInput*/}
-            {/*    selectedOption={value2}*/}
-            {/*    options={options}*/}
-            {/*    onChange={setValue2}*/}
-            {/*    onChangeInputText={setValue3}*/}
-            {/*    optionsLikeRightLabel*/}
-            {/*    label="Options like right label"*/}
-            {/*    fieldTip={`Value: ${value3} ${value2?.value}`}*/}
-            {/*/>*/}
+            <SelectInput
+                selectedOption={value}
+                options={asyncOptions}
+                loading={loading}
+                autoSelect
+                onChange={setValue}
+                label="Async options and autoSelect"
+                fieldTip={`Value: ${value?.value}`}
+            />
+            <SelectInput
+                selectedOption={value2}
+                options={options}
+                onChange={setValue2}
+                onChangeInputText={setValue3}
+                optionsLikeRightLabel
+                label="Options like right label"
+                fieldTip={`Value: ${value3} ${value2?.value}`}
+            />
+            <SelectInput
+                selectedOption={value9}
+                options={options}
+                onChange={setValue9}
+                label="With returnOnlyOptionValue"
+                returnOnlyOptionValue
+                fieldTip={`selectedOption: ${value9}`}
+            />
             <SelectInput
                 selectedOption={value8}
                 options={updOptions}
@@ -94,7 +102,7 @@ export const All: React.FC = () => {
                 fieldTip="Value will reset in three seconds, 'cause options will change"
             />
             <div>
-                <Button onClick={() => setValue8()}>Clear option above</Button>
+                <Button onClick={() => setValue9()}>Clear option above</Button>
             </div>
             <div>
                 <SelectInput
