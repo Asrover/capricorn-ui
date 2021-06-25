@@ -91,6 +91,7 @@
     display: flex;
     align-items: center;
     flex: 1;
+    flex-wrap: wrap;
 }
 
 .inputWrap {

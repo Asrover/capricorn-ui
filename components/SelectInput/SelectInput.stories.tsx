@@ -29,6 +29,39 @@ const newOptions = [
     { value: 'new-usdt', text: 'NEWUSDT', suffix: 'suffix' },
 ]
 
+const countries = [
+    {
+        value: 'Algeria',
+        text: 'Algeria',
+        countryCode: 'DZ',
+    },
+    {
+        value: 'Andorra',
+        text: 'Andorra',
+        countryCode: 'AD',
+    },
+    {
+        value: 'Angola',
+        text: 'Angola',
+        countryCode: 'AO',
+    },
+    {
+        value: 'Argentina',
+        text: 'Argentina',
+        countryCode: 'AR',
+    },
+    {
+        value: 'Armenia',
+        text: 'Armenia',
+        countryCode: 'AM',
+    },
+    {
+        value: 'Australia',
+        text: 'Australia',
+        countryCode: 'AU',
+    },
+]
+
 const textViewInputStyles = {
     fontWeight: 'bold',
     fontSize: 26,
@@ -40,6 +73,7 @@ const textViewInputStyles = {
 export const All: React.FC = () => {
     const [asyncOptions, setAsyncOptions] = useState([])
     const [loading, setLoading] = useState(true)
+    const [multiValue, setMultiValue] = useState([])
     const [value, setValue] = useState()
     const [value2, setValue2] = useState(options[0])
     const [value3, setValue3] = useState()
@@ -66,7 +100,15 @@ export const All: React.FC = () => {
                 <Title level={2}>Extends: TextInput, Dropdown</Title>
             </Surface>
             <SelectInput
-                selectedOption={value}
+                value={multiValue}
+                options={options}
+                multiple
+                withSearch
+                onChange={setMultiValue}
+                label="Multiple mode"
+            />
+            <SelectInput
+                value={value}
                 options={asyncOptions}
                 loading={loading}
                 autoSelect
@@ -75,7 +117,7 @@ export const All: React.FC = () => {
                 fieldTip={`Value: ${value?.value}`}
             />
             <SelectInput
-                selectedOption={value2}
+                value={value2}
                 options={options}
                 onChange={setValue2}
                 onChangeInputText={setValue3}
@@ -84,15 +126,15 @@ export const All: React.FC = () => {
                 fieldTip={`Value: ${value3} ${value2?.value}`}
             />
             <SelectInput
-                selectedOption={value9}
+                value={value9}
                 options={options}
                 onChange={setValue9}
                 label="With returnOnlyOptionValue"
                 returnOnlyOptionValue
-                fieldTip={`selectedOption: ${value9}`}
+                fieldTip={`value: ${value9}`}
             />
             <SelectInput
-                selectedOption={value8}
+                value={value8}
                 options={updOptions}
                 onChange={setValue8}
                 withSearch
@@ -106,7 +148,7 @@ export const All: React.FC = () => {
             </div>
             <div>
                 <SelectInput
-                    selectedOption={value10}
+                    value={value10}
                     options={options}
                     onChange={setValue10}
                     textInputValue={value10?.text}

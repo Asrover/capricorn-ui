@@ -5,10 +5,7 @@ import styles from './AccountInput.css'
 type Account = { id: string; currency: string; balance: number; payload?: any }
 
 export interface AccountInputProps
-    extends Omit<
-        SelectInputProps,
-        'options' | 'selectedOption' | 'onChange' | 'onSearch' | 'textInputValue' | 'withSearch'
-    > {
+    extends Omit<SelectInputProps, 'options' | 'value' | 'onChange' | 'onSearch' | 'textInputValue' | 'withSearch'> {
     accounts: Account[]
     onChangeAccount: (account?: Account) => void
     selectedAccount: Account
@@ -35,7 +32,8 @@ const AccountInput: React.FC<AccountInputProps> = ({
     return (
         <SelectInput
             {...rest}
-            selectedOption={accountToOption(selectedAccount, hideAccountCurrencyIcon)}
+            multiple={false}
+            value={accountToOption(selectedAccount, hideAccountCurrencyIcon)}
             options={options}
             onChange={onChange}
             textInputStyles={{ fontWeight: 600 }}

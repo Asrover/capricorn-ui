@@ -27,11 +27,11 @@ export interface TextInputProps
     dropdownContent?: ReactNode
     rightLabel?: ReactNode
 
-    onFocus?: () => void
-    onBlur?: () => void
-    onClick?: () => void
+    onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void
+    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
+    onClick?: (e: React.MouseEvent<HTMLInputElement>) => void
     onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
-    onMouseDown?: () => void
+    onMouseDown?: (event: React.MouseEvent<HTMLInputElement>) => void
 
     /** it will overwrite suffix */
     error?: ReactNode
@@ -117,16 +117,16 @@ const TextInput: React.FC<TextInputProps> = ({
         }
     }, [mask])
 
-    const handleFocus = () => {
+    const handleFocus = (e) => {
         if (!disabled && !loading) {
             setFocused(true)
-            onFocus && onFocus()
+            onFocus && onFocus(e)
         }
     }
 
-    const handleBlur = () => {
+    const handleBlur = (e) => {
         setFocused(false)
-        onBlur && onBlur()
+        onBlur && onBlur(e)
     }
 
     const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {

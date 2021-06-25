@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Calendar from 'react-calendar'
 import TextInput, { TextInputProps } from '../TextInput'
 import styles from './DateInput.css'
-import Dropdown from '../Dropdown'
+import Dropdown, { DropdownProps } from '../Dropdown'
 import CalendarSvg from '../../assets/calendar.svg'
 import { useWindowSize } from 'react-use/esm'
 import classNames from 'classnames'
@@ -11,9 +11,10 @@ export interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value
     onChange: (value?: Date | Date[]) => void
     value?: Date | Date[]
     isRange?: boolean
+    dropdownProps?: DropdownProps
 }
 
-const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest }) => {
+const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, dropdownProps, ...rest }) => {
     const width = useWindowSize().width
     const [dateText, setDateText] = useState<string | undefined>(dateToText(value, isRange))
     const [openedCalendar, setOpenedOptions] = useState(false)
@@ -100,6 +101,7 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, ...rest
                 position="bottom"
                 maxHeight="auto"
                 noPadding
+                {...dropdownProps}
             >
                 <Calendar selectRange={isRange} onChange={handleChangeDate} value={value} />
             </Dropdown>

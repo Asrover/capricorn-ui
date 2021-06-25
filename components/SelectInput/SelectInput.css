@@ -39,6 +39,7 @@
 }
 
 .optionItem {
+    position: relative;
     display: flex;
     align-items: center;
     padding: 6px 18px;
@@ -61,6 +62,17 @@
 .optionItem.selected,
 .optionItem.focused {
     background-color: var(--color-gray);
+}
+
+.optionItem:hover::after,
+.optionItem.focused::after {
+    position: absolute;
+    left: 0;
+    width: 2px;
+    top: 0;
+    bottom: 0;
+    background-color: var(--color-primary);
+    content: "";
 }
 
 .optionItem.selected {
@@ -127,24 +139,27 @@
     z-index: 1;
 }
 
+.multiplePrefix {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2px -3px;
+}
+
 .multiSelectItem {
     display: inline-flex;
     align-items: center;
     border-radius: 6px;
     padding: 2px 0 2px 6px;
-    background: #fff;
-    border: 1px solid #7e8289;
-    color: var(--color-primary);
-    margin-left: 15px;
-    font-size: 14px;
+    background: var(--color-gray-lighter);
+    border: 1px solid var(--color-gray-darker);
+    color: var(--text-color);
+    font-size: 13px;
+    margin: 3px;
 }
 
 .multiSelectItem svg {
     padding: 8px 6px 8px 3px;
-    margin-left: 5px;
+    margin-left: 4px;
+    color: var(--color-gray-darkest);
     cursor: pointer;
-}
-
-.multiSelectItem + .multiSelectItem {
-    margin-left: 10px;
 }

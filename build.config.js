@@ -22,7 +22,7 @@ const config = {
         new webpack.ProgressPlugin(),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'styles.[hash].css',
+            filename: 'capricorn-ui.min.css',
             chunkFilename: '[id].css',
         }),
         new OptimizeCssAssetsPlugin(),
