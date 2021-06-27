@@ -1,8 +1,8 @@
 {
   "name": "capricorn-ui",
   "module": "esm/index.js",
-  "version": "0.10.3",
-  "main": "lib/index.js",
+  "version": "0.10.4",
+  "main": "dist/capricorn-ui.js",
   "unpkg": "dist/capricorn-ui.js",
   "typings": "lib/index.d.ts",
   "license": "MIT",
