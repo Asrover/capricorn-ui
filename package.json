@@ -11,7 +11,7 @@
     "ui"
   ],
   "module": "esm/index.js",
-  "version": "0.10.9",
+  "version": "0.11.0",
   "main": "lib/index.js",
   "unpkg": "dist/capricorn-ui.js",
   "typings": "lib/index.d.ts",
@@ -35,7 +35,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "copy-to-clipboard": "^3.3.1",
-    "imask": "^6.0.5",
+    "imask": "^6.1.0",
     "react-calendar": "^3.3.0"
   },
   "devDependencies": {
