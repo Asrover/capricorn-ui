@@ -11,6 +11,7 @@ export interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {
     widthAuto?: boolean
     minWidth?: number
     toggleFullScreenWhenMobile?: boolean
+    noArrow?: boolean
 }
 
 // Todo: to Transition Group
@@ -25,6 +26,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     children,
     minWidth,
     toggleFullScreenWhenMobile,
+    noArrow,
     ...rest
 }) => {
     const windowWidth = useWindowSize().width
@@ -38,6 +40,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 [styles.active]: active,
                 [styles[`position-${position}`]]: position !== 'right',
                 [styles.widthAuto]: widthAuto,
+                [styles.noArrow]: noArrow,
                 [styles.fullScreen]: toggleFullScreenWhenMobile && windowWidth < 600,
             })}
         >

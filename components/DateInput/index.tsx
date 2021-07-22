@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Calendar from 'react-calendar'
 import TextInput, { TextInputProps } from '../TextInput'
 import styles from './DateInput.css'
@@ -6,8 +6,9 @@ import Dropdown, { DropdownProps } from '../Dropdown'
 import CalendarSvg from '../../assets/calendar.svg'
 import { useWindowSize } from 'react-use/esm'
 import classNames from 'classnames'
+import IMask from 'imask/esm'
 
-export interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
+export interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value' | 'mask' | 'pattern' | 'blocks'> {
     onChange: (value?: Date | Date[]) => void
     value?: Date | Date[]
     isRange?: boolean
@@ -19,6 +20,7 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, dropdow
     const [dateText, setDateText] = useState<string | undefined>(dateToText(value, isRange))
     const [openedCalendar, setOpenedOptions] = useState(false)
     const nativeView = !isRange && width < 600
+    const maskRef = useRef<IMask>()
 
     useEffect(() => {
         setDateText(dateToText(value, isRange))
@@ -38,11 +40,13 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, dropdow
                 const date2 = stringToDate(value2)
 
                 if (!isValidDate(date1) || !isValidDate(date2)) {
+                    maskRef.current.maskValue = ''
                     onChange(null)
                     setDateText(undefined)
                 }
             } else if (!isValidDate(stringToDate(dateText))) {
                 onChange(null)
+                maskRef.current.maskValue = ''
                 setDateText(undefined)
             }
         }
@@ -63,10 +67,8 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, dropdow
                 const date1 = value1 && stringToDate(value1)
                 const date2 = value2 && stringToDate(value2)
 
-                if (isValidDate(date1) || isValidDate(date2)) {
-                    const firstDate = value && (isValidDate(date1) ? date1 : value[0])
-                    const secondDate = value && (isValidDate(date2) ? date2 : value[1])
-                    onChange([firstDate, secondDate])
+                if (isValidDate(date1) && isValidDate(date2)) {
+                    onChange([date1, date2])
                 }
             }
         } else {
@@ -78,6 +80,7 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, dropdow
     const handleChangeDate = (date) => {
         onChange(date)
         setDateText(dateToText(date, isRange))
+        maskRef.current.maskValue = dateToText(date, isRange)
     }
 
     const selectNativeDate = (event: React.FormEvent<HTMLInputElement>) => {
@@ -89,7 +92,7 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, dropdow
             <input
                 type="date"
                 onChange={selectNativeDate}
-                value={!Array.isArray(value) ? value.toISOString().split('T')[0] : ''}
+                value={!Array.isArray(value) ? value?.toISOString().split('T')[0] : ''}
                 className={classNames({
                     [styles.nativeDate]: true,
                 })}
@@ -115,7 +118,18 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, dropdow
             dropdownContent={getDropdownContent()}
             prefix={<CalendarSvg width={20} />}
             value={dateText}
-            mask={isRange ? '00.00.0000 - 00.00.0000' : '00.00.0000'}
+            maskRef={maskRef}
+            mask={isRange ? 'from - to' : Date}
+            blocks={
+                isRange && {
+                    from: {
+                        mask: Date,
+                    },
+                    to: {
+                        mask: Date,
+                    },
+                }
+            }
             {...rest}
         />
     )
@@ -128,9 +142,14 @@ function isValidDate(d: any) {
     return d instanceof Date && !isNaN(d)
 }
 
-function stringToDate(s: string) {
+function stringToDate(s: string): Date | undefined {
     // format to YYYY/MM/DD
-    return new Date(s.split('.').reverse().join('/'))
+    const splitted = s?.split('.')
+
+    // Check for full date
+    if (splitted.length === 3 && splitted[2].length === 4) {
+        return new Date(s.split('.').reverse().join('/'))
+    }
 }
 
 function dateToText(date, isRange) {

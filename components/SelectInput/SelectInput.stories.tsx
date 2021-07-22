@@ -41,8 +41,8 @@ const countries = [
         countryCode: 'AD',
     },
     {
-        value: 'Angola',
-        text: 'Angola',
+        value: 'Long long name of country with multiple lines',
+        text: 'Long long name of country with multiple lines with multiple lines',
         countryCode: 'AO',
     },
     {
@@ -101,7 +101,7 @@ export const All: React.FC = () => {
             </Surface>
             <SelectInput
                 value={multiValue}
-                options={options}
+                options={countries}
                 multiple
                 withSearch
                 onChange={setMultiValue}

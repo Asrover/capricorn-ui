@@ -123,6 +123,11 @@
     transform: translateY(-10px);
 }
 
+.noArrow::after,
+.noArrow::before {
+    content: none;
+}
+
 .position-top::after {
     top: auto;
     bottom: -17px;

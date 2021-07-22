@@ -2,15 +2,27 @@ import React from 'react'
 import styles from './Link.css'
 import classNames from 'classnames'
 
-interface LinkProps extends React.HTMLProps<HTMLAnchorElement> {
+export interface LinkProps extends React.HTMLProps<HTMLAnchorElement> {
     hoverUnderline?: boolean
     disabled?: boolean
     bold?: boolean
+    component?: React.FC
 }
 
-const Link: React.FC<LinkProps> = ({ className, hoverUnderline, onClick, disabled, bold, children, ...rest }) => {
+const Link: React.FC<LinkProps> = ({
+    className,
+    component,
+    hoverUnderline,
+    onClick,
+    disabled,
+    bold,
+    children,
+    ...rest
+}) => {
+    const Component = component || 'a'
+
     return (
-        <a
+        <Component
             {...rest}
             className={classNames({
                 [className]: Boolean(className),
@@ -22,7 +34,7 @@ const Link: React.FC<LinkProps> = ({ className, hoverUnderline, onClick, disable
             onClick={!disabled ? onClick : undefined}
         >
             {children}
-        </a>
+        </Component>
     )
 }
 

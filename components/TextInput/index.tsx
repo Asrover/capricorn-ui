@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, useEffect, useRef, useState } from 'react'
+import React, { MutableRefObject, ReactNode, RefObject, useEffect, useRef, useState } from 'react'
 import styles from './TextInput.css'
 import classNames from 'classnames'
 import WarningSvg from '../../assets/warning-round.svg'
@@ -54,9 +54,13 @@ export interface TextInputProps
     maxWidth?: number
     smallHeight?: boolean
     staticLabel?: boolean
-    mask?: string
     disableTyping?: boolean
     textInputStyles?: Record<string, string | number>
+
+    maskRef?: MutableRefObject<IMask>
+    mask?: string | DateConstructor
+    pattern?: string
+    blocks?: Record<string, any>
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -89,11 +93,14 @@ const TextInput: React.FC<TextInputProps> = ({
     codeLength,
     staticLabel,
     maxWidth = 360,
+    maskRef,
     mask,
     disableTyping,
     style,
     textInputStyles,
     className,
+    blocks,
+    pattern,
     ...rest
 }) => {
     const inputRef: RefObject<HTMLInputElement | undefined> = innerRef || useRef()
@@ -105,17 +112,39 @@ const TextInput: React.FC<TextInputProps> = ({
     const hasError = Boolean(error)
     const hasSuccess = Boolean(success)
     const hasValue = Boolean(value)
-    const maskRef = useRef<IMask>()
+    const innerMaskRef = maskRef || useRef<IMask>()
 
     useEffect(() => {
         if (mask) {
-            maskRef.current = IMask(inputRef.current, { mask })
+            innerMaskRef.current = IMask(inputRef.current, { mask })
+            innerMaskRef.current.on('accept', () => {
+                onChange(maskRef.current.value)
+            })
         }
 
         return function cleanup() {
-            maskRef.current?.destroy()
+            innerMaskRef.current?.destroy()
+        }
+    }, [])
+
+    useEffect(() => {
+        if (innerMaskRef.current) {
+            innerMaskRef.current.updateOptions({ mask, blocks, pattern })
         }
     }, [mask])
+
+    useEffect(() => {
+        if (mask && innerMaskRef.current) {
+            if (
+                value !== innerMaskRef.current.value ||
+                (typeof innerMaskRef.current.value !== 'string' &&
+                    innerMaskRef.current.value === '' &&
+                    !innerMaskRef.current.el.isActive)
+            ) {
+                innerMaskRef.current.maskValue = value == null ? '' : value
+            }
+        }
+    }, [value])
 
     const handleFocus = (e) => {
         if (!disabled && !loading) {
@@ -130,7 +159,7 @@ const TextInput: React.FC<TextInputProps> = ({
     }
 
     const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-        if (!disabled && !disableTyping) {
+        if (!disabled && !disableTyping && !mask) {
             if (typeState === 'money' && isNaN(Number(target.value))) return
             onChange(target.value)
         }

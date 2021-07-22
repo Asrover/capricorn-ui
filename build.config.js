@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const mode = 'production'
 
 const config = {
@@ -14,9 +14,10 @@ const config = {
     output: {
         filename: `[name].js`,
         path: path.resolve(__dirname, 'dist'),
-        library: 'capricorn',
+        library: 'capricorn-ui',
         libraryTarget: 'umd',
         umdNamedDefine: true,
+        globalObject: 'this',
     },
     plugins: [
         new webpack.ProgressPlugin(),
