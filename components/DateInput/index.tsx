@@ -13,17 +13,29 @@ export interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value
     value?: Date | Date[]
     isRange?: boolean
     dropdownProps?: DropdownProps
+    dateStringMode?: boolean
 }
 
-const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, dropdownProps, ...rest }) => {
+const DateInput: React.FC<DateInputProps> = ({
+    value,
+    isRange,
+    dateStringMode,
+    onChange: onChangeProp,
+    dropdownProps,
+    ...rest
+}) => {
     const width = useWindowSize().width
-    const [dateText, setDateText] = useState<string | undefined>(dateToText(value, isRange))
+    const [dateText, setDateText] = useState<string | undefined>(dateToText(value, isRange, dateStringMode))
     const [openedCalendar, setOpenedOptions] = useState(false)
     const nativeView = !isRange && width < 600
     const maskRef = useRef<IMask>()
 
+    const onChange = (value: Date | Date[]) => {
+        onChangeProp(dateStringMode ? dateToText(value, isRange) : value)
+    }
+
     useEffect(() => {
-        setDateText(dateToText(value, isRange))
+        setDateText(dateStringMode ? value : dateToText(value, isRange))
     }, [value, isRange])
 
     const handleFocus = () => {
@@ -79,8 +91,8 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, dropdow
 
     const handleChangeDate = (date) => {
         onChange(date)
-        setDateText(dateToText(date, isRange))
-        maskRef.current.maskValue = dateToText(date, isRange)
+        setDateText(dateToText(date, isRange, dateStringMode))
+        maskRef.current.maskValue = dateToText(date, isRange, dateStringMode)
     }
 
     const selectNativeDate = (event: React.FormEvent<HTMLInputElement>) => {
@@ -106,7 +118,17 @@ const DateInput: React.FC<DateInputProps> = ({ value, isRange, onChange, dropdow
                 noPadding
                 {...dropdownProps}
             >
-                <Calendar selectRange={isRange} onChange={handleChangeDate} value={value} />
+                <Calendar
+                    selectRange={isRange}
+                    onChange={handleChangeDate}
+                    value={
+                        dateStringMode
+                            ? isRange
+                                ? [value[0] && new Date(value[0]), value[1] && new Date(value[1])]
+                                : value && new Date(value)
+                            : value
+                    }
+                />
             </Dropdown>
         )
 
@@ -152,23 +174,27 @@ function stringToDate(s: string): Date | undefined {
     }
 }
 
-function dateToText(date, isRange) {
+function dateToText(date, isRange, dateStringMode?: boolean) {
     if (date) {
         if (isRange) {
             let range
 
             if (date[0]) {
-                range = date[0].toLocaleDateString() || ''
+                const resolveDate = dateStringMode ? new Date(date[0]) : date[0]
+                range = resolveDate.toLocaleDateString() || ''
             }
 
             if (date[1]) {
-                const date2 = date[1].toLocaleDateString()
+                const resolveDate = dateStringMode ? new Date(date[1]) : date[1]
+                const date2 = resolveDate.toLocaleDateString()
                 range += date2 ? `${dateDelimiter}${date[1].toLocaleDateString()}` : ''
             }
 
             return range
         } else {
-            return date.toLocaleDateString() || ''
+            const resolveDate = dateStringMode ? new Date(date) : date
+
+            return resolveDate.toLocaleDateString() || ''
         }
     }
 }

@@ -123,7 +123,7 @@ const TextInput: React.FC<TextInputProps> = ({
         }
 
         return function cleanup() {
-            innerMaskRef.current?.destroy()
+            mask && innerMaskRef.current?.destroy()
         }
     }, [])
 
