@@ -28,12 +28,12 @@
 @media (max-width: 500px) {
     .toast {
         width: 100%;
-        padding: 15px 10px 5px 10px;
+        padding: 15px 10px;
     }
 
     .close {
-        top: 15px;
-        right: 19px;
+        top: 5px;
+        right: 5px;
     }
 }
 

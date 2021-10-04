@@ -118,7 +118,7 @@ const TextInput: React.FC<TextInputProps> = ({
         if (mask) {
             innerMaskRef.current = IMask(inputRef.current, { mask })
             innerMaskRef.current.on('accept', () => {
-                onChange(maskRef.current.value)
+                onChange(innerMaskRef.current.value)
             })
         }
 

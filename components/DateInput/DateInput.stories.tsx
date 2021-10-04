@@ -20,8 +20,9 @@ export const All: React.FC = () => {
             <Title level={2}>Extends: TextInput, Dropdown</Title>
             <Space column>
                 <DateInput
-                    label="With default date"
+                    label="With default date and EN locale"
                     value={value}
+                    locale="EN"
                     onChange={setValue}
                     fieldTip={`Value: ${value?.toLocaleDateString()}`}
                 />

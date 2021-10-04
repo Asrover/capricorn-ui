@@ -13,6 +13,7 @@ export interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value
     value?: Date | Date[]
     isRange?: boolean
     dropdownProps?: DropdownProps
+    locale?: string
     dateStringMode?: boolean
 }
 
@@ -21,6 +22,7 @@ const DateInput: React.FC<DateInputProps> = ({
     isRange,
     dateStringMode,
     onChange: onChangeProp,
+    locale,
     dropdownProps,
     ...rest
 }) => {
@@ -46,36 +48,14 @@ const DateInput: React.FC<DateInputProps> = ({
         setOpenedOptions(false)
 
         if (Boolean(dateText)) {
-            if (isRange) {
-                const [value1, value2] = dateText.split(dateDelimiter)
-                const date1 = stringToDate(value1)
-                const date2 = stringToDate(value2)
-
-                if (!isValidDate(date1) || !isValidDate(date2)) {
-                    maskRef.current.maskValue = ''
-                    onChange(null)
-                    setDateText(undefined)
-                }
-            } else if (!isValidDate(stringToDate(dateText))) {
-                onChange(null)
-                maskRef.current.maskValue = ''
-                setDateText(undefined)
-            }
-        }
-    }
-
-    const handleChangeInputText = (textValue: string) => {
-        if (textValue) {
-            setDateText(textValue)
-
             if (!isRange) {
-                const newDate = stringToDate(textValue)
+                const newDate = stringToDate(dateText)
 
                 if (isValidDate(newDate)) {
                     onChange(newDate)
                 }
             } else {
-                const [value1, value2] = textValue.split(dateDelimiter)
+                const [value1, value2] = dateText.split(dateDelimiter)
                 const date1 = value1 && stringToDate(value1)
                 const date2 = value2 && stringToDate(value2)
 
@@ -83,6 +63,12 @@ const DateInput: React.FC<DateInputProps> = ({
                     onChange([date1, date2])
                 }
             }
+        }
+    }
+
+    const handleChangeInputText = (textValue: string) => {
+        if (textValue) {
+            setDateText(textValue)
         } else {
             setDateText(undefined)
             onChange(null)
@@ -99,8 +85,25 @@ const DateInput: React.FC<DateInputProps> = ({
         handleChangeDate(new Date(event.currentTarget.value))
     }
 
-    const getDropdownContent = () =>
-        nativeView ? (
+    const getDropdownContent = () => {
+        let resolveValue = value
+
+        if (dateStringMode) {
+            if (isRange) {
+                const splitted1 = value[0] && value[0].split('.')
+                const splitted2 = value[1] && value[1].split('.')
+
+                resolveValue = [
+                    splitted1 && new Date(`${splitted1[2]}/${splitted1[1]}/${splitted1[0]}`),
+                    splitted2 && new Date(`${splitted2[2]}/${splitted2[1]}/${splitted2[0]}`),
+                ]
+            } else {
+                const splitted = value && (value as any).split('.')
+                resolveValue = splitted && new Date(`${splitted[2]}/${splitted[1]}/${splitted[0]}`)
+            }
+        }
+
+        return nativeView ? (
             <input
                 type="date"
                 onChange={selectNativeDate}
@@ -118,19 +121,10 @@ const DateInput: React.FC<DateInputProps> = ({
                 noPadding
                 {...dropdownProps}
             >
-                <Calendar
-                    selectRange={isRange}
-                    onChange={handleChangeDate}
-                    value={
-                        dateStringMode
-                            ? isRange
-                                ? [value[0] && new Date(value[0]), value[1] && new Date(value[1])]
-                                : value && new Date(value)
-                            : value
-                    }
-                />
+                <Calendar selectRange={isRange} locale={locale} onChange={handleChangeDate} value={resolveValue} />
             </Dropdown>
         )
+    }
 
     return (
         <TextInput
@@ -170,31 +164,37 @@ function stringToDate(s: string): Date | undefined {
 
     // Check for full date
     if (splitted.length === 3 && splitted[2].length === 4) {
-        return new Date(s.split('.').reverse().join('/'))
+        return new Date(splitted.reverse().join('/'))
     }
 }
 
 function dateToText(date, isRange, dateStringMode?: boolean) {
+    const toDateString = (date?: Date) =>
+        date &&
+        `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1)
+            .toString()
+            .padStart(2, '0')}.${date.getFullYear()}`
+
     if (date) {
         if (isRange) {
             let range
 
             if (date[0]) {
                 const resolveDate = dateStringMode ? new Date(date[0]) : date[0]
-                range = resolveDate.toLocaleDateString() || ''
+                range = toDateString(resolveDate) || ''
             }
 
             if (date[1]) {
                 const resolveDate = dateStringMode ? new Date(date[1]) : date[1]
-                const date2 = resolveDate.toLocaleDateString()
-                range += date2 ? `${dateDelimiter}${date[1].toLocaleDateString()}` : ''
+                const date2 = toDateString(resolveDate)
+                range += date2 ? `${dateDelimiter}${toDateString(date[1])}` : ''
             }
 
             return range
         } else {
             const resolveDate = dateStringMode ? new Date(date) : date
 
-            return resolveDate.toLocaleDateString() || ''
+            return toDateString(resolveDate) || ''
         }
     }
 }

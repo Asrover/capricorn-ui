@@ -31,6 +31,8 @@ const InternalTabs: React.ForwardRefRenderFunction<HTMLElement, TabsProps> = ({
         onChange && onChange(id)
     }
 
+    const tabsId = children[0].props.id
+
     useEffect(() => {
         const activeTab = document.getElementsByClassName(tabsId)[0] as HTMLDivElement
 
@@ -42,13 +44,11 @@ const InternalTabs: React.ForwardRefRenderFunction<HTMLElement, TabsProps> = ({
         if (tabIndicator.width !== 0) {
             isInitialIndicatorMount.current = false
         }
-    }, [activeId])
+    }, [activeId, children])
 
     const activeTabContent = useMemo(() => children.find(({ props }: ReactElement) => props.id === activeId), [
         activeId,
     ])
-
-    const tabsId = children[0].props.id
 
     return (
         <div
