@@ -119,6 +119,7 @@ const DateInput: React.FC<DateInputProps> = ({
                 position="bottom"
                 maxHeight="auto"
                 noPadding
+                tabIndex={1}
                 {...dropdownProps}
             >
                 <Calendar selectRange={isRange} locale={locale} onChange={handleChangeDate} value={resolveValue} />

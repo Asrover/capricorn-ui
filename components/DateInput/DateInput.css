@@ -1,5 +1,5 @@
 .dropDownContent {
-
+    outline: none;
 }
 
 :global(.react-calendar) {

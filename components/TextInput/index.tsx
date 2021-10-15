@@ -179,6 +179,34 @@ const TextInput: React.FC<TextInputProps> = ({
         onChange('')
     }
 
+    const labelRef = useRef<HTMLLabelElement>()
+
+    useEffect(() => {
+        const label = labelRef.current
+        const labelContent = label?.children[0] as HTMLSpanElement
+        const labelWidth = label?.clientWidth
+
+
+        setTimeout(() => {
+            if (labelContent && focused) {
+                labelContent.style.transitionDuration = `0s, 0s`
+                labelContent.style.marginLeft = `0px`
+                labelContent.style.transform = `translateX(0px)`
+            }
+        })
+
+        setTimeout(() => {
+            const labelContentWidth = labelContent?.clientWidth
+            const widthDifference = labelWidth - labelContentWidth - 20
+
+            if (!focused && widthDifference < 0 && labelContent) {
+                labelContent.style.transitionDuration = `${-widthDifference / 150}s, ${-widthDifference / 150}s`
+                labelContent.style.marginLeft = `${widthDifference}px`
+                labelContent.style.transform = `translateX(${-widthDifference}px)`
+            }
+        }, 160)
+    }, [focused])
+
     const getContent = () => (
         <div
             {...rest}
@@ -223,7 +251,11 @@ const TextInput: React.FC<TextInputProps> = ({
                     </div>
                 )}
                 <div className={styles.inputWrap}>
-                    {label && !(staticLabel || type === 'code') && <label className={styles.label}>{label}</label>}
+                    {label && !(staticLabel || type === 'code') && (
+                        <label ref={labelRef} className={styles.label}>
+                            <span>{label}</span>
+                        </label>
+                    )}
                     <input
                         {...rest}
                         name={name}

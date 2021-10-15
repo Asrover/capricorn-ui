@@ -64,7 +64,7 @@ export const All: React.FC = () => {
             <TextInput
                 value={value5}
                 onChange={setValue5}
-                label="Birth day with mask"
+                label="Birth day with mask and Countries with business activities (if any any any any)"
                 mask="00.00.0000"
                 fieldTip="Format: DD.MM.YYYY"
             />

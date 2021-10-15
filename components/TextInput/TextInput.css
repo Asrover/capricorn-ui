@@ -53,6 +53,10 @@
     border-color: var(--color-primary);
 }
 
+.inputContainer:hover .label:not(.static) span {
+    transform: translateX(0) !important;
+}
+
 .inputContainer.focused {
     border-color: var(--color-primary);
 }
@@ -111,11 +115,35 @@
     font-size: 15px;
     line-height: 1.2;
     color: #7e8289;
-    transition: 0.15s;
+    transition-duration: 0.15s;
     transition-property: color, font-size, transform;
     z-index: 0;
     cursor: text;
     user-select: none;
+}
+
+.label:not(.static) {
+    width: 100%;
+    white-space: nowrap;
+    max-width: calc(100% - 40px);
+    overflow: hidden;
+}
+
+.label:not(.static) span {
+    transition-property: transform, margin-left;
+    transition-timing-function: linear, linear;
+}
+
+.label:not(.static)::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto 0;
+    width: 20px;
+    height: 10px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    /*content: "";*/
 }
 
 .label.static {
@@ -133,7 +161,7 @@
     position: relative;
     box-sizing: border-box;
     width: 100%;
-    min-width: 100px;
+    min-width: 150px;
     height: 100%;
     padding: 10px 10px 8px 20px;
     background: transparent;
