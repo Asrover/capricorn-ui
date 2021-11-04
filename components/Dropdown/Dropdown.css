@@ -21,20 +21,7 @@
     height: 0;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-right: 10px solid #fff;
-    content: '';
-}
-
-.area::before {
-    position: absolute;
-    left: -10px;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    height: 0;
-    border-top: 11px solid transparent;
-    border-bottom: 11px solid transparent;
-    border-right: 11px solid rgba(26, 30, 42, 0.04);
+    border-right: 10px solid var(--cprn-bg-color);
     content: '';
 }
 
@@ -54,9 +41,8 @@
 .dropdown {
     position: relative;
     padding: 8px 14px;
-    background: #fff;
+    background: var(--cprn-bg-color);
     border-radius: 6px;
-    border: 1px solid rgba(26, 30, 42, 0.04);
     box-shadow: 0 6px 12px rgba(26, 30, 42, 0.08);
     overflow: auto;
     font: 400 14px/1.4 sans-serif;
@@ -98,7 +84,7 @@
     margin: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 10px solid #fff;
+    border-bottom: 10px solid var(--cprn-bg-color);
 }
 
 .position-bottom::before {
@@ -135,7 +121,7 @@
     margin: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-top: 10px solid #fff;
+    border-top: 10px solid var(--cprn-bg-color);
 }
 
 .position-top::before {
@@ -160,6 +146,6 @@
         bottom: calc(100% + 12px);
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
-        border-bottom: 6px solid #fff;
+        border-bottom: 6px solid var(--cprn-bg-color);
     }
 }

@@ -5,6 +5,7 @@
     font-size: 15px;
     line-height: 1.7;
     cursor: pointer;
+    color: var(--text-color);
 }
 
 .markBox {

@@ -25,8 +25,8 @@ interface CommonProps extends Omit<TextInputProps, 'onChange' | 'value' | 'clear
 }
 
 type ConditionalProps =
-    | { multiple?: false; value: Option; onChange: (value: Option) => void }
-    | { multiple: true; value: Option[]; onChange: (value: Option[]) => void }
+    | { multiple?: false; value: Option; onChange: (value: Option | undefined) => void }
+    | { multiple: true; value: Option[]; onChange: (value: Option[] | undefined) => void }
 
 export type SelectInputProps = CommonProps & ConditionalProps
 
@@ -68,7 +68,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
         if (!optionsLikeRightLabel && !multiple) {
             setInputText((value as Option)?.text)
         }
-    }, [(value as Option)?.value, multiple])
+    }, [(value as Option)?.text, multiple])
 
     useEffect(() => {
         onChangeInputText && onChangeInputText(inputText)
@@ -218,9 +218,11 @@ const SelectInput: React.FC<SelectInputProps> = ({
             >
                 {filteredOptions.length !== 0
                     ? filteredOptions.map((option, index) => {
-                          const isActive = multiple
-                              ? (value as Option[]).findIndex((item) => item.value === option.value) !== -1
-                              : (value as Option)?.value === option.value
+                          const isActive =
+                              value &&
+                              (multiple
+                                  ? (value as Option[]).findIndex((item) => item.value === option.value) !== -1
+                                  : (value as Option)?.value === option.value)
 
                           return (
                               <div
@@ -276,6 +278,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
 
     const getMultiplePrefix = () => {
         return (
+            value &&
             (value as Option[]).length !== 0 && (
                 <div className={styles.multiplePrefix}>
                     {(value as Option[]).map((item) => (

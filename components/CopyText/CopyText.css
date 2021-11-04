@@ -27,7 +27,7 @@
 
 .text.highlight {
     padding: 4px 8px;
-    background: var(--color-gray);
+    background: var(--third-text-color);
     border-radius: 4px;
 }
 

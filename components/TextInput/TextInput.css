@@ -114,7 +114,7 @@
     padding-left: 20px;
     font-size: 15px;
     line-height: 1.2;
-    color: #7e8289;
+    color: var(--second-text-color);
     transition-duration: 0.15s;
     transition-property: color, font-size, transform;
     z-index: 0;
@@ -171,6 +171,7 @@
     transition: 0.25s border-color;
     caret-color: var(--color-primary);
     border-radius: 6px;
+    color: var(--text-color);
 }
 
 .input.hideCaret {
@@ -215,11 +216,7 @@
     left: 0;
     margin-top: 5px;
     font-size: 13px;
-    color: #b8bdc4;
-}
-
-.fieldTip {
-    color: #b8bdc4;
+    color: var(--third-text-color);
 }
 
 .suffix {
@@ -229,6 +226,7 @@
     transform-origin: center center;
     transition: 0.25s color;
     cursor: pointer;
+    color: var(--text-color);
 }
 
 .suffix svg {
@@ -252,9 +250,9 @@
     padding: 0 15px;
     border-left: 1px solid #d9dde4;
     border-radius: 0 5px 5px 0;
-    background: #f9fafb;
+    background: var(--cprn-bg-color-2);
     font-size: 12px;
-    color: #35373b;
+    color: var(--text-color);
     transition: 0.25s border-color;
 }
 
@@ -372,7 +370,7 @@
     height: 44px;
     border: none;
     border-radius: 0;
-    border-bottom: 1px solid #d9dde4;
+    border-bottom: 1px solid var(--text-color);
 }
 
 .inputContainer.view-underscore .input {

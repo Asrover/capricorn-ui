@@ -1,15 +1,15 @@
 .surface {
     width: 100%;
-    background: #fff;
+    background: var(--cprn-bg-color);
     box-sizing: border-box;
-    box-shadow: 0 26px 30px #edf1f3;
+    box-shadow: var(--box-shadow-1);
     border-radius: 6px;
     transition: box-shadow .25s, transform .25s;
 }
 
 .surface:not(.noSurfacing):hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(26,30,42,.14);
+    box-shadow: var(--box-shadow-2);
 }
 
 @media screen and (max-width: 600px) {

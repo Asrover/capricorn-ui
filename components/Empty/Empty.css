@@ -5,10 +5,10 @@
     align-items: center;
     padding: 50px 15px;
     box-sizing: border-box;
-    border: 1px solid rgba(0,0,0,.1);
+    border: 1px solid var(--text-color);
     border-radius: 6px;
     transition: .25s border-color;
-    color: rgba(0,0,0,.25);
+    color: var(--text-color);
 }
 
 .empty:hover {
@@ -17,6 +17,7 @@
 
 .empty svg {
     margin-bottom: 10px !important;
+    color: var(--cprn-bg-color-3);
 }
 
 .empty.center {

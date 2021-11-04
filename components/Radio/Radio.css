@@ -16,7 +16,7 @@
     border-radius: 20px;
     border: 1px solid #d9dde4;
     transition: 0.25s border-color;
-    color: #35373b;
+    color: var(--text-color);
 }
 
 .markBox:hover {
@@ -76,6 +76,7 @@
 .label {
     position: relative;
     padding: 0 10px;
+    color: var(--text-color);
 }
 
 .error {

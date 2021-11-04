@@ -102,7 +102,7 @@
 }
 
 .button.skin-link:hover {
-    background-color: var(--color-gray);
+    background-color: var(--cprn-bg-color-2);
 }
 
 .button.skin-border {
@@ -125,20 +125,20 @@
 }
 
 .button.skin-default {
-    background-color: var(--color-gray);
+    background-color: var(--cprn-bg-color-3);
     color: var(--text-color);
 }
 
 .button.skin-default:hover {
-    background-color: var(--color-gray-lighter);
+    background-color: var(--cprn-bg-color-2);
 }
 
 .button.skin-default:active {
-    background-color: var(--color-gray-darker);
+    background-color: var(--cprn-bg-color-2);
 }
 
 .button.skin-default:focus {
-    box-shadow: inset 0 0 0 2px var(--color-gray-darker);
+    box-shadow: inset 0 0 0 2px var(--cprn-bg-color-2);
 }
 
 .button.skin-pseudo,
