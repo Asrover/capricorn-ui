@@ -1,4 +1,4 @@
-body {
+body.theme-light  {
     --base-hue: 214;
     --base-saturation: 100%;
     --base-lightness: 57%;

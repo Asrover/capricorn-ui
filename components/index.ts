@@ -1,6 +1,6 @@
 require('../theme/index.css')
 require('../theme/capitalist.css')
-require('theme/practika-light.css')
+require('../theme/practika-light.css')
 
 export { default as AccountInput } from './AccountInput'
 export { default as Button } from './Button'

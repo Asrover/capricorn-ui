@@ -112,7 +112,7 @@
     top: 15px;
     left: 20px;
     font-size: 15px;
-    color: #7e8289;
+    color: var(--second-text-color);
     transition: 0.1s ease-out;
     transition-property: color, font-size, transform;
     z-index: 1;
@@ -156,11 +156,7 @@
     left: 0;
     margin-top: 5px;
     font-size: 13px;
-    color: #b8bdc4;
-}
-
-.fieldTip {
-    color: #b8bdc4;
+    color: var(--third-text-color);
 }
 
 .rightIconBlock {
