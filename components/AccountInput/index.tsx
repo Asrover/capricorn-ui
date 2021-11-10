@@ -47,6 +47,7 @@ const currencyToSymbol = {
     eur: '€',
     usd: '$',
     gbp: '£',
+    rur: '₽',
 }
 
 const optionToAccount = (option: Option): Account => ({

@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import TextInput from './index'
 import PrintSvg from '../../assets/print.svg'
 import Space from '../Space'
+import { Surface } from '../index'
 
 export default {
     title: 'Components/TextInput',

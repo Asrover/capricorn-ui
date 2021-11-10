@@ -186,7 +186,6 @@ const TextInput: React.FC<TextInputProps> = ({
         const labelContent = label?.children[0] as HTMLSpanElement
         const labelWidth = label?.clientWidth
 
-
         setTimeout(() => {
             if (labelContent && focused) {
                 labelContent.style.transitionDuration = `0s, 0s`

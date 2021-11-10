@@ -5,10 +5,10 @@
     align-items: center;
     padding: 50px 15px;
     box-sizing: border-box;
-    border: 1px solid var(--text-color);
+    border: 1px solid var(--third-text-color);
     border-radius: 6px;
     transition: .25s border-color;
-    color: var(--text-color);
+    color: var(--third-text-color);
 }
 
 .empty:hover {
