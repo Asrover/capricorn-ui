@@ -1,7 +1,5 @@
 # React Components Library Based On HSLA Colors And CSS Variables
 
-DEMO: https://asrover.github.io/capricorn-ui
-
 ## Usage
 
 1. `yarn add capricorn-ui`
