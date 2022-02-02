@@ -56,6 +56,11 @@
     transition: 0.25s color, 0.25s background;
 }
 
+.tabHeaderItem.stretchWidth {
+    flex: 1 !important;
+    justify-content: center;
+}
+
 .tabHeaderItem.active {
     color: var(--text-color);
     cursor: default;
@@ -63,7 +68,7 @@
 
 .tabHeaderItem.disabled {
     cursor: not-allowed;
-    color: #d9dde4;
+    color: var(--cprn-border-color-1);
 }
 
 .tabHeaderItem:not(.active):hover {
@@ -174,7 +179,7 @@
 
 .skin-group-button .tabHeaderItem {
     box-sizing: border-box;
-    border: 1px solid var(--color-gray-darker);
+    border: 1px solid var(--cprn-border-color-1);
     border-left-color: transparent;
 }
 
@@ -215,7 +220,7 @@
     width: 100%;
     padding-bottom: 1px;
     box-sizing: border-box;
-    border-bottom: 1px solid #d9dde4;
+    border-bottom: 1px solid var(--cprn-border-color-1);
     margin-bottom: 15px;
 }
 

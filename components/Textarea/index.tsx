@@ -31,6 +31,7 @@ export interface TextAreaProps
     fullWidth?: boolean
     maxWidth?: number
     staticLabel?: boolean
+    maxRows?: number
 }
 
 type AllProps = TextAreaProps & Omit<React.HTMLAttributes<HTMLInputElement>, 'onFocus' | 'onClick' | 'onChange'>
@@ -55,6 +56,7 @@ const Textarea: React.FC<AllProps> = ({
     maxWidth = 360,
     className,
     name,
+    maxRows,
     ...rest
 }) => {
     const [inputText, setInputText] = useState(value)
@@ -136,7 +138,7 @@ const Textarea: React.FC<AllProps> = ({
                     [styles.vCenter]: staticLabel,
                     [styles.withLabel]: Boolean(label),
                 })}
-                rows={adaptiveHeight ? rows : undefined}
+                rows={adaptiveHeight ? (rows > maxRows ? maxRows : rows) : undefined}
                 placeholder={placeholder || undefined}
                 spellCheck="false"
                 ref={textareaRef}

@@ -15,6 +15,7 @@ const InternalRadio: React.ForwardRefRenderFunction<HTMLElement, RadioProps> = (
 ) => {
     return (
         <label
+            ref={ref as any}
             className={classNames({
                 [className]: Boolean(className),
                 [styles.radio]: true,

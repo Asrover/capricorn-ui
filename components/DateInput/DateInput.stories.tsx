@@ -11,6 +11,7 @@ export default {
 
 export const All: React.FC = () => {
     const [value, setValue] = useState<Date>(new Date())
+    const [value4, setValue4] = useState<Date>()
     const [value2, setValue2] = useState<Date[]>()
     const [value3, setValue3] = useState<Date[]>()
     const [ISOvalue, setISOvalue] = useState<string>('10.10.2010')
@@ -25,6 +26,14 @@ export const All: React.FC = () => {
                     locale="EN"
                     onChange={setValue}
                     fieldTip={`Value: ${value?.toLocaleDateString()}`}
+                />
+                <DateInput
+                    label="With dropdown content"
+                    value={value4}
+                    locale="EN"
+                    onChange={setValue4}
+                    dropdownSidebar="Here's dropdown sidebar"
+                    fieldTip={`Value: ${value4?.toLocaleDateString()}`}
                 />
                 <DateInput
                     label="dateStringMode"

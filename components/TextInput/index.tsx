@@ -111,7 +111,7 @@ const TextInput: React.FC<TextInputProps> = ({
     const hasPrefix = Boolean(prefix) || typeState === 'search'
     const hasError = Boolean(error)
     const hasSuccess = Boolean(success)
-    const hasValue = Boolean(value)
+    const hasValue = Boolean(value?.toString())
     const innerMaskRef = maskRef || useRef<IMask>()
 
     useEffect(() => {

@@ -14,6 +14,14 @@
     margin: 0 6px;
 }
 
+.cross {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px;
+    color: var(--color-primary);
+}
+
 .tip {
     position: relative;
     display: inline-block;

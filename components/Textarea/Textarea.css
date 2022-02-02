@@ -1,7 +1,7 @@
 .textareaContainer {
     position: relative;
     width: 100%;
-    border: 1px solid #d9dde4;
+    border: 1px solid var(--cprn-border-color-1);
     box-sizing: border-box;
     border-radius: 6px;
     cursor: text;
@@ -97,7 +97,7 @@
     caret-color: var(--color-primary);
     line-height: 1.5;
     background: transparent;
-    color: #222;
+    color: var(--text-color);
 }
 
 .textarea.adaptiveHeight {

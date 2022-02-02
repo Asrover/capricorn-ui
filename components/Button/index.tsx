@@ -6,13 +6,13 @@ import LeftArrowSvg from '../../assets/left-arrow.svg'
 type Skin = 'default' | 'action' | 'border' | 'pseudo' | 'back' | 'link'
 type Size = 's' | 'm' | 'l' | 'xl'
 
-interface ButtonProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'loading' | 'onClick'> {
+export interface ButtonProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'loading' | 'onClick'> {
     type?: 'submit' | 'button'
     skin?: Skin
     size?: Size
     disabled?: boolean
     loading?: boolean
-    onClick?: () => void
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 // Todo: icon before after text node
@@ -30,7 +30,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
         if (!loading && !disabled) {
-            onClick && onClick()
+            onClick && onClick(e)
         } else {
             e.preventDefault()
         }

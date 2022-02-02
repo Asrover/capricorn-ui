@@ -9,23 +9,26 @@ export default {
 } as Meta
 
 export const All: React.FC = () => (
-    <Space column >
+    <Space column>
         <br />
         <br />
-        <Tip title="Hover mode" dropdownProps={{ minWidth: 400 }}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, blanditiis consectetur consequatur
-            cumque cupiditate distinctio dolorem eos eveniet exercitationem facere incidunt ipsum minima, nam nobis
-            quibusdam quis rem sint, suscipit!
-        </Tip>
-        <br />
-        <Tip
-            title="Click mode with dropdownProps"
-            openingMode="click"
-            dropdownProps={{ minWidth: 400, position: 'bottom' }}
-        >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, blanditiis consectetur consequatur
-            cumque cupiditate distinctio dolorem eos eveniet exercitationem facere incidunt ipsum minima, nam nobis
-            quibusdam quis rem sint, suscipit!
-        </Tip>
+        <div>
+            <Tip title="Hover mode" dropdownProps={{ minWidth: 400 }}>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, blanditiis consectetur consequatur
+                cumque cupiditate distinctio dolorem eos eveniet exercitationem facere incidunt ipsum minima, nam nobis
+                quibusdam quis rem sint, suscipit!
+            </Tip>
+        </div>
+        <div>
+            <Tip
+                title="Click mode with position bottom"
+                openingMode="click"
+                dropdownProps={{ minWidth: 400, position: 'bottom' }}
+            >
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, blanditiis consectetur consequatur
+                cumque cupiditate distinctio dolorem eos eveniet exercitationem facere incidunt ipsum minima, nam nobis
+                quibusdam quis rem sint, suscipit!
+            </Tip>
+        </div>
     </Space>
 )

@@ -4,7 +4,7 @@ import styles from './Space.css'
 
 type SpaceSize = 12 | 24 | 32 | 40 | 48 | 56 | 64
 
-interface SpaceProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SpaceProps extends React.HTMLAttributes<HTMLDivElement> {
     /** space size (horizontal for column: false, vertical for column: true) or [horizontal, vertical] */
     size?: SpaceSize | [SpaceSize, SpaceSize]
     /** Align items */
@@ -15,17 +15,10 @@ interface SpaceProps extends React.HTMLAttributes<HTMLDivElement> {
     wrap?: boolean
 }
 
-const Space: React.FC<SpaceProps> = ({
-    size = 40,
-    align,
-    style,
-    justify,
-    className,
-    wrap,
-    column,
-    children,
-    ...rest
-}) => {
+const Space: React.ForwardRefRenderFunction<unknown, SpaceProps> = (
+    { size = 40, align, style, justify, className, wrap, column, children, ...rest },
+    ref,
+) => {
     // const [horizontalSize, verticalSize] = React.useMemo(
     //     () =>
     //         ((Array.isArray(size) ? size : [size, size]) as [SpaceSize, SpaceSize]).map(item =>
@@ -36,6 +29,7 @@ const Space: React.FC<SpaceProps> = ({
 
     return (
         <div
+            ref={ref as any}
             className={classNames({
                 [className]: Boolean(className),
                 [styles.space]: true,
@@ -56,4 +50,4 @@ const Space: React.FC<SpaceProps> = ({
     )
 }
 
-export default Space
+export default React.forwardRef<unknown, SpaceProps>(Space)

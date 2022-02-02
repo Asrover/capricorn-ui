@@ -2,8 +2,8 @@ import React from 'react'
 import styles from './Surface.css'
 import classNames from 'classnames'
 
-interface SurfaceProps {
-    padding?: number
+export interface SurfaceProps {
+    padding?: number | string
     /** Disable hover animation */
     noSurfacing?: boolean
 }

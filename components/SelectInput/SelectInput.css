@@ -150,8 +150,8 @@
     align-items: center;
     border-radius: 6px;
     padding: 2px 0 2px 6px;
-    background: var(--color-gray-lighter);
-    border: 1px solid var(--color-gray-darker);
+    background: var(--cprn-bg-color-2);
+    border: 1px solid var(--cprn-border-color-1);
     color: var(--text-color);
     font-size: 13px;
     margin: 3px;
@@ -160,6 +160,6 @@
 .multiSelectItem svg {
     padding: 8px 6px 8px 3px;
     margin-left: 4px;
-    color: var(--color-gray-darkest);
+    color: var(--color-primary);
     cursor: pointer;
 }

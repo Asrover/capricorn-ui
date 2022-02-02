@@ -1,5 +1,9 @@
-.dropDownContent {
+.dropdown {
     outline: none;
+}
+
+.dropdownContent {
+    display: flex;
 }
 
 :global(.react-calendar) {
@@ -36,6 +40,7 @@
     cursor: pointer;
 }
 :global(.react-calendar__navigation) {
+    display: flex;
     height: 44px;
     margin-bottom: 1em;
 }
@@ -115,7 +120,7 @@
 }
 :global(.react-calendar__tile--active):enabled:hover,
 :global(.react-calendar__tile--active):enabled:focus {
-    background: var(--cprn-bg-color-3);
+    background: var(--color-primary);
 }
 :global(.react-calendar--selectRange .react-calendar__tile--hover) {
     background-color: var(--cprn-bg-color-3);

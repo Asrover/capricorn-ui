@@ -80,6 +80,7 @@ export const All: React.FC = () => {
     const [value8, setValue8] = useState(options[0])
     const [value9, setValue9] = useState(options[1].value)
     const [value10, setValue10] = useState(options[1])
+    const [value11, setValue11] = useState()
 
     const [updOptions, setUpdOptions] = useState(options)
 
@@ -99,6 +100,13 @@ export const All: React.FC = () => {
             <Surface>
                 <Title level={2}>Extends: TextInput, Dropdown</Title>
             </Surface>
+            <SelectInput
+                value={value11}
+                options={countries}
+                withSearch
+                onChange={setValue11}
+                label="Search"
+            />
             <SelectInput
                 value={multiValue}
                 options={countries}

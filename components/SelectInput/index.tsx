@@ -187,7 +187,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
     }
 
     const selectNativeOption = (event: React.FormEvent<HTMLSelectElement>) => {
-        const option = options.find((option) => option.value === event.currentTarget.value)
+        const option = options.find((option) => option.value.toString() === event.currentTarget.value.toString())
 
         if (option) {
             onClickOption(option, -1)()

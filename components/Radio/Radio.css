@@ -14,7 +14,7 @@
     width: 20px;
     height: 20px;
     border-radius: 20px;
-    border: 1px solid #d9dde4;
+    border: 1px solid var(--cprn-border-color-1);
     transition: 0.25s border-color;
     color: var(--text-color);
 }

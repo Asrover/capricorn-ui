@@ -11,4 +11,6 @@ body.theme-dark {
     --cprn-bg-color-3: #2F3E5B;
     --box-shadow-1: none;
     --box-shadow-2: none;
+    --box-shadow-3: 0 15px 30px rgba(0, 0, 0, .21);
+    --cprn-border-color-1: #525f79;
 }

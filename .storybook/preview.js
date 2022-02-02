@@ -16,25 +16,44 @@ const callback = function(mutationsList, observer) {
               --cprn-bg-color: #28344A;
               --cprn-bg-color-2: #3A4C6F;
               --cprn-bg-color-3: #2F3E5B;
-              --box-shadow-1: none;
-              --box-shadow-2: none;
+              --box-shadow-1: 0 26px 30px #edf1f3;
+              --box-shadow-2: 0 12px 30px rgba(26,30,42,.14);
+              --box-shadow-3: 0 6px 12px rgba(26, 30, 42, 0.08);
           }
         </style>`;
       } else {
         document.querySelector('head').innerHTML += `<style>
           body {
-            --base-hue: 214;
-            --base-saturation: 100%;
-            --base-lightness: 57%;
+          /*  DARK */
+            /*--base-hue: 214;*/
+            /*--base-saturation: 100%;*/
+            /*--base-lightness: 57%;*/
             
-            --text-color: #fff;
-            --second-text-color: #95ABD6;
-            --third-text-color: #687CA5;
-            --cprn-bg-color: #28344A;
-            --cprn-bg-color-2: #3A4C6F;
-            --cprn-bg-color-3: #2F3E5B;
-            --box-shadow-1: none;
-            --box-shadow-2: none;
+            /*--text-color: #fff;*/
+            /*--second-text-color: #95ABD6;*/
+            /*--third-text-color: #687CA5;*/
+            /*--cprn-bg-color: #28344A;*/
+            /*--cprn-bg-color-2: #3A4C6F;*/
+            /*--cprn-bg-color-3: #2F3E5B;*/
+            /*--box-shadow-1: none;*/
+            /*--box-shadow-2: none;*/
+            
+            
+            /*  LIGHT */
+              --base-hue: 214;
+              --base-saturation: 100%;
+              --base-lightness: 57%;
+          
+              --text-color: #1D2534;
+              --second-text-color: #7E8289;
+              --third-text-color: #B8BDC4;
+              --cprn-bg-color: #fff;
+              --cprn-bg-color-2: #f7f9fa;
+              --cprn-bg-color-3: #f2f4f5;
+              --box-shadow-1: 0 26px 30px #edf1f3;
+              --box-shadow-2: 0 12px 30px rgba(26,30,42,.14);
+              --box-shadow-3: 0 6px 12px rgba(26, 30, 42, 0.08);
+              --cprn-border-color-1: #d9dde4;
           }
         </style>`;
       }

@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import Calendar from 'react-calendar'
 import TextInput, { TextInputProps } from '../TextInput'
 import styles from './DateInput.css'
 import Dropdown, { DropdownProps } from '../Dropdown'
 import CalendarSvg from '../../assets/calendar.svg'
-import { useWindowSize } from 'react-use/esm'
-import classNames from 'classnames'
 import IMask from 'imask/esm'
 
 export interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value' | 'mask' | 'pattern' | 'blocks'> {
@@ -15,6 +13,7 @@ export interface DateInputProps extends Omit<TextInputProps, 'onChange' | 'value
     dropdownProps?: DropdownProps
     locale?: string
     dateStringMode?: boolean
+    dropdownSidebar?: ReactNode
 }
 
 const DateInput: React.FC<DateInputProps> = ({
@@ -24,12 +23,11 @@ const DateInput: React.FC<DateInputProps> = ({
     onChange: onChangeProp,
     locale,
     dropdownProps,
+    dropdownSidebar,
     ...rest
 }) => {
-    const width = useWindowSize().width
     const [dateText, setDateText] = useState<string | undefined>(dateToText(value, isRange, dateStringMode))
     const [openedCalendar, setOpenedOptions] = useState(false)
-    const nativeView = !isRange && width < 600
     const maskRef = useRef<IMask>()
 
     const onChange = (value: Date | Date[]) => {
@@ -75,14 +73,10 @@ const DateInput: React.FC<DateInputProps> = ({
         }
     }
 
-    const handleChangeDate = (date) => {
+    const handleChangeDate = (date: Date) => {
         onChange(date)
         setDateText(dateToText(date, isRange, dateStringMode))
         maskRef.current.maskValue = dateToText(date, isRange, dateStringMode)
-    }
-
-    const selectNativeDate = (event: React.FormEvent<HTMLInputElement>) => {
-        handleChangeDate(new Date(event.currentTarget.value))
     }
 
     const getDropdownContent = () => {
@@ -103,18 +97,9 @@ const DateInput: React.FC<DateInputProps> = ({
             }
         }
 
-        return nativeView ? (
-            <input
-                type="date"
-                onChange={selectNativeDate}
-                value={!Array.isArray(value) ? value?.toISOString().split('T')[0] : ''}
-                className={classNames({
-                    [styles.nativeDate]: true,
-                })}
-            />
-        ) : (
+        return (
             <Dropdown
-                className={styles.dropDownContent}
+                className={styles.dropdown}
                 active={openedCalendar}
                 position="bottom"
                 maxHeight="auto"
@@ -122,7 +107,19 @@ const DateInput: React.FC<DateInputProps> = ({
                 tabIndex={1}
                 {...dropdownProps}
             >
-                <Calendar selectRange={isRange} locale={locale} onChange={handleChangeDate} value={resolveValue} />
+                {dropdownSidebar ? (
+                    <div className={styles.dropdownContent}>
+                        {dropdownSidebar}
+                        <Calendar
+                            selectRange={isRange}
+                            locale={locale}
+                            onChange={handleChangeDate}
+                            value={resolveValue}
+                        />
+                    </div>
+                ) : (
+                    <Calendar selectRange={isRange} locale={locale} onChange={handleChangeDate} value={resolveValue} />
+                )}
             </Dropdown>
         )
     }
@@ -137,6 +134,7 @@ const DateInput: React.FC<DateInputProps> = ({
             value={dateText}
             maskRef={maskRef}
             mask={isRange ? 'from - to' : Date}
+            inputMode="none"
             blocks={
                 isRange && {
                     from: {
@@ -169,7 +167,7 @@ function stringToDate(s: string): Date | undefined {
     }
 }
 
-function dateToText(date, isRange, dateStringMode?: boolean) {
+function dateToText(date, isRange: boolean, dateStringMode?: boolean) {
     const toDateString = (date?: Date) =>
         date &&
         `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1)

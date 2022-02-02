@@ -17,9 +17,9 @@ interface LinkProps {
     bold?: boolean
 }
 
-type AllProps = LinkProps & Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>
+export type CopyTextProps = LinkProps & Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>
 
-const CopyText: React.FC<AllProps> = ({
+const CopyText: React.FC<CopyTextProps> = ({
     textToCopy,
     successCopiedText,
     bold,

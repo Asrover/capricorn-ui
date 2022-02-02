@@ -15,7 +15,7 @@
     top: 0;
     right: 0;
     padding: 10px;
-    color: #d9dde4;
+    color: var(--cprn-border-color-1);
     transition: 0.2s color;
     cursor: pointer;
 }

@@ -2,14 +2,12 @@ import classNames from 'classnames'
 import React from 'react'
 import styles from './Spinner.css'
 
-interface SpinnerProps {
+export type SpinnerProps = {
     size?: 's' | 'm' | 'l'
     overlay?: boolean
-}
+} & React.HTMLAttributes<HTMLDivElement>
 
-type AllProps = SpinnerProps & React.HTMLAttributes<HTMLDivElement>
-
-const Spinner: React.FC<AllProps> = ({ size = 'm', className, overlay, children, ...rest }) => {
+const Spinner: React.FC<SpinnerProps> = ({ size = 'm', className, overlay, children, ...rest }) => {
     return (
         <div
             className={classNames({

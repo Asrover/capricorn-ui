@@ -6,9 +6,11 @@ body.theme-light  {
     --text-color: #1D2534;
     --second-text-color: #7E8289;
     --third-text-color: #B8BDC4;
-    --box-shadow-1: 0 26px 30px #edf1f3;
-    --box-shadow-2: 0 12px 30px rgba(26,30,42,.14);
     --cprn-bg-color: #fff;
     --cprn-bg-color-2: #f7f9fa;
     --cprn-bg-color-3: #f2f4f5;
+    --box-shadow-1: 0 26px 30px #edf1f3;
+    --box-shadow-2: 0 12px 30px rgba(26,30,42,.14);
+    --box-shadow-3: 0 6px 12px rgba(26, 30, 42, 0.08);
+    --cprn-border-color-1: #d9dde4;
 }

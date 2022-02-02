@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useMemo, useRef, useState } from 'react'
+import React, { Dispatch, ReactElement, useEffect, useMemo, useRef, useState } from 'react'
 import styles from './Tabs.css'
 import classNames from 'classnames'
 import Button from '../Button'
@@ -8,9 +8,10 @@ export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'o
     activeId: null | string
     skin?: 'default' | 'button' | 'group-button' | 'steps'
     size?: 's' | 'm' | 'l'
-    onChange?: (id: string) => void
+    onChange?: Dispatch<string | number>
     headerSpaceBetween?: boolean
     noItemHorizontalSpace?: boolean
+    stretchWidth?: boolean
 }
 
 const InternalTabs: React.ForwardRefRenderFunction<HTMLElement, TabsProps> = ({
@@ -22,6 +23,7 @@ const InternalTabs: React.ForwardRefRenderFunction<HTMLElement, TabsProps> = ({
     children,
     className,
     noItemHorizontalSpace,
+    stretchWidth,
     ...rest
 }) => {
     const isInitialIndicatorMount = useRef(true)
@@ -92,6 +94,7 @@ const InternalTabs: React.ForwardRefRenderFunction<HTMLElement, TabsProps> = ({
                                 [styles.tabHeaderItem]: true,
                                 [styles.active]: id === activeId,
                                 [styles.lastChild]: index === children.length - 1,
+                                [styles.stretchWidth]: stretchWidth,
                             })}
                             onClick={handleChangeActive(id)}
                         >
